@@ -35,6 +35,51 @@ each. > @
 
 You are welcome to add more primitives to this lib.
 
+Simple manipulations:
+
+```
+# Make a new object representing a file on disc
+file > f
+  "/tmp/foo.txt" 
+
+# Get its name:
+stdout
+  sprintf
+    "File name is: %s" 
+    f
+
+# Delete the file:
+f.rm
+
+# Rename/move it:
+f.mv "/tmp/bar.txt"
+
+# Get the size of it in bytes:
+f.size > s
+```
+
+Reading:
+
+```
+# This is the acceptor of the data:
+[] > target
+  [data] > write
+
+# Read binary content into the "target," in 1024-bytes chunks:
+f.read target 1024
+```
+
+Writing:
+
+```
+# This is the source of the data:
+[] > source
+  [size] > read
+
+# Write binary content, taking it from the "source":
+f.write source
+```
+
 ## How to Contribute
 
 Fork repository, make changes, send us a pull request.
