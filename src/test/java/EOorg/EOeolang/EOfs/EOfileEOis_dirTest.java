@@ -26,6 +26,7 @@ package EOorg.EOeolang.EOfs;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import org.eolang.phi.Data;
 import org.eolang.phi.Dataized;
 import org.eolang.phi.PhWith;
@@ -41,7 +42,7 @@ import org.junit.jupiter.api.io.TempDir;
  * @checkstyle TypeNameCheck (100 lines)
  */
 @SuppressWarnings("PMD.AvoidDollarSigns")
-public final class EOfile$EOisDirTest {
+public final class EOfileEOis_dirTest {
 
     @Test
     public void isDirectory(@TempDir final Path temp) throws Exception {
@@ -49,7 +50,24 @@ public final class EOfile$EOisDirTest {
         Files.write(file, "Hello, world!".getBytes());
         MatcherAssert.assertThat(
             new Dataized(
-                new EOfile$EOisDir(
+                new EOfile$EOis_dir(
+                    new PhWith(
+                        new EOfile(),
+                        "path",
+                        new Data.Value<>(file.toAbsolutePath().toString())
+                    )
+                )
+            ).take(Boolean.class),
+            Matchers.is(false)
+        );
+    }
+
+    @Test
+    public void isCurrentDirectory() {
+        final Path file = Paths.get(".");
+        MatcherAssert.assertThat(
+            new Dataized(
+                new EOfile$EOis_dir(
                     new PhWith(
                         new EOfile(),
                         "path",

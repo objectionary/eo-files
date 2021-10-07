@@ -5,4 +5,4 @@
   path > @
 
   # Is it directory?
-  [] > isDir /bool
+  [] > is-dir /bool

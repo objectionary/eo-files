@@ -39,7 +39,7 @@ import org.eolang.phi.Phi;
  * @checkstyle TypeNameCheck (100 lines)
  */
 @SuppressWarnings("PMD.AvoidDollarSigns")
-public class EOfile$EOisDir extends PhDefault {
+public class EOfile$EOis_dir extends PhDefault {
 
     /**
      * Ctor.
@@ -47,7 +47,7 @@ public class EOfile$EOisDir extends PhDefault {
      * @checkstyle BracketsStructureCheck (200 lines)
      */
     @SuppressWarnings("PMD.ConstructorOnlyInitializesOrCallOtherConstructors")
-    public EOfile$EOisDir(final Phi parent) {
+    public EOfile$EOis_dir(final Phi parent) {
         super(parent);
         this.add("φ", new AtBound(new AtLambda(this, self -> {
             final String path = new Dataized(
