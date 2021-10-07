@@ -39,6 +39,7 @@ Simple manipulations:
 
 ```
 # Make a new object representing a file on disc
++alias org.eolang.fs.file
 file > f
   "/tmp/foo.txt" 
 
@@ -87,15 +88,19 @@ Smart objects to help read and write:
 
 ```
 # This is the entire binary content of the file:
++alias org.eolang.fs.content
 content f
 
 # This is the entire text content of the file in UTF-8:
++alias org.eolang.fs.text-content
 text-content f "utf-8"
 
 # This is the binary content written to the file:
++alias org.eolang.fs.written
 written f data
 
 # This is the text content written to the file:
++alias org.eolang.fs.text-written
 text-written f text
 ```
 
@@ -103,6 +108,7 @@ Directories:
 
 ```
 # Make an object representing a directory on disc:
++alias org.eolang.fs.directory
 directory > d
   "/tmp"
 
@@ -120,12 +126,15 @@ Name manipulations:
 
 ```
 # Get directory name:
++alias org.eolang.fs.dir-name
 dir-name f
 
 # Get base name (no directory, not extension):
++alias org.eolang.fs.base-name
 base-name f
 
 # Get extension:
++alias org.eolang.fs.ext-name
 ext-name f
 ```
 
