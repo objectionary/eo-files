@@ -24,7 +24,7 @@ each. > @
   select.  
     walk.
       directory "/tmp"    
-      **/*
+      "**/*"
     *
       [f] (f.is-dir.not > @)
       [f] (/\.txt$/.matches f > @)
