@@ -1,24 +1,18 @@
 assets:
-  settings.xml: yegor256/home#assets/cactoos/settings.xml
-  pubring.gpg: yegor256/home#assets/pubring.gpg
-  secring.gpg: yegor256/home#assets/secring.gpg
-env:
-  MAVEN_OPTS: -XX:MaxPermSize=256m -Xmx1g
-  JAVA_OPTS: -XX:MaxPermSize=256m -Xmx1g
+  settings.xml: cqfn/secrets#settings.xml
+  pubring.gpg: cqfn/secrets#pubring.gpg
+  secring.gpg: cqfn/secrets#secring.gpg
 install: |
-  sudo update-java-alternatives -s java-1.8.0-openjdk-amd64
-  sudo gem install pdd
-  sudo gem install xcop
   pdd --file=/dev/null
 merge:
   script: |
-    mvn clean install -Pqulice --errors -Dstyle.color=never
+    LC_ALL=C mvn clean install -Pqulice --errors -Dstyle.color=never
 release:
   script: |-
     mvn versions:set "-DnewVersion=${tag}" -Dstyle.color=never
     git commit -am "${tag}"
     mvn clean install -Dinvoker.skip
-    mvn clean deploy -Pcactoos -Psonatype --errors --settings ../settings.xml -Dstyle.color=never
+    mvn clean deploy -Pcqfn -Psonatype --errors --settings ../settings.xml -Dstyle.color=never
 
     mkdir /tmp/objectionary
     cp -R src/main/eo /tmp/objectionary/objects

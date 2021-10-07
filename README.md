@@ -49,6 +49,9 @@ stdout
     "File name is: %s" 
     f
 
+# Does it exist?
+f.exists
+
 # Is it a directory?
 f.is-dir
 
@@ -112,10 +115,10 @@ Directories:
 directory > d
   "/tmp"
 
-# Make it if not exists:
+# Make it if doesn't exist:
 d.mkdir
 
-# Delete it with all files:
+# Delete it recursively:
 d.rm-rf
 
 # List all files recursively:
