@@ -26,7 +26,7 @@ each. > @
       directory "/tmp"    
       **/*
     *
-      [f] (f.isDir?.not > @)
+      [f] (f.is-dir.not > @)
       [f] (/\.txt$/.matches f > @)
   [f]
     stdout > @
@@ -47,6 +47,9 @@ stdout
   sprintf
     "File name is: %s" 
     f
+
+# Is it a directory?
+f.is-dir
 
 # Delete the file:
 f.rm
@@ -78,6 +81,52 @@ Writing:
 
 # Write binary content, taking it from the "source":
 f.write source
+```
+
+Smart objects to help read and write:
+
+```
+# This is the entire binary content of the file:
+content f
+
+# This is the entire text content of the file in UTF-8:
+text-content f "utf-8"
+
+# This is the binary content written to the file:
+written f data
+
+# This is the text content written to the file:
+text-written f text
+```
+
+Directories:
+
+```
+# Make an object representing a directory on disc:
+directory > d
+  "/tmp"
+
+# Make it if not exists:
+d.mkdir
+
+# Delete it with all files:
+d.rm-rf
+
+# List all files recursively:
+d.walk "**/*.txt"
+```
+
+Name manipulations:
+
+```
+# Get directory name:
+dir-name f
+
+# Get base name (no directory, not extension):
+base-name f
+
+# Get extension:
+ext-name f
 ```
 
 ## How to Contribute
