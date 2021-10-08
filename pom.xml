@@ -114,7 +114,6 @@ SOFTWARE.
               <goal>transpile</goal>
             </goals>
             <configuration>
-              <!-- <foreign>${project.build.directory}/eo-test-foreign.csv</foreign> -->
               <sourcesDir>${project.basedir}/src/test/eo</sourcesDir>
               <targetDir>${project.build.directory}/eo-test</targetDir>
               <addSourcesRoot>false</addSourcesRoot>
