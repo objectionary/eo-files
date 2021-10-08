@@ -9,7 +9,7 @@
 [![Hits-of-Code](https://hitsofcode.com/github/yegor256/eo-files)](https://hitsofcode.com/view/github/yegor256/eo-files)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/yegor256/eo-files/blob/master/LICENSE.txt)
 ![Lines of code](https://img.shields.io/tokei/lines/github/yegor256/eo-files)
-[![Maven Central](https://img.shields.io/maven-central/v/org.cactoos/eo-parent.svg)](https://maven-badges.herokuapp.com/maven-central/org.cactoos/eo-parent)
+[![Maven Central](https://img.shields.io/maven-central/v/org.eolang/eo-files.svg)](https://maven-badges.herokuapp.com/maven-central/org.eolang/eo-files)
 
 [EOLANG](https://www.eolang.org) objects for file system.
 
