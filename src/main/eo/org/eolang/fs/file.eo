@@ -6,3 +6,5 @@
 
   # Is it directory?
   [] > is-dir /bool
+
+  [] > exists /bool

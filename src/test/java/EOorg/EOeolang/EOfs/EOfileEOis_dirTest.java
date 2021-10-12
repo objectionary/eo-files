@@ -41,7 +41,6 @@ import org.junit.jupiter.api.io.TempDir;
  * @since 0.1
  * @checkstyle TypeNameCheck (100 lines)
  */
-@SuppressWarnings("PMD.AvoidDollarSigns")
 public final class EOfileEOis_dirTest {
 
     @Test

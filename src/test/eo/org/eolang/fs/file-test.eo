@@ -6,3 +6,9 @@
   is-dir. > @
     file
       "."
+
+[] > check-if-file-exists
+  not. > @
+    exists.
+      file
+        "some-absent-file.txt"
