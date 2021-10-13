@@ -24,7 +24,7 @@
 // @checkstyle PackageNameCheck (1 line)
 package EOorg.EOeolang.EOfs;
 
-import java.nio.file.Paths;
+import java.io.File;
 import org.eolang.phi.AtBound;
 import org.eolang.phi.AtLambda;
 import org.eolang.phi.Data;
@@ -33,13 +33,13 @@ import org.eolang.phi.PhDefault;
 import org.eolang.phi.Phi;
 
 /**
- * File.is-dir.
+ * File.rm.
  *
  * @since 0.1
  * @checkstyle TypeNameCheck (100 lines)
  */
 @SuppressWarnings("PMD.AvoidDollarSigns")
-public class EOfile$EOis_dir extends PhDefault {
+public class EOfile$EOrm extends PhDefault {
 
     /**
      * Ctor.
@@ -47,15 +47,15 @@ public class EOfile$EOis_dir extends PhDefault {
      * @checkstyle BracketsStructureCheck (200 lines)
      */
     @SuppressWarnings("PMD.ConstructorOnlyInitializesOrCallOtherConstructors")
-    public EOfile$EOis_dir(final Phi parent) {
+    public EOfile$EOrm(final Phi parent) {
         super(parent);
         this.add("φ", new AtBound(new AtLambda(this, self -> new Data.ToPhi(
-            Paths.get(
+            new File(
                 new Dataized(
                     self.attr("ρ").get().attr("path").get()
                 ).take(String.class)
-            ).toFile().isDirectory())
-        )));
+            ).delete()
+        ))));
     }
 
 }

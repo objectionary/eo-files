@@ -21,9 +21,9 @@ This is how you list all text files in a directory recursively:
 +alias org.eolang.fs.directory
 
 each. > @
-  select.  
+  select.
     walk.
-      directory "/tmp"    
+      directory "/tmp"
       "**/*"
     *
       [f] (f.is-dir.not > @)
@@ -41,12 +41,12 @@ Simple manipulations:
 # Make a new object representing a file on disc
 +alias org.eolang.fs.file
 file > f
-  "/tmp/foo.txt" 
+  "/tmp/foo.txt"
 
 # Get its name:
 stdout
   sprintf
-    "File name is: %s" 
+    "File name is: %s"
     f
 
 # Does it exist?
@@ -68,23 +68,20 @@ f.size > s
 Reading:
 
 ```
-# This is the acceptor of the data:
-[] > target
-  [data] > write
-
-# Read binary content into the "target," in 1024-bytes chunks:
-f.read target 1024
+# Read binary content into the "output," in 1024-bytes chunks;
+# the "output" is an abstract object with one free attribute,
+# which will be subsituted by "bytes" just read:
+f.read output 1024
 ```
 
 Writing:
 
 ```
-# This is the source of the data:
-[] > source
-  [size] > read
-
-# Write binary content, taking it from the "source":
-f.write source
+# Write binary content, taking it from the "input",
+# until input turns into a non-empty "bytes"; here the
+# "mode" is the same as the mode in POSIX fopen();
+# if the file is absent, it will be created:
+f.write input "a+"
 ```
 
 Smart objects to help read and write:
@@ -123,6 +120,17 @@ d.rm-rf
 
 # List all files recursively:
 d.walk "**/*.txt"
+```
+
+Temporary files:
+
+```
+# This is a system directory for temporary files:
++alias org.eolang.fs.tmpdir
+tmpdir > d
+
+# Create an empty temporary file in a directory
+d.tmpfile > f
 ```
 
 Name manipulations:

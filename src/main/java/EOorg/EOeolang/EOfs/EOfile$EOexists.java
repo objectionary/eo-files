@@ -50,12 +50,15 @@ public class EOfile$EOexists extends PhDefault {
     @SuppressWarnings("PMD.ConstructorOnlyInitializesOrCallOtherConstructors")
     public EOfile$EOexists(final Phi parent) {
         super(parent);
-        this.add("φ", new AtBound(new AtLambda(this, self -> {
-            final String path = new Dataized(
-                self.attr("ρ").get().attr("path").get()
-            ).take(String.class);
-            return new Data.ToPhi(Files.exists(Paths.get(path)));
-        })));
+        this.add("φ", new AtBound(new AtLambda(this, self -> new Data.ToPhi(
+            Files.exists(
+                Paths.get(
+                    new Dataized(
+                        self.attr("ρ").get().attr("path").get()
+                    ).take(String.class)
+                )
+            )
+        ))));
     }
 
 }

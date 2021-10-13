@@ -24,38 +24,40 @@
 // @checkstyle PackageNameCheck (1 line)
 package EOorg.EOeolang.EOfs;
 
-import java.nio.file.Paths;
-import org.eolang.phi.AtBound;
-import org.eolang.phi.AtLambda;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import org.eolang.phi.Data;
 import org.eolang.phi.Dataized;
-import org.eolang.phi.PhDefault;
-import org.eolang.phi.Phi;
+import org.eolang.phi.PhWith;
+import org.hamcrest.MatcherAssert;
+import org.hamcrest.Matchers;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
 /**
- * File.is-dir.
+ * Test.
  *
  * @since 0.1
  * @checkstyle TypeNameCheck (100 lines)
  */
-@SuppressWarnings("PMD.AvoidDollarSigns")
-public class EOfile$EOis_dir extends PhDefault {
+public final class EOfileEOrmTest {
 
-    /**
-     * Ctor.
-     * @param parent The parent
-     * @checkstyle BracketsStructureCheck (200 lines)
-     */
-    @SuppressWarnings("PMD.ConstructorOnlyInitializesOrCallOtherConstructors")
-    public EOfile$EOis_dir(final Phi parent) {
-        super(parent);
-        this.add("φ", new AtBound(new AtLambda(this, self -> new Data.ToPhi(
-            Paths.get(
-                new Dataized(
-                    self.attr("ρ").get().attr("path").get()
-                ).take(String.class)
-            ).toFile().isDirectory())
-        )));
+    @Test
+    public void existsFile(@TempDir final Path temp) throws Exception {
+        final Path file = temp.resolve("a.txt");
+        Files.write(file, "Hello, world!".getBytes());
+        MatcherAssert.assertThat(
+            new Dataized(
+                new EOfile$EOrm(
+                    new PhWith(
+                        new EOfile(),
+                        "path",
+                        new Data.Value<>(file.toAbsolutePath().toString())
+                    )
+                )
+            ).take(Boolean.class),
+            Matchers.is(true)
+        );
     }
 
 }

@@ -7,4 +7,11 @@
   # Is it directory?
   [] > is-dir /bool
 
+  # File exists?
   [] > exists /bool
+
+  # Remove it and returns TRUE
+  [] > rm /bool
+
+  # Write into it
+  [input mode] > write /int

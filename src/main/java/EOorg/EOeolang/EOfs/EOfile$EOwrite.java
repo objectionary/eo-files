@@ -24,8 +24,17 @@
 // @checkstyle PackageNameCheck (1 line)
 package EOorg.EOeolang.EOfs;
 
+import java.io.IOException;
+import java.io.OutputStream;
+import java.nio.file.Files;
+import java.nio.file.OpenOption;
+import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
+import java.util.Collection;
+import java.util.LinkedList;
 import org.eolang.phi.AtBound;
+import org.eolang.phi.AtFree;
 import org.eolang.phi.AtLambda;
 import org.eolang.phi.Data;
 import org.eolang.phi.Dataized;
@@ -33,13 +42,13 @@ import org.eolang.phi.PhDefault;
 import org.eolang.phi.Phi;
 
 /**
- * File.is-dir.
+ * File.write.
  *
  * @since 0.1
  * @checkstyle TypeNameCheck (100 lines)
  */
 @SuppressWarnings("PMD.AvoidDollarSigns")
-public class EOfile$EOis_dir extends PhDefault {
+public class EOfile$EOwrite extends PhDefault {
 
     /**
      * Ctor.
@@ -47,15 +56,47 @@ public class EOfile$EOis_dir extends PhDefault {
      * @checkstyle BracketsStructureCheck (200 lines)
      */
     @SuppressWarnings("PMD.ConstructorOnlyInitializesOrCallOtherConstructors")
-    public EOfile$EOis_dir(final Phi parent) {
+    public EOfile$EOwrite(final Phi parent) {
         super(parent);
-        this.add("φ", new AtBound(new AtLambda(this, self -> new Data.ToPhi(
-            Paths.get(
+        this.add("input", new AtFree());
+        this.add("mode", new AtFree());
+        this.add("φ", new AtBound(new AtLambda(this, self -> {
+            final String mode = new Dataized(self.attr("mode").get().copy()).take(String.class);
+            final Path path = Paths.get(
                 new Dataized(
                     self.attr("ρ").get().attr("path").get()
                 ).take(String.class)
-            ).toFile().isDirectory())
-        )));
+            );
+            int total = 0;
+            try (OutputStream out = EOfile$EOwrite.stream(path, mode)) {
+                final Phi input = self.attr("input").get().copy();
+                final byte[] chunk = new Dataized(input).take(byte[].class);
+                out.write(chunk);
+                total += chunk.length;
+            }
+            return new Data.ToPhi(total);
+        })));
+    }
+
+    /**
+     * Make an output stream.
+     * @param path The path
+     * @param opts Opts
+     * @return Stream
+     * @throws IOException If fails
+     */
+    private static OutputStream stream(final Path path, final String opts)
+        throws IOException {
+        final Collection<OpenOption> options = new LinkedList<>();
+        for (final char chr : opts.toCharArray()) {
+            if (chr == 'w') {
+                options.add(StandardOpenOption.WRITE);
+            }
+            if (chr == 'a') {
+                options.add(StandardOpenOption.APPEND);
+            }
+        }
+        return Files.newOutputStream(path, options.toArray(new OpenOption[0]));
     }
 
 }
