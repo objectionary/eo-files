@@ -10,8 +10,9 @@
   # File exists?
   [] > exists /bool
 
-  # Remove it and returns TRUE
+  # Removes the file and returns TRUE if success
   [] > rm /bool
 
-  # Write into it
-  [input mode] > write /int
+  # Turn it into an "output" with a single attribute
+  # "write", which accepts one attribute "data"
+  [mode] > as-output /?

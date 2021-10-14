@@ -24,40 +24,49 @@
 // @checkstyle PackageNameCheck (1 line)
 package EOorg.EOeolang.EOfs;
 
-import java.nio.file.Files;
-import java.nio.file.Path;
-import org.eolang.Data;
+import java.io.OutputStream;
+import org.eolang.AtBound;
+import org.eolang.AtFree;
+import org.eolang.AtLambda;
 import org.eolang.Dataized;
-import org.eolang.PhWith;
-import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.io.TempDir;
+import org.eolang.PhDefault;
+import org.eolang.Phi;
 
 /**
- * Test.
+ * File.as-output.write.
  *
  * @since 0.1
  * @checkstyle TypeNameCheck (100 lines)
  */
-public final class EOfileEOrmTest {
+@SuppressWarnings("PMD.AvoidDollarSigns")
+public class EOfile$EOas_output$EOwrite extends PhDefault {
 
-    @Test
-    public void existsFile(@TempDir final Path temp) throws Exception {
-        final Path file = temp.resolve("a.txt");
-        Files.write(file, "Hello, world!".getBytes());
-        MatcherAssert.assertThat(
-            new Dataized(
-                new EOfile$EOrm(
-                    new PhWith(
-                        new EOfile(),
-                        "path",
-                        new Data.ToPhi(file.toAbsolutePath().toString())
-                    )
-                )
-            ).take(Boolean.class),
-            Matchers.is(true)
-        );
+    /**
+     * Ctor.
+     * @param parent The parent
+     * @checkstyle BracketsStructureCheck (200 lines)
+     */
+    @SuppressWarnings("PMD.ConstructorOnlyInitializesOrCallOtherConstructors")
+    public EOfile$EOas_output$EOwrite(final Phi parent) {
+        this(parent, null);
+    }
+
+    /**
+     * Ctor.
+     * @param parent The parent
+     * @checkstyle BracketsStructureCheck (200 lines)
+     */
+    @SuppressWarnings("PMD.ConstructorOnlyInitializesOrCallOtherConstructors")
+    public EOfile$EOas_output$EOwrite(final Phi parent, final OutputStream stream) {
+        super(parent);
+        this.add("data", new AtFree());
+        this.add("φ", new AtBound(new AtLambda(this, self -> {
+            final byte[] chunk = new Dataized(
+                self.attr("data").get().copy()
+            ).take(byte[].class);
+            stream.write(chunk);
+            return new EOfile$EOas_output(self.attr("ρ").get(), stream);
+        })));
     }
 
 }

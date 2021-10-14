@@ -26,9 +26,9 @@ package EOorg.EOeolang.EOfs;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
-import org.eolang.phi.Data;
-import org.eolang.phi.Dataized;
-import org.eolang.phi.PhWith;
+import org.eolang.Data;
+import org.eolang.Dataized;
+import org.eolang.PhWith;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
@@ -52,7 +52,7 @@ public final class EOfileEOexistsTest {
                     new PhWith(
                         new EOfile(),
                         "path",
-                        new Data.Value<>(file.toAbsolutePath().toString())
+                        new Data.ToPhi(file.toAbsolutePath().toString())
                     )
                 )
             ).take(Boolean.class),

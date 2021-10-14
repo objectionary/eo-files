@@ -1,0 +1,16 @@
++package org.eolang.fs
++alias org.eolang.fs.bytes-as-input
++junit
+
+[] > reads-bytes
+  bytes-as-input > i
+    01-02-03-04-05-06-07-08
+  i.read 4 > i1
+  i.read 4 > i2
+  and. > @
+    eq.
+      i1
+      01-02-03-04
+    eq.
+      i2
+      05-06-07-08

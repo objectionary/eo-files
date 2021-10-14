@@ -24,15 +24,16 @@
 // @checkstyle PackageNameCheck (1 line)
 package EOorg.EOeolang.EOfs;
 
-import java.nio.file.Files;
-import java.nio.file.Path;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import org.eolang.Data;
 import org.eolang.Dataized;
 import org.eolang.PhWith;
+import org.eolang.Phi;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.io.TempDir;
 
 /**
  * Test.
@@ -40,23 +41,30 @@ import org.junit.jupiter.api.io.TempDir;
  * @since 0.1
  * @checkstyle TypeNameCheck (100 lines)
  */
-public final class EOfileEOrmTest {
+public final class EObytes_as_inputEOreadTest {
 
     @Test
-    public void existsFile(@TempDir final Path temp) throws Exception {
-        final Path file = temp.resolve("a.txt");
-        Files.write(file, "Hello, world!".getBytes());
+    public void readsBytes() throws IOException {
+        final String text = "你好, друг!";
+        Phi input = new PhWith(
+            new EObytes_as_input(),
+            "b", new Data.ToPhi(text.getBytes())
+        );
+        final ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        while (true) {
+            input = new PhWith(
+                input.attr("read").get().copy(),
+                "max", new Data.ToPhi(2L)
+            );
+            final byte[] chunk = new Dataized(input).take(byte[].class);
+            if (chunk.length == 0) {
+                break;
+            }
+            baos.write(chunk);
+        }
         MatcherAssert.assertThat(
-            new Dataized(
-                new EOfile$EOrm(
-                    new PhWith(
-                        new EOfile(),
-                        "path",
-                        new Data.ToPhi(file.toAbsolutePath().toString())
-                    )
-                )
-            ).take(Boolean.class),
-            Matchers.is(true)
+            new String(baos.toByteArray(), StandardCharsets.UTF_8),
+            Matchers.equalTo(text)
         );
     }
 

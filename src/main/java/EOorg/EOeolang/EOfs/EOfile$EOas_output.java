@@ -33,22 +33,21 @@ import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.Collection;
 import java.util.LinkedList;
-import org.eolang.phi.AtBound;
-import org.eolang.phi.AtFree;
-import org.eolang.phi.AtLambda;
-import org.eolang.phi.Data;
-import org.eolang.phi.Dataized;
-import org.eolang.phi.PhDefault;
-import org.eolang.phi.Phi;
+import org.eolang.AtBound;
+import org.eolang.AtFree;
+import org.eolang.AtLambda;
+import org.eolang.Dataized;
+import org.eolang.PhDefault;
+import org.eolang.Phi;
 
 /**
- * File.write.
+ * File.as-output.
  *
  * @since 0.1
  * @checkstyle TypeNameCheck (100 lines)
  */
 @SuppressWarnings("PMD.AvoidDollarSigns")
-public class EOfile$EOwrite extends PhDefault {
+public class EOfile$EOas_output extends PhDefault {
 
     /**
      * Ctor.
@@ -56,25 +55,39 @@ public class EOfile$EOwrite extends PhDefault {
      * @checkstyle BracketsStructureCheck (200 lines)
      */
     @SuppressWarnings("PMD.ConstructorOnlyInitializesOrCallOtherConstructors")
-    public EOfile$EOwrite(final Phi parent) {
+    public EOfile$EOas_output(final Phi parent) {
+        this(parent, null);
+    }
+
+    /**
+     * Ctor.
+     * @param parent The parent
+     * @checkstyle BracketsStructureCheck (200 lines)
+     */
+    @SuppressWarnings("PMD.ConstructorOnlyInitializesOrCallOtherConstructors")
+    public EOfile$EOas_output(final Phi parent, final OutputStream out) {
         super(parent);
-        this.add("input", new AtFree());
         this.add("mode", new AtFree());
-        this.add("φ", new AtBound(new AtLambda(this, self -> {
-            final String mode = new Dataized(self.attr("mode").get().copy()).take(String.class);
-            final Path path = Paths.get(
-                new Dataized(
-                    self.attr("ρ").get().attr("path").get()
-                ).take(String.class)
-            );
-            int total = 0;
-            try (OutputStream out = EOfile$EOwrite.stream(path, mode)) {
-                final Phi input = self.attr("input").get().copy();
-                final byte[] chunk = new Dataized(input).take(byte[].class);
-                out.write(chunk);
-                total += chunk.length;
+        this.add("write", new AtBound(new AtLambda(this, self -> {
+            OutputStream stream = out;
+            if (stream == null) {
+                final String mode = new Dataized(
+                    self.attr("ρ").get().attr("mode").get()
+                ).take(String.class);
+                final Path path = Paths.get(
+                    new Dataized(
+                        self.attr("ρ").get()
+                    ).take(String.class)
+                );
+                stream = EOfile$EOas_output.stream(path, mode);
             }
-            return new Data.ToPhi(total);
+            return new EOfile$EOas_output$EOwrite(self, stream);
+        })));
+        this.add("close", new AtBound(new AtLambda(this, self -> {
+            if (out != null) {
+                out.close();
+            }
+            return new EOfile$EOas_output$EOwrite(self, out);
         })));
     }
 

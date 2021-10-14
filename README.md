@@ -69,9 +69,14 @@ Reading:
 
 ```
 # Read binary content into the "output," in 1024-bytes chunks;
-# the "output" is an abstract object with one free attribute,
-# which will be subsituted by "bytes" just read:
-f.read output 1024
+# the "memory-as-output" is an abstract object with one free attribute,
+# which is the memory where the bytes will be stored:
+file "/tmp/foo.txt" > f
+memory > m
+copy
+  f.as-input
+  memory-as-output m
+  1024
 ```
 
 Writing:
@@ -81,7 +86,11 @@ Writing:
 # until input turns into a non-empty "bytes"; here the
 # "mode" is the same as the mode in POSIX fopen();
 # if the file is absent, it will be created:
-f.write input "a+"
+file "/tmp/foo.txt" > f
+copy
+  bytes-as-input
+    "你好, world!".as-bytes
+  f.as-ouput "w+"
 ```
 
 Smart objects to help read and write:

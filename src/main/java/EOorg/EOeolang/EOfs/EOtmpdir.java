@@ -24,12 +24,12 @@
 // @checkstyle PackageNameCheck (1 line)
 package EOorg.EOeolang.EOfs;
 
-import org.eolang.phi.AtBound;
-import org.eolang.phi.AtLambda;
-import org.eolang.phi.Data;
-import org.eolang.phi.PhDefault;
-import org.eolang.phi.PhWith;
-import org.eolang.phi.Phi;
+import org.eolang.AtBound;
+import org.eolang.AtLambda;
+import org.eolang.Data;
+import org.eolang.PhDefault;
+import org.eolang.PhWith;
+import org.eolang.Phi;
 
 /**
  * Tmpdir.@.
@@ -50,7 +50,7 @@ public class EOtmpdir extends PhDefault {
         this.add("φ", new AtBound(new AtLambda(this, self -> new PhWith(
             new EOdir(), "file",
             new PhWith(
-                new EOfile(), "path",
+                new EOfile(self), "path",
                 new Data.ToPhi(System.getProperty("java.io.tmpdir"))
             )
         ))));

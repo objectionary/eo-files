@@ -25,12 +25,12 @@
 package EOorg.EOeolang.EOfs;
 
 import java.nio.file.Paths;
-import org.eolang.phi.AtBound;
-import org.eolang.phi.AtLambda;
-import org.eolang.phi.Data;
-import org.eolang.phi.Dataized;
-import org.eolang.phi.PhDefault;
-import org.eolang.phi.Phi;
+import org.eolang.AtBound;
+import org.eolang.AtLambda;
+import org.eolang.Data;
+import org.eolang.Dataized;
+import org.eolang.PhDefault;
+import org.eolang.Phi;
 
 /**
  * File.is-dir.
@@ -52,7 +52,7 @@ public class EOfile$EOis_dir extends PhDefault {
         this.add("φ", new AtBound(new AtLambda(this, self -> new Data.ToPhi(
             Paths.get(
                 new Dataized(
-                    self.attr("ρ").get().attr("path").get()
+                    self.attr("ρ").get()
                 ).take(String.class)
             ).toFile().isDirectory())
         )));

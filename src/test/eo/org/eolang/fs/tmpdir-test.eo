@@ -2,6 +2,6 @@
 +alias org.eolang.fs.tmpdir
 +junit
 
-[] > it-exists
+[] > global-temp-dir-exists
   exists. > @
     tmpdir

@@ -24,26 +24,24 @@
 // @checkstyle PackageNameCheck (1 line)
 package EOorg.EOeolang.EOfs;
 
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.util.Arrays;
 import org.eolang.AtBound;
+import org.eolang.AtFree;
 import org.eolang.AtLambda;
+import org.eolang.Attr;
 import org.eolang.Data;
 import org.eolang.Dataized;
 import org.eolang.PhDefault;
 import org.eolang.PhWith;
 import org.eolang.Phi;
 
-
 /**
- * Dir.tmpfile.
+ * Bytes-as-input.read.
  *
  * @since 0.1
  * @checkstyle TypeNameCheck (100 lines)
  */
-@SuppressWarnings("PMD.AvoidDollarSigns")
-public class EOdir$EOtmpfile extends PhDefault {
+public class EObytes_as_input$EOread extends PhDefault {
 
     /**
      * Ctor.
@@ -51,19 +49,33 @@ public class EOdir$EOtmpfile extends PhDefault {
      * @checkstyle BracketsStructureCheck (200 lines)
      */
     @SuppressWarnings("PMD.ConstructorOnlyInitializesOrCallOtherConstructors")
-    public EOdir$EOtmpfile(final Phi parent) {
+    public EObytes_as_input$EOread(final Phi parent) {
         super(parent);
+        this.add("max", new AtFree());
         this.add("φ", new AtBound(new AtLambda(this, self -> {
-            final Path home = Paths.get(
-                new Dataized(
-                    self.attr("ρ").get()
-                ).take(String.class)
+            final Phi rho = self.attr("ρ").get();
+            final long max = new Dataized(self.attr("max").get()).take(Long.class);;
+            long next;
+            try {
+                next = new Dataized(rho.attr("next").get()).take(Long.class);
+            } catch (final Attr.StillAbstractException ex) {
+                next = 0L;
+            }
+            final byte[] bytes = new Dataized(rho.attr("b").get()).take(byte[].class);
+            final byte[] buf = Arrays.copyOfRange(
+                bytes,
+                (int) next,
+                Integer.min((int) (next + max), bytes.length)
             );
-            final Path path = Files.createTempFile(home, null, null);
-            path.toFile().deleteOnExit();
             return new PhWith(
-                new EOfile(self), "path",
-                new Data.ToPhi(path.toAbsolutePath().toString())
+                new PhWith(
+                    new PhWith(
+                        new EObytes_as_input(parent),
+                        "b", rho.attr("b").get()
+                    ),
+                    "next", new Data.ToPhi(next + (long) buf.length)
+                ),
+                "buf", new Data.ToPhi(buf)
             );
         })));
     }

@@ -24,10 +24,8 @@
 // @checkstyle PackageNameCheck (1 line)
 package EOorg.EOeolang.EOfs;
 
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import org.eolang.AtBound;
+import org.eolang.AtFree;
 import org.eolang.AtLambda;
 import org.eolang.Data;
 import org.eolang.Dataized;
@@ -35,15 +33,14 @@ import org.eolang.PhDefault;
 import org.eolang.PhWith;
 import org.eolang.Phi;
 
-
 /**
- * Dir.tmpfile.
+ * Copu.
  *
  * @since 0.1
  * @checkstyle TypeNameCheck (100 lines)
  */
 @SuppressWarnings("PMD.AvoidDollarSigns")
-public class EOdir$EOtmpfile extends PhDefault {
+public class EOcopy extends PhDefault {
 
     /**
      * Ctor.
@@ -51,20 +48,38 @@ public class EOdir$EOtmpfile extends PhDefault {
      * @checkstyle BracketsStructureCheck (200 lines)
      */
     @SuppressWarnings("PMD.ConstructorOnlyInitializesOrCallOtherConstructors")
-    public EOdir$EOtmpfile(final Phi parent) {
+    public EOcopy(final Phi parent) {
         super(parent);
+        this.add("input", new AtFree());
+        this.add("output", new AtFree());
+        this.add("size", new AtFree());
         this.add("φ", new AtBound(new AtLambda(this, self -> {
-            final Path home = Paths.get(
-                new Dataized(
-                    self.attr("ρ").get()
-                ).take(String.class)
-            );
-            final Path path = Files.createTempFile(home, null, null);
-            path.toFile().deleteOnExit();
-            return new PhWith(
-                new EOfile(self), "path",
-                new Data.ToPhi(path.toAbsolutePath().toString())
-            );
+            final long size = new Dataized(self.attr("size").get()).take(Long.class);
+            int total = 0;
+            Phi input = self.attr("input").get();
+            Phi output = self.attr("output").get();
+            while (true) {
+                input = new Dataized(
+                    new PhWith(
+                        input.attr("read").get().copy(),
+                        0, new Data.ToPhi(size)
+                    )
+                ).take(Phi.class);
+                final byte[] chunk = new Dataized(input).take(byte[].class);
+                if (chunk.length == 0) {
+                    new Dataized(input.attr("close").get()).take();
+                    break;
+                }
+                output = new Dataized(
+                    new PhWith(
+                        output.attr("write").get().copy(),
+                        0, new Data.ToPhi(size)
+                    )
+                ).take(Phi.class);
+                total += chunk.length;
+            }
+            new Dataized(output.attr("close").get()).take();
+            return new Data.ToPhi(total);
         })));
     }
 
