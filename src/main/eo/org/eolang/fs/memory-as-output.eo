@@ -4,9 +4,11 @@
 # Turns memory into an output.
 [m] > memory-as-output
 
-  # Read the next chunk of bytes and
-  # return a new "input" object, with the maximum length of "max"
-  [max] > read /bytes-as-input
+  m > @
+
+  # Write the next chunk of bytes and
+  # return a new "output" object
+  [data] > write /memory-as-output
 
   # Close it
   [] > close

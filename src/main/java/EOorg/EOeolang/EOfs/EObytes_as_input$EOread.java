@@ -53,15 +53,16 @@ public class EObytes_as_input$EOread extends PhDefault {
         super(parent);
         this.add("max", new AtFree());
         this.add("φ", new AtBound(new AtLambda(this, self -> {
-            final Phi rho = self.attr("ρ").get();
             final long max = new Dataized(self.attr("max").get()).take(Long.class);;
+            final Phi rho = self.attr("ρ").get();
             long next;
             try {
                 next = new Dataized(rho.attr("next").get()).take(Long.class);
             } catch (final Attr.StillAbstractException ex) {
                 next = 0L;
             }
-            final byte[] bytes = new Dataized(rho.attr("b").get()).take(byte[].class);
+            final Phi data = rho.attr("b").get();
+            final byte[] bytes = new Dataized(data).take(byte[].class);
             final byte[] buf = Arrays.copyOfRange(
                 bytes,
                 (int) next,
@@ -70,8 +71,8 @@ public class EObytes_as_input$EOread extends PhDefault {
             return new PhWith(
                 new PhWith(
                     new PhWith(
-                        new EObytes_as_input(parent),
-                        "b", rho.attr("b").get()
+                        new EObytes_as_input(),
+                        "b", data
                     ),
                     "next", new Data.ToPhi(next + (long) buf.length)
                 ),

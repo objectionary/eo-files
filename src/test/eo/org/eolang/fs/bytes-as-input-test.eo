@@ -4,9 +4,10 @@
 
 [] > reads-bytes
   bytes-as-input > i
-    01-02-03-04-05-06-07-08
+    01-02-03-04-05-06-07-08-F5-F6
   i.read 4 > i1
-  i.read 4 > i2
+  i1.read 4 > i2
+  i2.read 4 > i3
   and. > @
     eq.
       i1
@@ -14,3 +15,6 @@
     eq.
       i2
       05-06-07-08
+    eq.
+      i3
+      F5-F6

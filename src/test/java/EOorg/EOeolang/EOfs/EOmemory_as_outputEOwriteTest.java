@@ -24,20 +24,17 @@
 // @checkstyle PackageNameCheck (1 line)
 package EOorg.EOeolang.EOfs;
 
-import java.io.ByteArrayOutputStream;
+import EOorg.EOeolang.EOmemory;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.util.stream.Stream;
+import java.util.Arrays;
 import org.eolang.Data;
 import org.eolang.Dataized;
-import org.eolang.PhConst;
 import org.eolang.PhWith;
 import org.eolang.Phi;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test.
@@ -45,45 +42,38 @@ import org.junit.jupiter.params.provider.MethodSource;
  * @since 0.1
  * @checkstyle TypeNameCheck (100 lines)
  */
-public final class EObytes_as_inputEOreadTest {
+public final class EOmemory_as_outputEOwriteTest {
 
-    @ParameterizedTest
-    @MethodSource("packs")
-    public void readsBytes(final String text, final int max) throws IOException {
-        Phi input = new PhWith(
-            new EObytes_as_input(),
-            "b", new Data.ToPhi(text.getBytes())
-        );
-        final ByteArrayOutputStream baos = new ByteArrayOutputStream();
+    @Test
+    public void writesBytesToMemory() throws IOException {
+        final Phi mem = new EOmemory();
+        Phi output = new PhWith(new EOmemory_as_output(), "m", mem);
+//        final String text = "你好, друг!";
+        final String text = "hello";
+        final byte[] bytes = text.getBytes(StandardCharsets.UTF_8);
+        int pos = 0;
         while (true) {
-            input = new PhConst(
-                new PhWith(
-                    input.attr("read").get().copy(),
-                    "max", new Data.ToPhi((long) max)
-                )
+            final byte[] chunk = Arrays.copyOfRange(
+                bytes, pos, Integer.min(pos + 2, bytes.length)
             );
-            final byte[] chunk = new Dataized(input).take(byte[].class);
-            if (chunk.length == 0) {
-                new Dataized(input.attr("close").get()).take();
+            output = new PhWith(
+                output.attr("write").get().copy(),
+                "data", new Data.ToPhi(chunk)
+            );
+            new Dataized(output).take();
+            System.out.println("---");
+            pos += chunk.length;
+            if (pos >= bytes.length) {
+                new Dataized(output.attr("close").get()).take();
                 break;
             }
-            baos.write(chunk);
         }
         MatcherAssert.assertThat(
-            new String(baos.toByteArray(), StandardCharsets.UTF_8),
+            new String(
+                new Dataized(mem).take(byte[].class),
+                StandardCharsets.UTF_8
+            ),
             Matchers.equalTo(text)
-        );
-    }
-
-    static Stream<Arguments> packs() {
-        return Stream.of(
-            Arguments.arguments("", 1),
-            Arguments.arguments("x", 1),
-            Arguments.arguments("xx", 1),
-            Arguments.arguments("你好, друг!", 2),
-            Arguments.arguments("test", 10),
-            Arguments.arguments("", 10),
-            Arguments.arguments("hello, друг!", 1)
         );
     }
 
