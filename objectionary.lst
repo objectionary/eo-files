@@ -1,2 +1,10 @@
+objectionary/objects/org/eolang/io/copied.eo
+objectionary/objects/org/eolang/io/bytes-as-input.eo
+objectionary/objects/org/eolang/io/memory-as-output.eo
+objectionary/objects/org/eolang/fs/tmpdir.eo
 objectionary/objects/org/eolang/fs/file.eo
+objectionary/objects/org/eolang/fs/dir.eo
+objectionary/tests/org/eolang/io/bytes-as-input-test.eo
+objectionary/tests/org/eolang/io/copied-test.eo
+objectionary/tests/org/eolang/fs/tmpdir-test.eo
 objectionary/tests/org/eolang/fs/file-test.eo
