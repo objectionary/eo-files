@@ -55,6 +55,9 @@ f.exists
 # Is it a directory?
 f.is-dir
 
+# Touch it, to make sure it exists
+f.touch
+
 # Delete the file:
 f.rm
 

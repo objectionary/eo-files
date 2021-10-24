@@ -10,6 +10,9 @@
   # File exists?
   [] > exists /bool
 
+  # Touch it and return TRUE.
+  [] > touch /bool
+
   # Removes the file and returns TRUE if success
   [] > rm /bool
 

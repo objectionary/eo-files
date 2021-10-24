@@ -16,6 +16,12 @@
       file
         "some-absent-file.txt"
 
+[] > touches-a-file
+  tmpdir.tmpfile > f
+  and. > @
+    f.touch
+    f.exists
+
 [] > deletes-single-file-in-temp
   rm. > @
     tmpfile.
