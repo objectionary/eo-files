@@ -53,7 +53,7 @@ public class EObytes_as_input$EOread extends PhDefault {
         super(parent);
         this.add("max", new AtFree());
         this.add("φ", new AtBound(new AtLambda(this, self -> {
-            final long max = new Dataized(self.attr("max").get()).take(Long.class);;
+            final long max = new Dataized(self.attr("max").get()).take(Long.class);
             final Phi rho = self.attr("ρ").get();
             long next;
             try {

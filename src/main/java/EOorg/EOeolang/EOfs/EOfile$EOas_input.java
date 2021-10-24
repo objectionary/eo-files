@@ -63,6 +63,7 @@ public class EOfile$EOas_input extends PhDefault {
     /**
      * Ctor.
      * @param parent The parent
+     * @param out Output stream of NULL
      * @checkstyle BracketsStructureCheck (200 lines)
      */
     @SuppressWarnings("PMD.ConstructorOnlyInitializesOrCallOtherConstructors")

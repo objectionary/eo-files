@@ -39,6 +39,7 @@ import org.eolang.Phi;
  *
  * @since 0.1
  * @checkstyle TypeNameCheck (100 lines)
+ * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
 public class EOmemory_as_output$EOwrite extends PhDefault {
 

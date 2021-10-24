@@ -27,7 +27,6 @@ package EOorg.EOeolang.EOio;
 import EOorg.EOeolang.EOmemory;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
-import java.util.stream.Stream;
 import org.eolang.Data;
 import org.eolang.Dataized;
 import org.eolang.PhConst;
@@ -37,19 +36,19 @@ import org.eolang.Phi;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.CsvFileSource;
 
 /**
  * Test.
  *
  * @since 0.1
  * @checkstyle TypeNameCheck (100 lines)
+ * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
 public final class EOmemory_as_outputEOwriteTest {
 
     @ParameterizedTest
-    @MethodSource("packs")
+    @CsvFileSource(resources = "/EOlang/EOio/test-samples.csv")
     public void writesBytesToMemory(final String text, final int max) {
         final Phi mem = new EOmemory();
         Phi output = new PhWith(new EOmemory_as_output(), "m", mem);
@@ -81,18 +80,6 @@ public final class EOmemory_as_outputEOwriteTest {
                 StandardCharsets.UTF_8
             ),
             Matchers.equalTo(text)
-        );
-    }
-
-    static Stream<Arguments> packs() {
-        return Stream.of(
-            Arguments.arguments("", 1),
-            Arguments.arguments("x", 1),
-            Arguments.arguments("xx", 1),
-            Arguments.arguments("你好, друг!", 2),
-            Arguments.arguments("test", 10),
-            Arguments.arguments("", 10),
-            Arguments.arguments("hello, друг!", 1)
         );
     }
 }

@@ -27,7 +27,6 @@ package EOorg.EOeolang.EOio;
 import EOorg.EOeolang.EOmemory;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.util.stream.Stream;
 import org.eolang.Data;
 import org.eolang.Dataized;
 import org.eolang.PhEta;
@@ -36,19 +35,19 @@ import org.eolang.Phi;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.CsvFileSource;
 
 /**
  * Test of copy.
  *
  * @since 0.1
  * @checkstyle TypeNameCheck (100 lines)
+ * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
 public final class EOcopiedTest {
 
     @ParameterizedTest
-    @MethodSource("packs")
+    @CsvFileSource(resources = "/EOlang/EOio/test-samples.csv")
     public void readsBytes(final String text, final int size) throws IOException {
         final byte[] bytes = text.getBytes();
         Phi copy = new PhWith(
@@ -80,18 +79,6 @@ public final class EOcopiedTest {
                 StandardCharsets.UTF_8
             ),
             Matchers.equalTo(text)
-        );
-    }
-
-    static Stream<Arguments> packs() {
-        return Stream.of(
-            Arguments.arguments("", 1),
-            Arguments.arguments("x", 1),
-            Arguments.arguments("xx", 1),
-            Arguments.arguments("你好, друг!", 2),
-            Arguments.arguments("test", 10),
-            Arguments.arguments("", 10),
-            Arguments.arguments("hello, друг!", 1)
         );
     }
 }

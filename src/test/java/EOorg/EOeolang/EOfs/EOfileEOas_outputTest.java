@@ -29,7 +29,6 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Arrays;
-import java.util.stream.Stream;
 import org.eolang.Data;
 import org.eolang.Dataized;
 import org.eolang.PhConst;
@@ -40,8 +39,7 @@ import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.io.TempDir;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.CsvFileSource;
 
 /**
  * Test.
@@ -51,11 +49,15 @@ import org.junit.jupiter.params.provider.MethodSource;
  */
 public final class EOfileEOas_outputTest {
 
+    /**
+     * Temp dir.
+     * @checkstyle VisibilityModifierCheck (4 lines)
+     */
     @TempDir
     public Path temp;
 
     @ParameterizedTest
-    @MethodSource("packs")
+    @CsvFileSource(resources = "/EOlang/EOio/test-samples.csv")
     public void writesBytesToFile(final String text, final int max) throws IOException {
         final Path file = this.temp.resolve("test.txt");
         Phi output = new PhWith(
@@ -97,15 +99,4 @@ public final class EOfileEOas_outputTest {
         );
     }
 
-    static Stream<Arguments> packs() {
-        return Stream.of(
-            Arguments.arguments("", 1),
-            Arguments.arguments("x", 1),
-            Arguments.arguments("xx", 1),
-            Arguments.arguments("你好, друг!", 2),
-            Arguments.arguments("test", 10),
-            Arguments.arguments("", 10),
-            Arguments.arguments("hello, друг!", 1)
-        );
-    }
 }

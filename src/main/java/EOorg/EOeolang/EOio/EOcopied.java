@@ -40,6 +40,7 @@ import org.eolang.Phi;
  *
  * @since 0.1
  * @checkstyle TypeNameCheck (100 lines)
+ * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
 @SuppressWarnings("PMD.AvoidDollarSigns")
 public class EOcopied extends PhDefault {
