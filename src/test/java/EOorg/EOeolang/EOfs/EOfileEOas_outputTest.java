@@ -24,8 +24,10 @@
 // @checkstyle PackageNameCheck (1 line)
 package EOorg.EOeolang.EOfs;
 
-import EOorg.EOeolang.EOmemory;
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.stream.Stream;
 import org.eolang.Data;
@@ -36,6 +38,7 @@ import org.eolang.PhWith;
 import org.eolang.Phi;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
+import org.junit.jupiter.api.io.TempDir;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -46,13 +49,26 @@ import org.junit.jupiter.params.provider.MethodSource;
  * @since 0.1
  * @checkstyle TypeNameCheck (100 lines)
  */
-public final class EOmemory_as_outputEOwriteTest {
+public final class EOfileEOas_outputTest {
+
+    @TempDir
+    public Path temp;
 
     @ParameterizedTest
     @MethodSource("packs")
-    public void writesBytesToMemory(final String text, final int max) {
-        final Phi mem = new EOmemory();
-        Phi output = new PhWith(new EOmemory_as_output(), "m", mem);
+    public void writesBytesToFile(final String text, final int max) throws IOException {
+        final Path file = this.temp.resolve("test.txt");
+        Phi output = new PhWith(
+            new PhMethod(
+                new PhWith(
+                    new EOfile(), "path",
+                    new Data.ToPhi(file.toAbsolutePath().toString())
+                ),
+                "as-output"
+            ),
+            "mode",
+            new Data.ToPhi("w")
+        );
         final byte[] bytes = text.getBytes(StandardCharsets.UTF_8);
         int pos = 0;
         while (true) {
@@ -76,10 +92,7 @@ public final class EOmemory_as_outputEOwriteTest {
             }
         }
         MatcherAssert.assertThat(
-            new String(
-                new Dataized(mem).take(byte[].class),
-                StandardCharsets.UTF_8
-            ),
+            new String(Files.readAllBytes(file), StandardCharsets.UTF_8),
             Matchers.equalTo(text)
         );
     }

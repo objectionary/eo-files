@@ -25,7 +25,7 @@
 package EOorg.EOeolang.EOfs;
 
 import java.io.IOException;
-import java.io.OutputStream;
+import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.OpenOption;
 import java.nio.file.Path;
@@ -42,13 +42,13 @@ import org.eolang.PhDefault;
 import org.eolang.Phi;
 
 /**
- * File.as-output.
+ * File.as-input.
  *
  * @since 0.1
  * @checkstyle TypeNameCheck (100 lines)
  */
 @SuppressWarnings("PMD.AvoidDollarSigns")
-public class EOfile$EOas_output extends PhDefault {
+public class EOfile$EOas_input extends PhDefault {
 
     /**
      * Ctor.
@@ -56,7 +56,7 @@ public class EOfile$EOas_output extends PhDefault {
      * @checkstyle BracketsStructureCheck (200 lines)
      */
     @SuppressWarnings("PMD.ConstructorOnlyInitializesOrCallOtherConstructors")
-    public EOfile$EOas_output(final Phi parent) {
+    public EOfile$EOas_input(final Phi parent) {
         this(parent, null);
     }
 
@@ -66,12 +66,13 @@ public class EOfile$EOas_output extends PhDefault {
      * @checkstyle BracketsStructureCheck (200 lines)
      */
     @SuppressWarnings("PMD.ConstructorOnlyInitializesOrCallOtherConstructors")
-    public EOfile$EOas_output(final Phi parent, final OutputStream out) {
+    public EOfile$EOas_input(final Phi parent, final InputStream out) {
         super(parent);
         this.add("mode", new AtFree());
-        this.add("φ", new AtBound(new AtLambda(this, self -> new Data.ToPhi(true))));
-        this.add("write", new AtBound(new AtLambda(this, self -> {
-            OutputStream stream = out;
+        this.add("buf", new AtFree());
+        this.add("φ", new AtBound(new AtLambda(this, self -> self.attr("buf").get())));
+        this.add("read", new AtBound(new AtLambda(this, self -> {
+            InputStream stream = out;
             if (stream == null) {
                 final String mode = new Dataized(
                     self.attr("mode").get()
@@ -81,9 +82,9 @@ public class EOfile$EOas_output extends PhDefault {
                         self.attr("ρ").get()
                     ).take(String.class)
                 );
-                stream = EOfile$EOas_output.stream(path, mode);
+                stream = EOfile$EOas_input.stream(path, mode);
             }
-            return new EOfile$EOas_output$EOwrite(self, stream);
+            return new EOfile$EOas_input$EOread(self, stream);
         })));
         this.add("close", new AtBound(new AtLambda(this, self -> {
             if (out != null) {
@@ -100,21 +101,15 @@ public class EOfile$EOas_output extends PhDefault {
      * @return Stream
      * @throws IOException If fails
      */
-    private static OutputStream stream(final Path path, final String opts)
+    private static InputStream stream(final Path path, final String opts)
         throws IOException {
         final Collection<OpenOption> options = new LinkedList<>();
         for (final char chr : opts.toCharArray()) {
-            if (chr == 'w') {
-                options.add(StandardOpenOption.WRITE);
-            }
-            if (chr == 'a') {
-                options.add(StandardOpenOption.APPEND);
+            if (chr == 'r') {
+                options.add(StandardOpenOption.READ);
             }
         }
-        if (opts.indexOf('+') < 0) {
-            options.add(StandardOpenOption.CREATE);
-        }
-        return Files.newOutputStream(path, options.toArray(new OpenOption[0]));
+        return Files.newInputStream(path, options.toArray(new OpenOption[0]));
     }
 
 }

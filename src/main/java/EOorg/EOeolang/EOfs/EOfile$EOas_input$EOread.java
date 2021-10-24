@@ -24,6 +24,8 @@
 // @checkstyle PackageNameCheck (1 line)
 package EOorg.EOeolang.EOfs;
 
+import java.io.InputStream;
+import java.util.Arrays;
 import org.eolang.AtBound;
 import org.eolang.AtFree;
 import org.eolang.AtLambda;
@@ -34,13 +36,13 @@ import org.eolang.PhWith;
 import org.eolang.Phi;
 
 /**
- * Copu.
+ * File.as-input.read.
  *
  * @since 0.1
  * @checkstyle TypeNameCheck (100 lines)
  */
 @SuppressWarnings("PMD.AvoidDollarSigns")
-public class EOcopy extends PhDefault {
+public class EOfile$EOas_input$EOread extends PhDefault {
 
     /**
      * Ctor.
@@ -48,35 +50,28 @@ public class EOcopy extends PhDefault {
      * @checkstyle BracketsStructureCheck (200 lines)
      */
     @SuppressWarnings("PMD.ConstructorOnlyInitializesOrCallOtherConstructors")
-    public EOcopy(final Phi parent) {
+    public EOfile$EOas_input$EOread(final Phi parent) {
+        this(parent, null);
+    }
+
+    /**
+     * Ctor.
+     * @param parent The parent
+     * @checkstyle BracketsStructureCheck (200 lines)
+     */
+    @SuppressWarnings("PMD.ConstructorOnlyInitializesOrCallOtherConstructors")
+    public EOfile$EOas_input$EOread(final Phi parent, final InputStream stream) {
         super(parent);
-        this.add("input", new AtFree());
-        this.add("output", new AtFree());
-        this.add("size", new AtFree());
+        this.add("max", new AtFree());
         this.add("φ", new AtBound(new AtLambda(this, self -> {
-            final long size = new Dataized(self.attr("size").get()).take(Long.class);
-            int total = 0;
-            Phi input = self.attr("input").get();
-            Phi output = self.attr("output").get();
-            while (true) {
-                input = new PhWith(
-                    input.attr("read").get().copy(),
-                    0, new Data.ToPhi(size)
-                );
-                final byte[] chunk = new Dataized(input).take(byte[].class);
-                if (chunk.length == 0) {
-                    new Dataized(input.attr("close").get()).take();
-                    break;
-                }
-                output = new PhWith(
-                    output.attr("write").get().copy(),
-                    0, new Data.ToPhi(size)
-                );
-                new Dataized(output).take();
-                total += chunk.length;
-            }
-            new Dataized(output.attr("close").get()).take();
-            return new Data.ToPhi(total);
+            final long max = new Dataized(self.attr("max").get().copy()).take(Long.class);
+            final byte[] chunk = new byte[(int) max];
+            final int found = stream.read(chunk);
+            final byte[] buf = Arrays.copyOfRange(chunk, 0, Integer.max(0, found));
+            return new PhWith(
+                new EOfile$EOas_input(self.attr("ρ").get(), stream),
+                "buf", new Data.ToPhi(buf)
+            );
         })));
     }
 

@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 // @checkstyle PackageNameCheck (1 line)
-package EOorg.EOeolang.EOfs;
+package EOorg.EOeolang.EOio;
 
 import java.util.Arrays;
 import org.eolang.AtBound;

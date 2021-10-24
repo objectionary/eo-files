@@ -22,16 +22,15 @@
  * SOFTWARE.
  */
 // @checkstyle PackageNameCheck (1 line)
-package EOorg.EOeolang.EOfs;
+package EOorg.EOeolang.EOio;
 
-import java.io.ByteArrayOutputStream;
+import EOorg.EOeolang.EOmemory;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.stream.Stream;
 import org.eolang.Data;
 import org.eolang.Dataized;
-import org.eolang.PhConst;
-import org.eolang.PhMethod;
+import org.eolang.PhEta;
 import org.eolang.PhWith;
 import org.eolang.Phi;
 import org.hamcrest.MatcherAssert;
@@ -41,40 +40,45 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 /**
- * Test.
+ * Test of copy.
  *
  * @since 0.1
  * @checkstyle TypeNameCheck (100 lines)
  */
-public final class EObytes_as_inputEOreadTest {
+public final class EOcopiedTest {
 
     @ParameterizedTest
     @MethodSource("packs")
-    public void readsBytes(final String text, final int max) throws IOException {
-        Phi input = new PhWith(
-            new EObytes_as_input(),
-            "b", new Data.ToPhi(text.getBytes())
+    public void readsBytes(final String text, final int size) throws IOException {
+        final byte[] bytes = text.getBytes();
+        Phi copy = new PhWith(
+            new EOcopied(new PhEta()), "input",
+            new PhWith(
+                new EObytes_as_input(),
+                "b", new Data.ToPhi(bytes)
+            )
         );
-        final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        while (true) {
-            input = new PhConst(
-                new PhMethod(
-                    new PhWith(
-                        input.attr("read").get().copy(),
-                        "max", new Data.ToPhi((long) max)
-                    ),
-                    "φ"
-                )
-            );
-            final byte[] chunk = new Dataized(input).take(byte[].class);
-            if (chunk.length == 0) {
-                new Dataized(input.attr("close").get()).take();
-                break;
-            }
-            baos.write(chunk);
-        }
+        final Phi mem = new EOmemory();
+        copy = new PhWith(
+            copy, "output",
+            new PhWith(
+                new EOmemory_as_output(),
+                "m", mem
+            )
+        );
+        copy = new PhWith(
+            copy, "size",
+            new Data.ToPhi((long) size)
+        );
         MatcherAssert.assertThat(
-            new String(baos.toByteArray(), StandardCharsets.UTF_8),
+            new Dataized(copy).take(Long.class),
+            Matchers.equalTo((long) bytes.length)
+        );
+        MatcherAssert.assertThat(
+            new String(
+                new Dataized(mem).take(byte[].class),
+                StandardCharsets.UTF_8
+            ),
             Matchers.equalTo(text)
         );
     }
@@ -90,5 +94,4 @@ public final class EObytes_as_inputEOreadTest {
             Arguments.arguments("hello, друг!", 1)
         );
     }
-
 }

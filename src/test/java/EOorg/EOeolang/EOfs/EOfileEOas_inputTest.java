@@ -27,13 +27,21 @@ package EOorg.EOeolang.EOfs;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.stream.Stream;
 import org.eolang.Data;
 import org.eolang.Dataized;
+import org.eolang.PhConst;
+import org.eolang.PhMethod;
 import org.eolang.PhWith;
 import org.eolang.Phi;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 /**
  * Test.
@@ -41,23 +49,41 @@ import org.junit.jupiter.api.Test;
  * @since 0.1
  * @checkstyle TypeNameCheck (100 lines)
  */
-public final class EOcopyTest {
+public final class EOfileEOas_inputTest {
 
-    @Test
-    public void readsBytes() throws IOException {
-        final String text = "你好, друг!";
+    @TempDir
+    public Path temp;
+
+    @ParameterizedTest
+    @MethodSource("packs")
+    public void readsBytes(final String text, final int max) throws IOException {
+        final Path file = this.temp.resolve("test.txt");
+        Files.write(file, text.getBytes(StandardCharsets.UTF_8));
         Phi input = new PhWith(
-            new EObytes_as_input(),
-            "b", new Data.ToPhi(text.getBytes())
+            new PhMethod(
+                new PhWith(
+                    new EOfile(), "path",
+                    new Data.ToPhi(file.toAbsolutePath().toString())
+                ),
+                "as-input"
+            ),
+            "mode",
+            new Data.ToPhi("r")
         );
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         while (true) {
-            input = new PhWith(
-                input.attr("read").get().copy(),
-                "max", new Data.ToPhi(2L)
+            input = new PhConst(
+                new PhMethod(
+                    new PhWith(
+                        input.attr("read").get().copy(),
+                        "max", new Data.ToPhi((long) max)
+                    ),
+                    "φ"
+                )
             );
             final byte[] chunk = new Dataized(input).take(byte[].class);
             if (chunk.length == 0) {
+                new Dataized(input.attr("close").get()).take();
                 break;
             }
             baos.write(chunk);
@@ -65,6 +91,18 @@ public final class EOcopyTest {
         MatcherAssert.assertThat(
             new String(baos.toByteArray(), StandardCharsets.UTF_8),
             Matchers.equalTo(text)
+        );
+    }
+
+    static Stream<Arguments> packs() {
+        return Stream.of(
+            Arguments.arguments("", 1),
+            Arguments.arguments("x", 1),
+            Arguments.arguments("xx", 1),
+            Arguments.arguments("你好, друг!", 2),
+            Arguments.arguments("test", 10),
+            Arguments.arguments("", 10),
+            Arguments.arguments("hello, друг!", 1)
         );
     }
 

@@ -15,4 +15,8 @@
 
   # Turn it into an "output" with a single attribute
   # "write", which accepts one attribute "data"
-  [mode] > as-output /?
+  [mode] > as-output /bool
+
+  # Turn it into an "input" with a single attribute
+  # "read", which accepts one attribute "size"
+  [mode buf] > as-input /bool

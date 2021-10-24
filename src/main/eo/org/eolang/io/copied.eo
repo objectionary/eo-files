@@ -1,6 +1,6 @@
-+package org.eolang.fs
++package org.eolang.io
 +rt jvm org.eolang:eo-files:0.0.0
 
 # A copy of input into output, which is a total
 # number of bytes copied.
-[input output] > copy /int
+[input output] > copied /int
