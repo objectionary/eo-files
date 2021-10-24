@@ -94,6 +94,10 @@ public final class EOfileEOas_outputTest {
             }
         }
         MatcherAssert.assertThat(
+            file.toFile().length(),
+            Matchers.equalTo((long) bytes.length)
+        );
+        MatcherAssert.assertThat(
             new String(Files.readAllBytes(file), StandardCharsets.UTF_8),
             Matchers.equalTo(text)
         );

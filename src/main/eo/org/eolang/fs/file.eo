@@ -16,6 +16,9 @@
   # Removes the file and returns TRUE if success
   [] > rm /bool
 
+  # Get file size in bytes.
+  [] > size /int
+
   # Move it to a new place, making a new file.
   [path] > mv /file
 
