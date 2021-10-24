@@ -65,7 +65,10 @@ public class EOmemory_as_output$EOwrite extends PhDefault {
                     0, new Data.ToPhi(baos.toByteArray())
                 )
             ).take();
-            return self.attr("ρ").get();
+            return new PhWith(
+                new EOmemory_as_output(),
+                "m", mem
+            );
         })));
     }
 

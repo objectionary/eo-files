@@ -31,6 +31,7 @@ import java.util.stream.Stream;
 import org.eolang.Data;
 import org.eolang.Dataized;
 import org.eolang.PhConst;
+import org.eolang.PhMethod;
 import org.eolang.PhWith;
 import org.eolang.Phi;
 import org.hamcrest.MatcherAssert;
@@ -57,9 +58,12 @@ public final class EObytes_as_inputEOreadTest {
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         while (true) {
             input = new PhConst(
-                new PhWith(
-                    input.attr("read").get().copy(),
-                    "max", new Data.ToPhi((long) max)
+                new PhMethod(
+                    new PhWith(
+                        input.attr("read").get().copy(),
+                        "max", new Data.ToPhi((long) max)
+                    ),
+                    "φ"
                 )
             );
             final byte[] chunk = new Dataized(input).take(byte[].class);

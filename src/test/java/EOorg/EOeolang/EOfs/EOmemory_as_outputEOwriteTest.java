@@ -25,16 +25,20 @@
 package EOorg.EOeolang.EOfs;
 
 import EOorg.EOeolang.EOmemory;
-import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
+import java.util.stream.Stream;
 import org.eolang.Data;
 import org.eolang.Dataized;
+import org.eolang.PhConst;
+import org.eolang.PhMethod;
 import org.eolang.PhWith;
 import org.eolang.Phi;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 /**
  * Test.
@@ -44,24 +48,27 @@ import org.junit.jupiter.api.Test;
  */
 public final class EOmemory_as_outputEOwriteTest {
 
-    @Test
-    public void writesBytesToMemory() throws IOException {
+    @ParameterizedTest
+    @MethodSource("packs")
+    public void writesBytesToMemory(final String text, final int max) {
         final Phi mem = new EOmemory();
         Phi output = new PhWith(new EOmemory_as_output(), "m", mem);
-//        final String text = "你好, друг!";
-        final String text = "hello";
         final byte[] bytes = text.getBytes(StandardCharsets.UTF_8);
         int pos = 0;
         while (true) {
             final byte[] chunk = Arrays.copyOfRange(
-                bytes, pos, Integer.min(pos + 2, bytes.length)
+                bytes, pos, Integer.min(pos + max, bytes.length)
             );
-            output = new PhWith(
-                output.attr("write").get().copy(),
-                "data", new Data.ToPhi(chunk)
+            output = new PhConst(
+                new PhMethod(
+                    new PhWith(
+                        output.attr("write").get().copy(),
+                        "data", new Data.ToPhi(chunk)
+                    ),
+                    "φ"
+                )
             );
             new Dataized(output).take();
-            System.out.println("---");
             pos += chunk.length;
             if (pos >= bytes.length) {
                 new Dataized(output.attr("close").get()).take();
@@ -77,4 +84,15 @@ public final class EOmemory_as_outputEOwriteTest {
         );
     }
 
+    static Stream<Arguments> packs() {
+        return Stream.of(
+            Arguments.arguments("", 1),
+            Arguments.arguments("x", 1),
+            Arguments.arguments("xx", 1),
+            Arguments.arguments("你好, друг!", 2),
+            Arguments.arguments("test", 10),
+            Arguments.arguments("", 10),
+            Arguments.arguments("hello, друг!", 1)
+        );
+    }
 }
