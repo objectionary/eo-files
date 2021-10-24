@@ -1,4 +1,5 @@
 +package org.eolang.fs
++alias org.eolang.txt.sprintf
 +alias org.eolang.fs.file
 +alias org.eolang.fs.tmpdir
 +alias org.eolang.io.bytes-as-input
@@ -21,6 +22,18 @@
   and. > @
     f.touch
     f.exists
+
+[] > moves-a-file
+  tmpdir.tmpfile > src
+  file > dest
+    sprintf
+      "%s.dest"
+      src
+  seq > @
+    src.touch
+    src.mv dest
+    dest.exists
+    src.exists.not
 
 [] > deletes-single-file-in-temp
   rm. > @
