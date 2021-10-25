@@ -3,8 +3,15 @@ objectionary/objects/org/eolang/io/bytes-as-input.eo
 objectionary/objects/org/eolang/io/memory-as-output.eo
 objectionary/objects/org/eolang/fs/tmpdir.eo
 objectionary/objects/org/eolang/fs/file.eo
+objectionary/objects/org/eolang/fs/ext-name.eo
 objectionary/objects/org/eolang/fs/dir.eo
+objectionary/objects/org/eolang/fs/dir-name.eo
+objectionary/objects/org/eolang/fs/base-name.eo
 objectionary/tests/org/eolang/io/bytes-as-input-test.eo
 objectionary/tests/org/eolang/io/copied-test.eo
 objectionary/tests/org/eolang/fs/tmpdir-test.eo
+objectionary/tests/org/eolang/fs/base-name-test.eo
+objectionary/tests/org/eolang/fs/dir-test.eo
 objectionary/tests/org/eolang/fs/file-test.eo
+objectionary/tests/org/eolang/fs/ext-name-test.eo
+objectionary/tests/org/eolang/fs/dir-name-test.eo
