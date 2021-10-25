@@ -1,6 +1,8 @@
 +package org.eolang.fs
 +alias org.eolang.fs.dir
 +alias org.eolang.fs.tmpdir
++alias org.eolang.io.copied
++alias org.eolang.io.bytes-as-input
 +junit
 
 [] > makes-new-directory
@@ -21,3 +23,21 @@
     d.mkdir
     d.exists
     d.is-dir
+
+[] > deletes-recursively
+  dir > d!
+    tmpdir.tmpfile.@
+  and. > @
+    d.rm.@
+    d.mkdir
+    eq.
+      copied
+        bytes-as-input
+          "Hello, world".as-bytes
+        as-output.
+          d.resolve "test.txt"
+          "w"
+        1024
+      12
+    d.rm-rf
+    d.exists.not

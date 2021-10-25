@@ -11,5 +11,9 @@
   # exists, the result will be TRUE, not a failure.
   [] > mkdir /bool
 
+  # Delete directory and all files in it, recursively.
+  # Always returns TRUE.
+  [] > rm-rf /bool
+
   # Create an empty temporary file in the dir
   [] > tmpfile /file
