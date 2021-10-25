@@ -76,7 +76,7 @@ Reading:
 # which is the memory where the bytes will be stored:
 file "/tmp/foo.txt" > f
 memory > m
-copy
+copied
   f.as-input
   memory-as-output m
   1024
@@ -90,7 +90,7 @@ Writing:
 # "mode" is the same as the mode in POSIX fopen();
 # if the file is absent, it will be created:
 file "/tmp/foo.txt" > f
-copy
+copied
   bytes-as-input
     "你好, world!".as-bytes
   f.as-ouput "w+"
