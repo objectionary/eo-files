@@ -24,41 +24,39 @@
 // @checkstyle PackageNameCheck (1 line)
 package EOorg.EOeolang.EOfs;
 
-import java.io.File;
-import org.eolang.AtBound;
-import org.eolang.AtLambda;
 import org.eolang.Data;
 import org.eolang.Dataized;
-import org.eolang.PhDefault;
-import org.eolang.Phi;
+import org.eolang.PhWith;
+import org.hamcrest.MatcherAssert;
+import org.hamcrest.Matchers;
+import org.junit.jupiter.api.Test;
 
 /**
- * File.rm.
+ * Test.
  *
  * @since 0.1
  * @checkstyle TypeNameCheck (100 lines)
  */
-@SuppressWarnings("PMD.AvoidDollarSigns")
-public class EOfile$EOrm extends PhDefault {
+public final class EOfileEOresolveTest {
 
-    /**
-     * Ctor.
-     * @param parent The parent
-     * @checkstyle BracketsStructureCheck (200 lines)
-     */
-    @SuppressWarnings("PMD.ConstructorOnlyInitializesOrCallOtherConstructors")
-    public EOfile$EOrm(final Phi parent) {
-        super(parent);
-        this.add("φ", new AtBound(new AtLambda(this, self -> {
-            System.out.println("rm");
-            return new Data.ToPhi(
-                new File(
-                    new Dataized(
-                        self.attr("ρ").get()
-                    ).take(String.class)
-                ).delete()
-            );
-        })));
+    @Test
+    public void existsFile() {
+        MatcherAssert.assertThat(
+            new Dataized(
+                new PhWith(
+                    new EOfile$EOresolve(
+                        new PhWith(
+                            new EOfile(),
+                            "path",
+                            new Data.ToPhi("/tmp/foo")
+                        )
+                    ),
+                    0,
+                    new Data.ToPhi("bar.txt")
+                )
+            ).take(String.class),
+            Matchers.equalTo("/tmp/foo/bar.txt")
+        );
     }
 
 }

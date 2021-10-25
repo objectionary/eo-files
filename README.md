@@ -136,6 +136,10 @@ d.tmpfile.@ > f
 Name manipulations:
 
 ```
+# Add path segment to existing file:
+file "/tmp" > f
+f.resolve "foo.txt"
+
 # Get directory name:
 +alias org.eolang.fs.dir-name
 dir-name f

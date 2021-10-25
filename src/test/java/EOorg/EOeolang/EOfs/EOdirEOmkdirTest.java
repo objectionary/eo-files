@@ -24,41 +24,41 @@
 // @checkstyle PackageNameCheck (1 line)
 package EOorg.EOeolang.EOfs;
 
-import java.io.File;
-import org.eolang.AtBound;
-import org.eolang.AtLambda;
+import java.nio.file.Path;
 import org.eolang.Data;
 import org.eolang.Dataized;
-import org.eolang.PhDefault;
+import org.eolang.PhWith;
 import org.eolang.Phi;
+import org.hamcrest.MatcherAssert;
+import org.hamcrest.Matchers;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
 /**
- * File.rm.
+ * Test.
  *
  * @since 0.1
  * @checkstyle TypeNameCheck (100 lines)
  */
-@SuppressWarnings("PMD.AvoidDollarSigns")
-public class EOfile$EOrm extends PhDefault {
+public final class EOdirEOmkdirTest {
 
-    /**
-     * Ctor.
-     * @param parent The parent
-     * @checkstyle BracketsStructureCheck (200 lines)
-     */
-    @SuppressWarnings("PMD.ConstructorOnlyInitializesOrCallOtherConstructors")
-    public EOfile$EOrm(final Phi parent) {
-        super(parent);
-        this.add("φ", new AtBound(new AtLambda(this, self -> {
-            System.out.println("rm");
-            return new Data.ToPhi(
-                new File(
-                    new Dataized(
-                        self.attr("ρ").get()
-                    ).take(String.class)
-                ).delete()
-            );
-        })));
+    @Test
+    public void makesDirectory(@TempDir final Path temp) {
+        final Path file = temp.resolve("foo");
+        final Phi phi = new EOdir$EOmkdir(
+            new PhWith(
+                new EOfile(),
+                "path",
+                new Data.ToPhi(file.toAbsolutePath().toString())
+            )
+        );
+        MatcherAssert.assertThat(
+            new Dataized(phi).take(Boolean.class),
+            Matchers.is(true)
+        );
+        MatcherAssert.assertThat(
+            new Dataized(phi).take(Boolean.class),
+            Matchers.is(false)
+        );
     }
-
 }

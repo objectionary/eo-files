@@ -7,6 +7,9 @@
   # Is it directory?
   [] > is-dir /bool
 
+  # Add path segment
+  [p] > resolve /file
+
   # File exists?
   [] > exists /bool
 

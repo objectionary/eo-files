@@ -30,6 +30,7 @@ import java.util.Arrays;
 import org.eolang.Data;
 import org.eolang.Dataized;
 import org.eolang.PhConst;
+import org.eolang.PhEta;
 import org.eolang.PhMethod;
 import org.eolang.PhWith;
 import org.eolang.Phi;
@@ -50,7 +51,7 @@ public final class EOmemory_as_outputEOwriteTest {
     @ParameterizedTest
     @CsvFileSource(resources = "/EOlang/EOio/test-samples.csv")
     public void writesBytesToMemory(final String text, final int max) {
-        final Phi mem = new EOmemory();
+        final Phi mem = new EOmemory(new PhEta());
         Phi output = new PhWith(new EOmemory_as_output(), "m", mem);
         final byte[] bytes = text.getBytes(StandardCharsets.UTF_8);
         int pos = 0;

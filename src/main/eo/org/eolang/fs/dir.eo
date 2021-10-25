@@ -4,5 +4,12 @@
 [file] > dir
   file > @
 
+  # Make a directory together with all required
+  # parent directories and returns TRUE if it
+  # was created; FALSE means that the directory was
+  # already there. Even if it's a file that already
+  # exists, the result will be TRUE, not a failure.
+  [] > mkdir /bool
+
   # Create an empty temporary file in the dir
   [] > tmpfile /file

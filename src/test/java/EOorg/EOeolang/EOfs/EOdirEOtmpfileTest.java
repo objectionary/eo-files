@@ -24,41 +24,55 @@
 // @checkstyle PackageNameCheck (1 line)
 package EOorg.EOeolang.EOfs;
 
-import java.io.File;
-import org.eolang.AtBound;
-import org.eolang.AtLambda;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import org.eolang.Data;
 import org.eolang.Dataized;
-import org.eolang.PhDefault;
+import org.eolang.PhWith;
 import org.eolang.Phi;
+import org.hamcrest.MatcherAssert;
+import org.hamcrest.Matchers;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
 /**
- * File.rm.
+ * Test.
  *
  * @since 0.1
  * @checkstyle TypeNameCheck (100 lines)
  */
-@SuppressWarnings("PMD.AvoidDollarSigns")
-public class EOfile$EOrm extends PhDefault {
+public final class EOdirEOtmpfileTest {
 
-    /**
-     * Ctor.
-     * @param parent The parent
-     * @checkstyle BracketsStructureCheck (200 lines)
-     */
-    @SuppressWarnings("PMD.ConstructorOnlyInitializesOrCallOtherConstructors")
-    public EOfile$EOrm(final Phi parent) {
-        super(parent);
-        this.add("φ", new AtBound(new AtLambda(this, self -> {
-            System.out.println("rm");
-            return new Data.ToPhi(
-                new File(
-                    new Dataized(
-                        self.attr("ρ").get()
-                    ).take(String.class)
-                ).delete()
-            );
-        })));
+    @Test
+    public void makesTempFile(@TempDir final Path temp) {
+        final Phi phi = new EOdir$EOtmpfile(
+            new PhWith(
+                new EOfile(),
+                "path",
+                new Data.ToPhi(temp.toAbsolutePath().toString())
+            )
+        );
+        final String path = new Dataized(phi).take(String.class);
+        MatcherAssert.assertThat(
+            Files.exists(Paths.get(path)),
+            Matchers.is(true)
+        );
     }
 
+    @Test
+    public void makesTheSameFile(@TempDir final Path temp) {
+        final Phi phi = new EOdir$EOtmpfile(
+            new PhWith(
+                new EOfile(),
+                0, new Data.ToPhi(temp.toAbsolutePath().toString())
+            )
+        );
+        MatcherAssert.assertThat(
+            new Dataized(phi).take(String.class),
+            Matchers.not(
+                Matchers.equalTo(new Dataized(phi).take(String.class))
+            )
+        );
+    }
 }

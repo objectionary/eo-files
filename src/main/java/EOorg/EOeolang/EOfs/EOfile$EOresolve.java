@@ -24,22 +24,25 @@
 // @checkstyle PackageNameCheck (1 line)
 package EOorg.EOeolang.EOfs;
 
-import java.io.File;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import org.eolang.AtBound;
+import org.eolang.AtFree;
 import org.eolang.AtLambda;
 import org.eolang.Data;
 import org.eolang.Dataized;
 import org.eolang.PhDefault;
+import org.eolang.PhWith;
 import org.eolang.Phi;
 
 /**
- * File.rm.
+ * File.resolve.
  *
  * @since 0.1
  * @checkstyle TypeNameCheck (100 lines)
  */
 @SuppressWarnings("PMD.AvoidDollarSigns")
-public class EOfile$EOrm extends PhDefault {
+public class EOfile$EOresolve extends PhDefault {
 
     /**
      * Ctor.
@@ -47,16 +50,21 @@ public class EOfile$EOrm extends PhDefault {
      * @checkstyle BracketsStructureCheck (200 lines)
      */
     @SuppressWarnings("PMD.ConstructorOnlyInitializesOrCallOtherConstructors")
-    public EOfile$EOrm(final Phi parent) {
+    public EOfile$EOresolve(final Phi parent) {
         super(parent);
+        this.add("p", new AtFree());
         this.add("φ", new AtBound(new AtLambda(this, self -> {
-            System.out.println("rm");
-            return new Data.ToPhi(
-                new File(
-                    new Dataized(
-                        self.attr("ρ").get()
-                    ).take(String.class)
-                ).delete()
+            final Path path = Paths.get(
+                new Dataized(
+                    self.attr("ρ").get()
+                ).take(String.class)
+            );
+            final String suffix = new Dataized(
+                self.attr("p").get()
+            ).take(String.class);
+            return new PhWith(
+                new EOfile(parent),
+                0, new Data.ToPhi(path.resolve(suffix).toString())
             );
         })));
     }

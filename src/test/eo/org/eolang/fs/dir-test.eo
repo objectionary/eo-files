@@ -1,0 +1,23 @@
++package org.eolang.fs
++alias org.eolang.fs.dir
++alias org.eolang.fs.tmpdir
++junit
+
+[] > makes-new-directory
+  tmpdir.tmpfile.@ > f!
+  dir > d
+    f.resolve "new-dir"
+  and. > @
+    f.rm.@
+    d.mkdir
+    d.exists
+    d.is-dir
+
+[] > makes-new-directory-on-top-of-file
+  dir > d!
+    tmpdir.tmpfile.@
+  and. > @
+    d.rm.@
+    d.mkdir
+    d.exists
+    d.is-dir

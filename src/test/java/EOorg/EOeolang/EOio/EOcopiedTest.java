@@ -25,7 +25,6 @@
 package EOorg.EOeolang.EOio;
 
 import EOorg.EOeolang.EOmemory;
-import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import org.eolang.Data;
 import org.eolang.Dataized;
@@ -48,7 +47,7 @@ public final class EOcopiedTest {
 
     @ParameterizedTest
     @CsvFileSource(resources = "/EOlang/EOio/test-samples.csv")
-    public void readsBytes(final String text, final int size) throws IOException {
+    public void readsBytes(final String text, final int size) {
         final byte[] bytes = text.getBytes();
         Phi copy = new PhWith(
             new EOcopied(new PhEta()), "input",
@@ -57,7 +56,7 @@ public final class EOcopiedTest {
                 "b", new Data.ToPhi(bytes)
             )
         );
-        final Phi mem = new EOmemory();
+        final Phi mem = new EOmemory(new PhEta());
         copy = new PhWith(
             copy, "output",
             new PhWith(
