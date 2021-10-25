@@ -26,6 +26,7 @@ package EOorg.EOeolang.EOfs;
 
 import java.io.File;
 import org.eolang.AtBound;
+import org.eolang.AtFree;
 import org.eolang.AtLambda;
 import org.eolang.Data;
 import org.eolang.Dataized;
@@ -33,13 +34,13 @@ import org.eolang.PhDefault;
 import org.eolang.Phi;
 
 /**
- * File.rm.
+ * Ext-name.
  *
  * @since 0.1
  * @checkstyle TypeNameCheck (100 lines)
  */
 @SuppressWarnings("PMD.AvoidDollarSigns")
-public class EOfile$EOrm extends PhDefault {
+public class EOext_name extends PhDefault {
 
     /**
      * Ctor.
@@ -47,15 +48,22 @@ public class EOfile$EOrm extends PhDefault {
      * @checkstyle BracketsStructureCheck (200 lines)
      */
     @SuppressWarnings("PMD.ConstructorOnlyInitializesOrCallOtherConstructors")
-    public EOfile$EOrm(final Phi parent) {
+    public EOext_name(final Phi parent) {
         super(parent);
-        this.add("φ", new AtBound(new AtLambda(this, self -> new Data.ToPhi(
-            new File(
-                new Dataized(
-                    self.attr("ρ").get()
-                ).take(String.class)
-            ).delete()
-        ))));
+        this.add("f", new AtFree());
+        this.add("φ", new AtBound(new AtLambda(this, self -> {
+            final String path = new Dataized(
+                self.attr("f").get()
+            ).take(String.class);
+            String ext = path.substring(path.lastIndexOf(File.separator) + 1);
+            final int pos = ext.indexOf('.');
+            if (pos > 0) {
+                ext = ext.substring(pos);
+            } else {
+                ext = "";
+            }
+            return new Data.ToPhi(ext);
+        })));
     }
 
 }

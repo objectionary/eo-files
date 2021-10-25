@@ -24,38 +24,46 @@
 // @checkstyle PackageNameCheck (1 line)
 package EOorg.EOeolang.EOfs;
 
-import java.io.File;
-import org.eolang.AtBound;
-import org.eolang.AtLambda;
 import org.eolang.Data;
 import org.eolang.Dataized;
-import org.eolang.PhDefault;
-import org.eolang.Phi;
+import org.eolang.PhEta;
+import org.eolang.PhWith;
+import org.hamcrest.MatcherAssert;
+import org.hamcrest.Matchers;
+import org.junit.jupiter.api.Test;
 
 /**
- * File.rm.
+ * Test.
  *
  * @since 0.1
  * @checkstyle TypeNameCheck (100 lines)
  */
-@SuppressWarnings("PMD.AvoidDollarSigns")
-public class EOfile$EOrm extends PhDefault {
+public final class EOext_nameTest {
 
-    /**
-     * Ctor.
-     * @param parent The parent
-     * @checkstyle BracketsStructureCheck (200 lines)
-     */
-    @SuppressWarnings("PMD.ConstructorOnlyInitializesOrCallOtherConstructors")
-    public EOfile$EOrm(final Phi parent) {
-        super(parent);
-        this.add("φ", new AtBound(new AtLambda(this, self -> new Data.ToPhi(
-            new File(
-                new Dataized(
-                    self.attr("ρ").get()
-                ).take(String.class)
-            ).delete()
-        ))));
+    @Test
+    public void extractsPart() {
+        MatcherAssert.assertThat(
+            new Dataized(
+                new PhWith(
+                    new EOext_name(new PhEta()),
+                    0, new Data.ToPhi("/tmp/foo/base.txt")
+                )
+            ).take(String.class),
+            Matchers.equalTo(".txt")
+        );
+    }
+
+    @Test
+    public void extractsPartFromSimpleName() {
+        MatcherAssert.assertThat(
+            new Dataized(
+                new PhWith(
+                    new EOext_name(new PhEta()),
+                    0, new Data.ToPhi("foo-txt")
+                )
+            ).take(String.class),
+            Matchers.equalTo("")
+        );
     }
 
 }
