@@ -11,6 +11,10 @@
   # exists, the result will be TRUE, not a failure.
   [] > mkdir /bool
 
+  # Go though all files in the directory, recursively
+  # finding them with the "glob" provided.
+  [glob] > walk /array
+
   # Delete directory and all files in it, recursively.
   # Always returns TRUE.
   [] > rm-rf /bool

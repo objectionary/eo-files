@@ -30,6 +30,7 @@ import java.nio.file.Path;
 import org.eolang.Data;
 import org.eolang.Dataized;
 import org.eolang.PhWith;
+import org.eolang.Phi;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
@@ -41,28 +42,28 @@ import org.junit.jupiter.api.io.TempDir;
  * @since 0.1
  * @checkstyle TypeNameCheck (100 lines)
  */
-public final class EOdirEOrm_rfTest {
+public final class EOdirEOwalkTest {
 
     @Test
-    public void makesDirectory(@TempDir final Path temp) throws IOException {
+    public void walksDirectory(@TempDir final Path temp) throws IOException {
         final Path file = temp.resolve("foo/bar/test.txt");
         file.toFile().getParentFile().mkdirs();
         Files.write(file, "".getBytes());
         MatcherAssert.assertThat(
             new Dataized(
-                new EOdir$EOrm_rf(
-                    new PhWith(
-                        new EOfile(),
-                        "path",
-                        new Data.ToPhi(temp.toAbsolutePath().toString())
-                    )
+                new PhWith(
+                    new EOdir$EOwalk(
+                        new PhWith(
+                            new EOfile(),
+                            "path",
+                            new Data.ToPhi(temp.toAbsolutePath().toString())
+                        )
+                    ),
+                    "glob",
+                    new Data.ToPhi("**/*.txt")
                 )
-            ).take(Boolean.class),
-            Matchers.is(true)
-        );
-        MatcherAssert.assertThat(
-            Files.exists(temp),
-            Matchers.is(false)
+            ).take(Phi[].class).length,
+            Matchers.equalTo(1)
         );
     }
 }

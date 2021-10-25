@@ -41,3 +41,23 @@
       12
     d.rm-rf
     d.exists.not
+
+[] > walks-recursively
+  dir > d!
+    tmpdir.tmpfile.@
+  and. > @
+    d.rm.@
+    d.mkdir
+    mkdir.
+      dir
+        d.resolve "foo/bar"
+    (d.resolve "foo/bar/test.txt").touch
+    mkdir.
+      dir
+        d.resolve "x/y/z"
+    (d.resolve "x/y/z/a.txt").touch
+    eq.
+      length.
+        d.walk
+          "**/*.txt"
+      2
