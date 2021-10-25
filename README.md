@@ -96,24 +96,12 @@ copied
   f.as-ouput "w+"
 ```
 
-Smart objects to help read and write:
+Smart object to help read content fast:
 
 ```
 # This is the entire binary content of the file:
 +alias org.eolang.fs.content
 content f
-
-# This is the entire text content of the file in UTF-8:
-+alias org.eolang.fs.text-content
-text-content f "utf-8"
-
-# This is the binary content written to the file:
-+alias org.eolang.fs.written
-written f data
-
-# This is the text content written to the file:
-+alias org.eolang.fs.text-written
-text-written f text
 ```
 
 Directories:
@@ -142,7 +130,7 @@ Temporary files:
 tmpdir > d
 
 # Create an empty temporary file in a directory
-d.tmpfile > f
+d.tmpfile.@ > f
 ```
 
 Name manipulations:
