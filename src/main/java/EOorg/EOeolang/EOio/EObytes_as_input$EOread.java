@@ -25,7 +25,6 @@
 package EOorg.EOeolang.EOio;
 
 import java.util.Arrays;
-import org.eolang.AtBound;
 import org.eolang.AtFree;
 import org.eolang.AtLambda;
 import org.eolang.Attr;
@@ -45,23 +44,23 @@ public class EObytes_as_input$EOread extends PhDefault {
 
     /**
      * Ctor.
-     * @param parent The parent
+     * @param sigma The \sigma
      * @checkstyle BracketsStructureCheck (200 lines)
      */
     @SuppressWarnings("PMD.ConstructorOnlyInitializesOrCallOtherConstructors")
-    public EObytes_as_input$EOread(final Phi parent) {
-        super(parent);
+    public EObytes_as_input$EOread(final Phi sigma) {
+        super(sigma);
         this.add("max", new AtFree());
-        this.add("φ", new AtBound(new AtLambda(this, self -> {
-            final long max = new Dataized(self.attr("max").get()).take(Long.class);
-            final Phi rho = self.attr("ρ").get();
+        this.add("φ", new AtLambda(this, rho -> {
+            final long max = new Dataized(rho.attr("max").get()).take(Long.class);
+            final Phi input = rho.attr("ρ").get();
             long next;
             try {
-                next = new Dataized(rho.attr("next").get()).take(Long.class);
+                next = new Dataized(input.attr("next").get()).take(Long.class);
             } catch (final Attr.StillAbstractException ex) {
                 next = 0L;
             }
-            final Phi data = rho.attr("b").get();
+            final Phi data = input.attr("b").get();
             final byte[] bytes = new Dataized(data).take(byte[].class);
             final byte[] buf = Arrays.copyOfRange(
                 bytes,
@@ -71,14 +70,14 @@ public class EObytes_as_input$EOread extends PhDefault {
             return new PhWith(
                 new PhWith(
                     new PhWith(
-                        new EObytes_as_input(),
+                        new EObytes_as_input(input),
                         "b", data
                     ),
                     "next", new Data.ToPhi(next + (long) buf.length)
                 ),
                 "buf", new Data.ToPhi(buf)
             );
-        })));
+        }));
     }
 
 }

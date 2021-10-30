@@ -26,7 +26,6 @@ package EOorg.EOeolang.EOfs;
 
 import java.io.InputStream;
 import java.util.Arrays;
-import org.eolang.AtBound;
 import org.eolang.AtFree;
 import org.eolang.AtLambda;
 import org.eolang.Data;
@@ -46,26 +45,26 @@ public class EOfile$EOas_input$EOread extends PhDefault {
 
     /**
      * Ctor.
-     * @param parent The parent
+     * @param sigma The \sigma
      * @checkstyle BracketsStructureCheck (200 lines)
      */
     @SuppressWarnings("PMD.ConstructorOnlyInitializesOrCallOtherConstructors")
-    public EOfile$EOas_input$EOread(final Phi parent) {
-        this(parent, null);
+    public EOfile$EOas_input$EOread(final Phi sigma) {
+        this(sigma, null);
     }
 
     /**
      * Ctor.
-     * @param parent The parent
+     * @param sigma The \sigma
      * @param stream Output stream of NULL
      * @checkstyle BracketsStructureCheck (200 lines)
      */
     @SuppressWarnings("PMD.ConstructorOnlyInitializesOrCallOtherConstructors")
-    public EOfile$EOas_input$EOread(final Phi parent, final InputStream stream) {
-        super(parent);
+    public EOfile$EOas_input$EOread(final Phi sigma, final InputStream stream) {
+        super(sigma);
         this.add("max", new AtFree());
-        this.add("φ", new AtBound(new AtLambda(this, self -> {
-            final long max = new Dataized(self.attr("max").get().copy()).take(Long.class);
+        this.add("φ", new AtLambda(this, self -> {
+            final long max = new Dataized(self.attr("max").get()).take(Long.class);
             final byte[] chunk = new byte[(int) max];
             final int found = stream.read(chunk);
             final byte[] buf = Arrays.copyOfRange(chunk, 0, Integer.max(0, found));
@@ -73,7 +72,7 @@ public class EOfile$EOas_input$EOread extends PhDefault {
                 new EOfile$EOas_input(self.attr("ρ").get(), stream),
                 "buf", new Data.ToPhi(buf)
             );
-        })));
+        }));
     }
 
 }

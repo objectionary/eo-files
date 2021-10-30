@@ -25,7 +25,6 @@
 package EOorg.EOeolang.EOfs;
 
 import java.io.OutputStream;
-import org.eolang.AtBound;
 import org.eolang.AtFree;
 import org.eolang.AtLambda;
 import org.eolang.Dataized;
@@ -43,31 +42,31 @@ public class EOfile$EOas_output$EOwrite extends PhDefault {
 
     /**
      * Ctor.
-     * @param parent The parent
+     * @param sigma The \sigma
      * @checkstyle BracketsStructureCheck (200 lines)
      */
     @SuppressWarnings("PMD.ConstructorOnlyInitializesOrCallOtherConstructors")
-    public EOfile$EOas_output$EOwrite(final Phi parent) {
-        this(parent, null);
+    public EOfile$EOas_output$EOwrite(final Phi sigma) {
+        this(sigma, null);
     }
 
     /**
      * Ctor.
-     * @param parent The parent
+     * @param sigma The \sigma
      * @param stream Output stream of NULL
      * @checkstyle BracketsStructureCheck (200 lines)
      */
     @SuppressWarnings("PMD.ConstructorOnlyInitializesOrCallOtherConstructors")
-    public EOfile$EOas_output$EOwrite(final Phi parent, final OutputStream stream) {
-        super(parent);
+    public EOfile$EOas_output$EOwrite(final Phi sigma, final OutputStream stream) {
+        super(sigma);
         this.add("data", new AtFree());
-        this.add("φ", new AtBound(new AtLambda(this, self -> {
+        this.add("φ", new AtLambda(this, self -> {
             final byte[] chunk = new Dataized(
-                self.attr("data").get().copy()
+                self.attr("data").get()
             ).take(byte[].class);
             stream.write(chunk);
             return new EOfile$EOas_output(self.attr("ρ").get(), stream);
-        })));
+        }));
     }
 
 }

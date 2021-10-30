@@ -26,7 +26,6 @@ package EOorg.EOeolang.EOfs;
 
 import java.io.File;
 import java.nio.file.Paths;
-import org.eolang.AtBound;
 import org.eolang.AtFree;
 import org.eolang.AtLambda;
 import org.eolang.Data;
@@ -46,14 +45,14 @@ public class EOfile$EOmv extends PhDefault {
 
     /**
      * Ctor.
-     * @param parent The parent
+     * @param sigma The \sigma
      * @checkstyle BracketsStructureCheck (200 lines)
      */
     @SuppressWarnings("PMD.ConstructorOnlyInitializesOrCallOtherConstructors")
-    public EOfile$EOmv(final Phi parent) {
-        super(parent);
+    public EOfile$EOmv(final Phi sigma) {
+        super(sigma);
         this.add("path", new AtFree());
-        this.add("φ", new AtBound(new AtLambda(this, self -> {
+        this.add("φ", new AtLambda(this, self -> {
             final File file = Paths.get(
                 new Dataized(
                     self.attr("ρ").get()
@@ -66,10 +65,10 @@ public class EOfile$EOmv extends PhDefault {
             ).toFile();
             file.renameTo(target);
             return new PhWith(
-                new EOfile(parent),
+                new EOfile(sigma),
                 0, new Data.ToPhi(target.toString())
             );
-        })));
+        }));
     }
 
 }

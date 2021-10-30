@@ -32,6 +32,7 @@ import java.util.Arrays;
 import org.eolang.Data;
 import org.eolang.Dataized;
 import org.eolang.PhConst;
+import org.eolang.PhEta;
 import org.eolang.PhMethod;
 import org.eolang.PhWith;
 import org.eolang.Phi;
@@ -63,7 +64,7 @@ public final class EOfileEOas_outputTest {
         Phi output = new PhWith(
             new PhMethod(
                 new PhWith(
-                    new EOfile(), "path",
+                    new EOfile(new PhEta()), "path",
                     new Data.ToPhi(file.toAbsolutePath().toString())
                 ),
                 "as-output"
@@ -80,7 +81,7 @@ public final class EOfileEOas_outputTest {
             output = new PhConst(
                 new PhMethod(
                     new PhWith(
-                        output.attr("write").get().copy(),
+                        output.attr("write").get().copy(output),
                         "data", new Data.ToPhi(chunk)
                     ),
                     "φ"

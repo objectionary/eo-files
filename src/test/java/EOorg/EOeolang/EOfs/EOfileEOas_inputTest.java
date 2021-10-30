@@ -32,6 +32,7 @@ import java.nio.file.Path;
 import org.eolang.Data;
 import org.eolang.Dataized;
 import org.eolang.PhConst;
+import org.eolang.PhEta;
 import org.eolang.PhMethod;
 import org.eolang.PhWith;
 import org.eolang.Phi;
@@ -46,6 +47,7 @@ import org.junit.jupiter.params.provider.CsvFileSource;
  *
  * @since 0.1
  * @checkstyle TypeNameCheck (100 lines)
+ * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
 public final class EOfileEOas_inputTest {
 
@@ -64,7 +66,7 @@ public final class EOfileEOas_inputTest {
         Phi input = new PhWith(
             new PhMethod(
                 new PhWith(
-                    new EOfile(), "path",
+                    new EOfile(new PhEta()), "path",
                     new Data.ToPhi(file.toAbsolutePath().toString())
                 ),
                 "as-input"
@@ -77,7 +79,7 @@ public final class EOfileEOas_inputTest {
             input = new PhConst(
                 new PhMethod(
                     new PhWith(
-                        input.attr("read").get().copy(),
+                        input.attr("read").get().copy(input),
                         "max", new Data.ToPhi((long) max)
                     ),
                     "φ"

@@ -33,7 +33,6 @@ import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.Collection;
 import java.util.LinkedList;
-import org.eolang.AtBound;
 import org.eolang.AtFree;
 import org.eolang.AtLambda;
 import org.eolang.Data;
@@ -52,26 +51,26 @@ public class EOfile$EOas_output extends PhDefault {
 
     /**
      * Ctor.
-     * @param parent The parent
+     * @param sigma The \sigma
      * @checkstyle BracketsStructureCheck (200 lines)
      */
     @SuppressWarnings("PMD.ConstructorOnlyInitializesOrCallOtherConstructors")
-    public EOfile$EOas_output(final Phi parent) {
-        this(parent, null);
+    public EOfile$EOas_output(final Phi sigma) {
+        this(sigma, null);
     }
 
     /**
      * Ctor.
-     * @param parent The parent
+     * @param sigma The \sigma
      * @param out Output stream of NULL
      * @checkstyle BracketsStructureCheck (200 lines)
      */
     @SuppressWarnings("PMD.ConstructorOnlyInitializesOrCallOtherConstructors")
-    public EOfile$EOas_output(final Phi parent, final OutputStream out) {
-        super(parent);
+    public EOfile$EOas_output(final Phi sigma, final OutputStream out) {
+        super(sigma);
         this.add("mode", new AtFree());
-        this.add("φ", new AtBound(new AtLambda(this, self -> new Data.ToPhi(true))));
-        this.add("write", new AtBound(new AtLambda(this, self -> {
+        this.add("φ", new AtLambda(this, self -> new Data.ToPhi(true)));
+        this.add("write", new AtLambda(this, self -> {
             OutputStream stream = out;
             if (stream == null) {
                 final String mode = new Dataized(
@@ -85,13 +84,13 @@ public class EOfile$EOas_output extends PhDefault {
                 stream = EOfile$EOas_output.stream(path, mode);
             }
             return new EOfile$EOas_output$EOwrite(self, stream);
-        })));
-        this.add("close", new AtBound(new AtLambda(this, self -> {
+        }));
+        this.add("close", new AtLambda(this, self -> {
             if (out != null) {
                 out.close();
             }
             return new Data.ToPhi(true);
-        })));
+        }));
     }
 
     /**

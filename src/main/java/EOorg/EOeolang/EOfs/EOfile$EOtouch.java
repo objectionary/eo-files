@@ -27,7 +27,6 @@ package EOorg.EOeolang.EOfs;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.nio.file.Paths;
-import org.eolang.AtBound;
 import org.eolang.AtLambda;
 import org.eolang.Data;
 import org.eolang.Dataized;
@@ -45,13 +44,13 @@ public class EOfile$EOtouch extends PhDefault {
 
     /**
      * Ctor.
-     * @param parent The parent
+     * @param sigma The \sigma
      * @checkstyle BracketsStructureCheck (200 lines)
      */
     @SuppressWarnings("PMD.ConstructorOnlyInitializesOrCallOtherConstructors")
-    public EOfile$EOtouch(final Phi parent) {
-        super(parent);
-        this.add("φ", new AtBound(new AtLambda(this, self -> {
+    public EOfile$EOtouch(final Phi sigma) {
+        super(sigma);
+        this.add("φ", new AtLambda(this, self -> {
             final File file = Paths.get(
                 new Dataized(
                     self.attr("ρ").get()
@@ -62,7 +61,7 @@ public class EOfile$EOtouch extends PhDefault {
             }
             file.setLastModified(System.currentTimeMillis());
             return new Data.ToPhi(true);
-        })));
+        }));
     }
 
 }

@@ -52,7 +52,7 @@ public final class EOmemory_as_outputEOwriteTest {
     @CsvFileSource(resources = "/EOlang/EOio/test-samples.csv")
     public void writesBytesToMemory(final String text, final int max) {
         final Phi mem = new EOmemory(new PhEta());
-        Phi output = new PhWith(new EOmemory_as_output(), "m", mem);
+        Phi output = new PhWith(new EOmemory_as_output(mem), "m", mem);
         final byte[] bytes = text.getBytes(StandardCharsets.UTF_8);
         int pos = 0;
         while (true) {
@@ -62,7 +62,7 @@ public final class EOmemory_as_outputEOwriteTest {
             output = new PhConst(
                 new PhMethod(
                     new PhWith(
-                        output.attr("write").get().copy(),
+                        output.attr("write").get().copy(output),
                         "data", new Data.ToPhi(chunk)
                     ),
                     "φ"

@@ -29,6 +29,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import org.eolang.Data;
 import org.eolang.Dataized;
+import org.eolang.PhEta;
 import org.eolang.PhWith;
 import org.eolang.Phi;
 import org.hamcrest.MatcherAssert;
@@ -54,7 +55,7 @@ public final class EOdirEOwalkTest {
                 new PhWith(
                     new EOdir$EOwalk(
                         new PhWith(
-                            new EOfile(),
+                            new EOfile(new PhEta()),
                             "path",
                             new Data.ToPhi(temp.toAbsolutePath().toString())
                         )

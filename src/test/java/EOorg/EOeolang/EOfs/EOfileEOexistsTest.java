@@ -28,6 +28,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import org.eolang.Data;
 import org.eolang.Dataized;
+import org.eolang.PhEta;
 import org.eolang.PhWith;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
@@ -50,7 +51,7 @@ public final class EOfileEOexistsTest {
             new Dataized(
                 new EOfile$EOexists(
                     new PhWith(
-                        new EOfile(),
+                        new EOfile(new PhEta()),
                         "path",
                         new Data.ToPhi(file.toAbsolutePath().toString())
                     )

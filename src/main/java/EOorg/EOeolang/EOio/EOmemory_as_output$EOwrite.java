@@ -25,7 +25,6 @@
 package EOorg.EOeolang.EOio;
 
 import java.io.ByteArrayOutputStream;
-import org.eolang.AtBound;
 import org.eolang.AtFree;
 import org.eolang.AtLambda;
 import org.eolang.Data;
@@ -45,32 +44,32 @@ public class EOmemory_as_output$EOwrite extends PhDefault {
 
     /**
      * Ctor.
-     * @param parent The parent
+     * @param sigma The \sigma
      * @checkstyle BracketsStructureCheck (200 lines)
      */
     @SuppressWarnings("PMD.ConstructorOnlyInitializesOrCallOtherConstructors")
-    public EOmemory_as_output$EOwrite(final Phi parent) {
-        super(parent);
+    public EOmemory_as_output$EOwrite(final Phi sigma) {
+        super(sigma);
         this.add("data", new AtFree());
-        this.add("φ", new AtBound(new AtLambda(this, self -> {
-            final Phi mem = self.attr("ρ").get().attr("m").get();
+        this.add("φ", new AtLambda(this, rho -> {
+            final Phi mem = rho.attr("ρ").get().attr("m").get();
             final ByteArrayOutputStream baos = new ByteArrayOutputStream();
             if (!new Dataized(mem.attr("is-empty").get()).take(Boolean.class)) {
                 baos.write(new Dataized(mem).take(byte[].class));
             }
-            final byte[] chunk = new Dataized(self.attr("data").get()).take(byte[].class);
+            final byte[] chunk = new Dataized(rho.attr("data").get()).take(byte[].class);
             baos.write(chunk);
             new Dataized(
                 new PhWith(
-                    mem.attr("write").get().copy(),
+                    mem.attr("write").get().copy(rho),
                     0, new Data.ToPhi(baos.toByteArray())
                 )
             ).take();
             return new PhWith(
-                new EOmemory_as_output(),
+                new EOmemory_as_output(rho),
                 "m", mem
             );
-        })));
+        }));
     }
 
 }

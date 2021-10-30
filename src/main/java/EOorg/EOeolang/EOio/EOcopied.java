@@ -24,7 +24,6 @@
 // @checkstyle PackageNameCheck (1 line)
 package EOorg.EOeolang.EOio;
 
-import org.eolang.AtBound;
 import org.eolang.AtFree;
 import org.eolang.AtLambda;
 import org.eolang.Data;
@@ -47,16 +46,16 @@ public class EOcopied extends PhDefault {
 
     /**
      * Ctor.
-     * @param parent The parent
+     * @param sigma The \sigma
      * @checkstyle BracketsStructureCheck (200 lines)
      */
     @SuppressWarnings("PMD.ConstructorOnlyInitializesOrCallOtherConstructors")
-    public EOcopied(final Phi parent) {
-        super(parent);
+    public EOcopied(final Phi sigma) {
+        super(sigma);
         this.add("input", new AtFree());
         this.add("output", new AtFree());
         this.add("size", new AtFree());
-        this.add("φ", new AtBound(new AtLambda(this, self -> {
+        this.add("φ", new AtLambda(this, self -> {
             final long size = new Dataized(self.attr("size").get()).take(Long.class);
             int total = 0;
             Phi input = self.attr("input").get();
@@ -65,7 +64,7 @@ public class EOcopied extends PhDefault {
                 input = new PhConst(
                     new PhMethod(
                         new PhWith(
-                            input.attr("read").get().copy(),
+                            input.attr("read").get().copy(input),
                             0, new Data.ToPhi(size)
                         ),
                         "φ"
@@ -75,7 +74,7 @@ public class EOcopied extends PhDefault {
                 output = new PhConst(
                     new PhMethod(
                         new PhWith(
-                            output.attr("write").get().copy(),
+                            output.attr("write").get().copy(output),
                             0, new Data.ToPhi(chunk)
                         ),
                         "φ"
@@ -90,7 +89,7 @@ public class EOcopied extends PhDefault {
             }
             new Dataized(output.attr("close").get()).take();
             return new Data.ToPhi((long) total);
-        })));
+        }));
     }
 
 }

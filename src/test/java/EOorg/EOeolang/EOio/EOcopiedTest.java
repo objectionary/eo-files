@@ -52,7 +52,7 @@ public final class EOcopiedTest {
         Phi copy = new PhWith(
             new EOcopied(new PhEta()), "input",
             new PhWith(
-                new EObytes_as_input(),
+                new EObytes_as_input(new PhEta()),
                 "b", new Data.ToPhi(bytes)
             )
         );
@@ -60,7 +60,7 @@ public final class EOcopiedTest {
         copy = new PhWith(
             copy, "output",
             new PhWith(
-                new EOmemory_as_output(),
+                new EOmemory_as_output(new PhEta()),
                 "m", mem
             )
         );

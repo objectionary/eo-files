@@ -26,7 +26,6 @@ package EOorg.EOeolang.EOfs;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import org.eolang.AtBound;
 import org.eolang.AtFree;
 import org.eolang.AtLambda;
 import org.eolang.Data;
@@ -46,14 +45,14 @@ public class EOfile$EOresolve extends PhDefault {
 
     /**
      * Ctor.
-     * @param parent The parent
+     * @param sigma The \sigma
      * @checkstyle BracketsStructureCheck (200 lines)
      */
     @SuppressWarnings("PMD.ConstructorOnlyInitializesOrCallOtherConstructors")
-    public EOfile$EOresolve(final Phi parent) {
-        super(parent);
+    public EOfile$EOresolve(final Phi sigma) {
+        super(sigma);
         this.add("p", new AtFree());
-        this.add("φ", new AtBound(new AtLambda(this, self -> {
+        this.add("φ", new AtLambda(this, self -> {
             final Path path = Paths.get(
                 new Dataized(
                     self.attr("ρ").get()
@@ -63,10 +62,10 @@ public class EOfile$EOresolve extends PhDefault {
                 self.attr("p").get()
             ).take(String.class);
             return new PhWith(
-                new EOfile(parent),
+                new EOfile(sigma),
                 0, new Data.ToPhi(path.resolve(suffix).toString())
             );
-        })));
+        }));
     }
 
 }

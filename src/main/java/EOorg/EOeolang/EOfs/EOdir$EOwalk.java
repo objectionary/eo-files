@@ -31,7 +31,6 @@ import java.nio.file.PathMatcher;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.stream.Collectors;
-import org.eolang.AtBound;
 import org.eolang.AtFree;
 import org.eolang.AtLambda;
 import org.eolang.Data;
@@ -52,21 +51,21 @@ public class EOdir$EOwalk extends PhDefault {
 
     /**
      * Ctor.
-     * @param parent The parent
+     * @param sigma The \sigma
      * @checkstyle BracketsStructureCheck (200 lines)
      */
     @SuppressWarnings("PMD.ConstructorOnlyInitializesOrCallOtherConstructors")
-    public EOdir$EOwalk(final Phi parent) {
-        super(parent);
+    public EOdir$EOwalk(final Phi sigma) {
+        super(sigma);
         this.add("glob", new AtFree());
-        this.add("φ", new AtBound(new AtLambda(this, self -> {
+        this.add("φ", new AtLambda(this, rho -> {
             final Path path = Paths.get(
                 new Dataized(
-                    self.attr("ρ").get()
+                    rho.attr("ρ").get()
                 ).take(String.class)
             ).toAbsolutePath();
             final String glob = new Dataized(
-                self.attr("glob").get()
+                rho.attr("glob").get()
             ).take(String.class);
             final PathMatcher matcher = FileSystems.getDefault().getPathMatcher(
                 String.format("glob:%s", glob)
@@ -75,10 +74,10 @@ public class EOdir$EOwalk extends PhDefault {
                 .map(p -> p.toAbsolutePath().toString())
                 .map(p -> p.substring(p.indexOf(path.toString())))
                 .filter(p -> matcher.matches(Paths.get(p)))
-                .map(p -> new PhWith(new EOfile(parent), 0, new Data.ToPhi(p)))
+                .map(p -> new PhWith(new EOfile(sigma), 0, new Data.ToPhi(p)))
                 .collect(Collectors.toList());
             return new Data.ToPhi(files.toArray(new Phi[] {}));
-        })));
+        }));
     }
 
 }

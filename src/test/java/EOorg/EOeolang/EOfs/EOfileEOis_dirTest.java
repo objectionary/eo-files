@@ -29,6 +29,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import org.eolang.Data;
 import org.eolang.Dataized;
+import org.eolang.PhEta;
 import org.eolang.PhWith;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
@@ -51,7 +52,7 @@ public final class EOfileEOis_dirTest {
             new Dataized(
                 new EOfile$EOis_dir(
                     new PhWith(
-                        new EOfile(),
+                        new EOfile(new PhEta()),
                         "path",
                         new Data.ToPhi(file.toAbsolutePath().toString())
                     )
@@ -68,7 +69,7 @@ public final class EOfileEOis_dirTest {
             new Dataized(
                 new EOfile$EOis_dir(
                     new PhWith(
-                        new EOfile(),
+                        new EOfile(new PhEta()),
                         "path",
                         new Data.ToPhi(file.toAbsolutePath().toString())
                     )

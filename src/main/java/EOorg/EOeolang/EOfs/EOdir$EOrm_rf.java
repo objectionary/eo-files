@@ -28,7 +28,6 @@ import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import org.eolang.AtBound;
 import org.eolang.AtLambda;
 import org.eolang.Data;
 import org.eolang.Dataized;
@@ -46,16 +45,16 @@ public class EOdir$EOrm_rf extends PhDefault {
 
     /**
      * Ctor.
-     * @param parent The parent
+     * @param sigma The \sigma
      * @checkstyle BracketsStructureCheck (200 lines)
      */
     @SuppressWarnings("PMD.ConstructorOnlyInitializesOrCallOtherConstructors")
-    public EOdir$EOrm_rf(final Phi parent) {
-        super(parent);
-        this.add("φ", new AtBound(new AtLambda(this, self -> {
+    public EOdir$EOrm_rf(final Phi sigma) {
+        super(sigma);
+        this.add("φ", new AtLambda(this, rho -> {
             final Path path = Paths.get(
                 new Dataized(
-                    self.attr("ρ").get()
+                    rho.attr("ρ").get()
                 ).take(String.class)
             );
             Files.walk(path)
@@ -63,7 +62,7 @@ public class EOdir$EOrm_rf extends PhDefault {
                 .sorted((o1, o2) -> -o1.compareTo(o2))
                 .forEach(File::delete);
             return new Data.ToPhi(true);
-        })));
+        }));
     }
 
 }

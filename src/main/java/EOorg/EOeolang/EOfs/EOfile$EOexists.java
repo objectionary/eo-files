@@ -26,7 +26,6 @@ package EOorg.EOeolang.EOfs;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import org.eolang.AtBound;
 import org.eolang.AtLambda;
 import org.eolang.Data;
 import org.eolang.Dataized;
@@ -44,13 +43,13 @@ public class EOfile$EOexists extends PhDefault {
 
     /**
      * Ctor.
-     * @param parent The parent
+     * @param sigma The \sigma
      * @checkstyle BracketsStructureCheck (200 lines)
      */
     @SuppressWarnings("PMD.ConstructorOnlyInitializesOrCallOtherConstructors")
-    public EOfile$EOexists(final Phi parent) {
-        super(parent);
-        this.add("φ", new AtBound(new AtLambda(this, self -> new Data.ToPhi(
+    public EOfile$EOexists(final Phi sigma) {
+        super(sigma);
+        this.add("φ", new AtLambda(this, self -> new Data.ToPhi(
             Files.exists(
                 Paths.get(
                     new Dataized(
@@ -58,7 +57,7 @@ public class EOfile$EOexists extends PhDefault {
                     ).take(String.class)
                 )
             )
-        ))));
+        )));
     }
 
 }

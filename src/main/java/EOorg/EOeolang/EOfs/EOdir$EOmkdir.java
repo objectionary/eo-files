@@ -26,7 +26,6 @@ package EOorg.EOeolang.EOfs;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import org.eolang.AtBound;
 import org.eolang.AtLambda;
 import org.eolang.Data;
 import org.eolang.Dataized;
@@ -44,20 +43,20 @@ public class EOdir$EOmkdir extends PhDefault {
 
     /**
      * Ctor.
-     * @param parent The parent
+     * @param sigma The \sigma
      * @checkstyle BracketsStructureCheck (200 lines)
      */
     @SuppressWarnings("PMD.ConstructorOnlyInitializesOrCallOtherConstructors")
-    public EOdir$EOmkdir(final Phi parent) {
-        super(parent);
-        this.add("φ", new AtBound(new AtLambda(this, self -> {
+    public EOdir$EOmkdir(final Phi sigma) {
+        super(sigma);
+        this.add("φ", new AtLambda(this, rho -> {
             final Path path = Paths.get(
                 new Dataized(
-                    self.attr("ρ").get()
+                    rho.attr("ρ").get()
                 ).take(String.class)
             );
             return new Data.ToPhi(path.toFile().mkdirs());
-        })));
+        }));
     }
 
 }

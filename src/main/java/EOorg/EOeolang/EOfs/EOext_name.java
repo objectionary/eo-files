@@ -25,7 +25,6 @@
 package EOorg.EOeolang.EOfs;
 
 import java.io.File;
-import org.eolang.AtBound;
 import org.eolang.AtFree;
 import org.eolang.AtLambda;
 import org.eolang.Data;
@@ -44,14 +43,14 @@ public class EOext_name extends PhDefault {
 
     /**
      * Ctor.
-     * @param parent The parent
+     * @param sigma The \sigma
      * @checkstyle BracketsStructureCheck (200 lines)
      */
     @SuppressWarnings("PMD.ConstructorOnlyInitializesOrCallOtherConstructors")
-    public EOext_name(final Phi parent) {
-        super(parent);
+    public EOext_name(final Phi sigma) {
+        super(sigma);
         this.add("f", new AtFree());
-        this.add("φ", new AtBound(new AtLambda(this, self -> {
+        this.add("φ", new AtLambda(this, self -> {
             final String path = new Dataized(
                 self.attr("f").get()
             ).take(String.class);
@@ -63,7 +62,7 @@ public class EOext_name extends PhDefault {
                 ext = "";
             }
             return new Data.ToPhi(ext);
-        })));
+        }));
     }
 
 }

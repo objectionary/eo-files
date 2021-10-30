@@ -24,7 +24,6 @@
 // @checkstyle PackageNameCheck (1 line)
 package EOorg.EOeolang.EOfs;
 
-import org.eolang.AtBound;
 import org.eolang.AtLambda;
 import org.eolang.Data;
 import org.eolang.PhDefault;
@@ -41,19 +40,19 @@ public class EOtmpdir extends PhDefault {
 
     /**
      * Ctor.
-     * @param parent The parent
+     * @param sigma The \sigma
      * @checkstyle BracketsStructureCheck (200 lines)
      */
     @SuppressWarnings("PMD.ConstructorOnlyInitializesOrCallOtherConstructors")
-    public EOtmpdir(final Phi parent) {
-        super(parent);
-        this.add("φ", new AtBound(new AtLambda(this, self -> new PhWith(
-            new EOdir(), "file",
+    public EOtmpdir(final Phi sigma) {
+        super(sigma);
+        this.add("φ", new AtLambda(this, self -> new PhWith(
+            new EOdir(self), "file",
             new PhWith(
                 new EOfile(self), "path",
                 new Data.ToPhi(System.getProperty("java.io.tmpdir"))
             )
-        ))));
+        )));
     }
 
 }

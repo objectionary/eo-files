@@ -25,7 +25,6 @@
 package EOorg.EOeolang.EOfs;
 
 import java.io.File;
-import org.eolang.AtBound;
 import org.eolang.AtLambda;
 import org.eolang.Data;
 import org.eolang.Dataized;
@@ -43,19 +42,19 @@ public class EOfile$EOsize extends PhDefault {
 
     /**
      * Ctor.
-     * @param parent The parent
+     * @param sigma The \sigma
      * @checkstyle BracketsStructureCheck (200 lines)
      */
     @SuppressWarnings("PMD.ConstructorOnlyInitializesOrCallOtherConstructors")
-    public EOfile$EOsize(final Phi parent) {
-        super(parent);
-        this.add("φ", new AtBound(new AtLambda(this, self -> new Data.ToPhi(
+    public EOfile$EOsize(final Phi sigma) {
+        super(sigma);
+        this.add("φ", new AtLambda(this, self -> new Data.ToPhi(
             new File(
                 new Dataized(
                     self.attr("ρ").get()
                 ).take(String.class)
             ).length()
-        ))));
+        )));
     }
 
 }

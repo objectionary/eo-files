@@ -27,6 +27,7 @@ package EOorg.EOeolang.EOfs;
 import java.nio.file.Path;
 import org.eolang.Data;
 import org.eolang.Dataized;
+import org.eolang.PhEta;
 import org.eolang.PhWith;
 import org.eolang.Phi;
 import org.hamcrest.MatcherAssert;
@@ -47,7 +48,7 @@ public final class EOdirEOmkdirTest {
         final Path file = temp.resolve("foo");
         final Phi phi = new EOdir$EOmkdir(
             new PhWith(
-                new EOfile(),
+                new EOfile(new PhEta()),
                 "path",
                 new Data.ToPhi(file.toAbsolutePath().toString())
             )
