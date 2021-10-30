@@ -29,7 +29,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import org.eolang.Data;
 import org.eolang.Dataized;
-import org.eolang.PhEta;
 import org.eolang.PhWith;
 import org.eolang.Phi;
 import org.hamcrest.MatcherAssert;
@@ -49,7 +48,7 @@ public final class EOdirEOtmpfileTest {
     public void makesTempFile(@TempDir final Path temp) {
         final Phi phi = new EOdir$EOtmpfile(
             new PhWith(
-                new EOfile(new PhEta()),
+                new EOfile(Phi.Φ),
                 "path",
                 new Data.ToPhi(temp.toAbsolutePath().toString())
             )
@@ -65,7 +64,7 @@ public final class EOdirEOtmpfileTest {
     public void makesTheSameFile(@TempDir final Path temp) {
         final Phi phi = new EOdir$EOtmpfile(
             new PhWith(
-                new EOfile(new PhEta()),
+                new EOfile(Phi.Φ),
                 0, new Data.ToPhi(temp.toAbsolutePath().toString())
             )
         );

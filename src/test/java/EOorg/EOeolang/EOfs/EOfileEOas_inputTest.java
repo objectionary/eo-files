@@ -32,7 +32,6 @@ import java.nio.file.Path;
 import org.eolang.Data;
 import org.eolang.Dataized;
 import org.eolang.PhConst;
-import org.eolang.PhEta;
 import org.eolang.PhMethod;
 import org.eolang.PhWith;
 import org.eolang.Phi;
@@ -66,7 +65,7 @@ public final class EOfileEOas_inputTest {
         Phi input = new PhWith(
             new PhMethod(
                 new PhWith(
-                    new EOfile(new PhEta()), "path",
+                    new EOfile(Phi.Φ), "path",
                     new Data.ToPhi(file.toAbsolutePath().toString())
                 ),
                 "as-input"

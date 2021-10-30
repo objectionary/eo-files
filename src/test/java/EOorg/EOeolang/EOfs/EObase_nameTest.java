@@ -26,8 +26,8 @@ package EOorg.EOeolang.EOfs;
 
 import org.eolang.Data;
 import org.eolang.Dataized;
-import org.eolang.PhEta;
 import org.eolang.PhWith;
+import org.eolang.Phi;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
@@ -45,7 +45,7 @@ public final class EObase_nameTest {
         MatcherAssert.assertThat(
             new Dataized(
                 new PhWith(
-                    new EObase_name(new PhEta()),
+                    new EObase_name(Phi.Φ),
                     0, new Data.ToPhi("/tmp/foo/base.txt")
                 )
             ).take(String.class),
@@ -58,7 +58,7 @@ public final class EObase_nameTest {
         MatcherAssert.assertThat(
             new Dataized(
                 new PhWith(
-                    new EObase_name(new PhEta()),
+                    new EObase_name(Phi.Φ),
                     0, new Data.ToPhi("foo.txt")
                 )
             ).take(String.class),

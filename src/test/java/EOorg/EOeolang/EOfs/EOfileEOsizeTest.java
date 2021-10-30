@@ -29,8 +29,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import org.eolang.Data;
 import org.eolang.Dataized;
-import org.eolang.PhEta;
 import org.eolang.PhWith;
+import org.eolang.Phi;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
@@ -54,7 +54,7 @@ public final class EOfileEOsizeTest {
             new Dataized(
                 new EOfile$EOsize(
                     new PhWith(
-                        new EOfile(new PhEta()),
+                        new EOfile(Phi.Φ),
                         "path",
                         new Data.ToPhi(file.toAbsolutePath().toString())
                     )

@@ -28,7 +28,6 @@ import EOorg.EOeolang.EOmemory;
 import java.nio.charset.StandardCharsets;
 import org.eolang.Data;
 import org.eolang.Dataized;
-import org.eolang.PhEta;
 import org.eolang.PhWith;
 import org.eolang.Phi;
 import org.hamcrest.MatcherAssert;
@@ -50,17 +49,17 @@ public final class EOcopiedTest {
     public void readsBytes(final String text, final int size) {
         final byte[] bytes = text.getBytes();
         Phi copy = new PhWith(
-            new EOcopied(new PhEta()), "input",
+            new EOcopied(Phi.Φ), "input",
             new PhWith(
-                new EObytes_as_input(new PhEta()),
+                new EObytes_as_input(Phi.Φ),
                 "b", new Data.ToPhi(bytes)
             )
         );
-        final Phi mem = new EOmemory(new PhEta());
+        final Phi mem = new EOmemory(Phi.Φ);
         copy = new PhWith(
             copy, "output",
             new PhWith(
-                new EOmemory_as_output(new PhEta()),
+                new EOmemory_as_output(Phi.Φ),
                 "m", mem
             )
         );
