@@ -6,10 +6,12 @@
 
 [![mvn](https://github.com/yegor256/eo-files/actions/workflows/mvn.yml/badge.svg?branch=master)](https://github.com/yegor256/eo-files/actions/workflows/mvn.yml)
 [![PDD status](http://www.0pdd.com/svg?name=yegor256/eo-files)](http://www.0pdd.com/p?name=yegor256/eo-files)
-[![Hits-of-Code](https://hitsofcode.com/github/yegor256/eo-files)](https://hitsofcode.com/view/github/yegor256/eo-files)
-[![License](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/yegor256/eo-files/blob/master/LICENSE.txt)
-![Lines of code](https://img.shields.io/tokei/lines/github/yegor256/eo-files)
+[![codecov](https://codecov.io/gh/cqfn/eo/branch/master/graph/badge.svg)](https://codecov.io/gh/cqfn/eo)
 [![Maven Central](https://img.shields.io/maven-central/v/org.eolang/eo-files.svg)](https://maven-badges.herokuapp.com/maven-central/org.eolang/eo-files)
+
+[![Hits-of-Code](https://hitsofcode.com/github/yegor256/eo-files)](https://hitsofcode.com/view/github/yegor256/eo-files)
+![Lines of code](https://img.shields.io/tokei/lines/github/yegor256/eo-files)
+[![License](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/yegor256/eo-files/blob/master/LICENSE.txt)
 
 [EOLANG](https://www.eolang.org) objects for file system.
 
