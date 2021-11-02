@@ -50,9 +50,9 @@ public class EOext_name extends PhDefault {
     public EOext_name(final Phi sigma) {
         super(sigma);
         this.add("f", new AtFree());
-        this.add("φ", new AtLambda(this, self -> {
+        this.add("φ", new AtLambda(this, rho -> {
             final String path = new Dataized(
-                self.attr("f").get()
+                rho.attr("f").get()
             ).take(String.class);
             String ext = path.substring(path.lastIndexOf(File.separator) + 1);
             final int pos = ext.indexOf('.');

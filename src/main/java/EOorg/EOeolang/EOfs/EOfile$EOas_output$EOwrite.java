@@ -60,12 +60,12 @@ public class EOfile$EOas_output$EOwrite extends PhDefault {
     public EOfile$EOas_output$EOwrite(final Phi sigma, final OutputStream stream) {
         super(sigma);
         this.add("data", new AtFree());
-        this.add("φ", new AtLambda(this, self -> {
+        this.add("φ", new AtLambda(this, rho -> {
             final byte[] chunk = new Dataized(
-                self.attr("data").get()
+                rho.attr("data").get()
             ).take(byte[].class);
             stream.write(chunk);
-            return new EOfile$EOas_output(self.attr("ρ").get(), stream);
+            return new EOfile$EOas_output(rho.attr("ρ").get(), stream);
         }));
     }
 

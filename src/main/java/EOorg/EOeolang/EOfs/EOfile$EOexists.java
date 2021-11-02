@@ -49,11 +49,11 @@ public class EOfile$EOexists extends PhDefault {
     @SuppressWarnings("PMD.ConstructorOnlyInitializesOrCallOtherConstructors")
     public EOfile$EOexists(final Phi sigma) {
         super(sigma);
-        this.add("φ", new AtLambda(this, self -> new Data.ToPhi(
+        this.add("φ", new AtLambda(this, rho -> new Data.ToPhi(
             Files.exists(
                 Paths.get(
                     new Dataized(
-                        self.attr("ρ").get()
+                        rho.attr("ρ").get()
                     ).take(String.class)
                 )
             )

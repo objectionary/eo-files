@@ -63,13 +63,13 @@ public class EOfile$EOas_input$EOread extends PhDefault {
     public EOfile$EOas_input$EOread(final Phi sigma, final InputStream stream) {
         super(sigma);
         this.add("max", new AtFree());
-        this.add("φ", new AtLambda(this, self -> {
-            final long max = new Dataized(self.attr("max").get()).take(Long.class);
+        this.add("φ", new AtLambda(this, rho -> {
+            final long max = new Dataized(rho.attr("max").get()).take(Long.class);
             final byte[] chunk = new byte[(int) max];
             final int found = stream.read(chunk);
             final byte[] buf = Arrays.copyOfRange(chunk, 0, Integer.max(0, found));
             return new PhWith(
-                new EOfile$EOas_input(self.attr("ρ").get(), stream),
+                new EOfile$EOas_input(rho.attr("ρ").get(), stream),
                 "buf", new Data.ToPhi(buf)
             );
         }));

@@ -48,10 +48,10 @@ public class EOfile$EOis_dir extends PhDefault {
     @SuppressWarnings("PMD.ConstructorOnlyInitializesOrCallOtherConstructors")
     public EOfile$EOis_dir(final Phi sigma) {
         super(sigma);
-        this.add("φ", new AtLambda(this, self -> new Data.ToPhi(
+        this.add("φ", new AtLambda(this, rho -> new Data.ToPhi(
             Paths.get(
                 new Dataized(
-                    self.attr("ρ").get()
+                    rho.attr("ρ").get()
                 ).take(String.class)
             ).toFile().isDirectory())
         ));

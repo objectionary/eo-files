@@ -55,11 +55,11 @@ public class EOcopied extends PhDefault {
         this.add("input", new AtFree());
         this.add("output", new AtFree());
         this.add("size", new AtFree());
-        this.add("φ", new AtLambda(this, self -> {
-            final long size = new Dataized(self.attr("size").get()).take(Long.class);
+        this.add("φ", new AtLambda(this, rho -> {
+            final long size = new Dataized(rho.attr("size").get()).take(Long.class);
             int total = 0;
-            Phi input = self.attr("input").get();
-            Phi output = self.attr("output").get();
+            Phi input = rho.attr("input").get();
+            Phi output = rho.attr("output").get();
             while (true) {
                 input = new PhConst(
                     new PhMethod(

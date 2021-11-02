@@ -48,10 +48,10 @@ public class EOfile$EOrm extends PhDefault {
     @SuppressWarnings("PMD.ConstructorOnlyInitializesOrCallOtherConstructors")
     public EOfile$EOrm(final Phi sigma) {
         super(sigma);
-        this.add("φ", new AtLambda(this, self -> new Data.ToPhi(
+        this.add("φ", new AtLambda(this, rho -> new Data.ToPhi(
             new File(
                 new Dataized(
-                    self.attr("ρ").get()
+                    rho.attr("ρ").get()
                 ).take(String.class)
             ).delete()
         )));

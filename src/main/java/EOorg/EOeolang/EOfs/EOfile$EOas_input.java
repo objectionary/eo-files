@@ -70,7 +70,7 @@ public class EOfile$EOas_input extends PhDefault {
         super(sigma);
         this.add("mode", new AtFree());
         this.add("buf", new AtFree());
-        this.add("φ", new AtLambda(this, self -> self.attr("buf").get()));
+        this.add("φ", new AtLambda(this, rho -> rho.attr("buf").get()));
         this.add("read", new AtLambda(this, self -> {
             InputStream stream = out;
             if (stream == null) {

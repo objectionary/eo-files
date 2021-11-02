@@ -50,10 +50,10 @@ public class EOfile$EOtouch extends PhDefault {
     @SuppressWarnings("PMD.ConstructorOnlyInitializesOrCallOtherConstructors")
     public EOfile$EOtouch(final Phi sigma) {
         super(sigma);
-        this.add("φ", new AtLambda(this, self -> {
+        this.add("φ", new AtLambda(this, rho -> {
             final File file = Paths.get(
                 new Dataized(
-                    self.attr("ρ").get()
+                    rho.attr("ρ").get()
                 ).take(String.class)
             ).toFile();
             if (!file.exists()) {

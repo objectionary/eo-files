@@ -69,7 +69,7 @@ public class EOfile$EOas_output extends PhDefault {
     public EOfile$EOas_output(final Phi sigma, final OutputStream out) {
         super(sigma);
         this.add("mode", new AtFree());
-        this.add("φ", new AtLambda(this, self -> new Data.ToPhi(true)));
+        this.add("φ", new AtLambda(this, rho -> new Data.ToPhi(true)));
         this.add("write", new AtLambda(this, self -> {
             OutputStream stream = out;
             if (stream == null) {

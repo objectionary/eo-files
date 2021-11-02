@@ -50,8 +50,8 @@ public class EOdir_name extends PhDefault {
     public EOdir_name(final Phi sigma) {
         super(sigma);
         this.add("f", new AtFree());
-        this.add("φ", new AtLambda(this, self -> {
-            String path = new Dataized(self.attr("f").get()).take(String.class);
+        this.add("φ", new AtLambda(this, rho -> {
+            String path = new Dataized(rho.attr("f").get()).take(String.class);
             final int pos = path.lastIndexOf(File.separator);
             if (pos > 0) {
                 path = path.substring(0, pos);

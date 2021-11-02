@@ -52,15 +52,15 @@ public class EOfile$EOmv extends PhDefault {
     public EOfile$EOmv(final Phi sigma) {
         super(sigma);
         this.add("path", new AtFree());
-        this.add("φ", new AtLambda(this, self -> {
+        this.add("φ", new AtLambda(this, rho -> {
             final File file = Paths.get(
                 new Dataized(
-                    self.attr("ρ").get()
+                    rho.attr("ρ").get()
                 ).take(String.class)
             ).toFile();
             final File target = Paths.get(
                 new Dataized(
-                    self.attr("path").get()
+                    rho.attr("path").get()
                 ).take(String.class)
             ).toFile();
             file.renameTo(target);

@@ -50,9 +50,9 @@ public class EObase_name extends PhDefault {
     public EObase_name(final Phi sigma) {
         super(sigma);
         this.add("f", new AtFree());
-        this.add("φ", new AtLambda(this, self -> {
+        this.add("φ", new AtLambda(this, rho -> {
             final String path = new Dataized(
-                self.attr("f").get()
+                rho.attr("f").get()
             ).take(String.class);
             return new Data.ToPhi(
                 path.substring(path.lastIndexOf(File.separator) + 1)

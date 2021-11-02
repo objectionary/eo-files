@@ -52,14 +52,14 @@ public class EOfile$EOresolve extends PhDefault {
     public EOfile$EOresolve(final Phi sigma) {
         super(sigma);
         this.add("p", new AtFree());
-        this.add("φ", new AtLambda(this, self -> {
+        this.add("φ", new AtLambda(this, rho -> {
             final Path path = Paths.get(
                 new Dataized(
-                    self.attr("ρ").get()
+                    rho.attr("ρ").get()
                 ).take(String.class)
             );
             final String suffix = new Dataized(
-                self.attr("p").get()
+                rho.attr("p").get()
             ).take(String.class);
             return new PhWith(
                 new EOfile(sigma),
