@@ -28,6 +28,17 @@
 +alias org.eolang.io.copied
 +junit
 
+[] > compares-to-same-file
+  eq. > @
+    file "/tmp/foo.txt"
+    file "/tmp/foo.txt"
+
+[] > compares-to-another-file
+  not. > @
+    eq.
+      file "/tmp/foo.txt"
+      file "/tmp/bar.txt"
+
 [] > check-if-it-is-directory
   is-dir. > @
     file
@@ -40,9 +51,9 @@
         "some-absent-file.txt"
 
 [] > touches-a-file
-  tmpdir.tmpfile.@ > f!
+  tmpdir.tmpfile > f!
   and. > @
-    f.rm.@
+    f.rm
     f.exists.not
     f.touch
     f.exists
@@ -65,13 +76,13 @@
       tmpdir
 
 [] > makes-the-same-temp-file
-  tmpdir.tmpfile.@ > f!
+  tmpdir.tmpfile > f!
   eq. > @
     f
     f
 
 [] > writes-string-to-file
-  tmpdir.tmpfile.@ > f!
+  tmpdir.tmpfile > f!
   eq. > @
     copied
       bytes-as-input
@@ -82,13 +93,13 @@
     17
 
 [] > measures-empty-file-size
-  tmpdir.tmpfile.@ > f!
+  tmpdir.tmpfile > f!
   and. > @
     f.touch
     f.size.eq 0
 
 [] > measures-file-size
-  tmpdir.tmpfile.@ > f!
+  tmpdir.tmpfile > f!
   eq. > @
     copied
       bytes-as-input

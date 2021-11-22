@@ -21,7 +21,7 @@
 # SOFTWARE.
 
 +package org.eolang.io
-+rt jvm org.eolang:eo-files:0.2.0
++rt jvm org.eolang:eo-files:0.3.0
 
 # Turns memory into an output.
 [m] > memory-as-output
