@@ -25,8 +25,8 @@
 package EOorg.EOeolang.EOfs;
 
 import java.io.File;
+import org.eolang.AtComposite;
 import org.eolang.AtFree;
-import org.eolang.AtLambda;
 import org.eolang.Data;
 import org.eolang.Dataized;
 import org.eolang.PhDefault;
@@ -50,7 +50,7 @@ public class EOext_name extends PhDefault {
     public EOext_name(final Phi sigma) {
         super(sigma);
         this.add("f", new AtFree());
-        this.add("φ", new AtLambda(this, rho -> {
+        this.add("φ", new AtComposite(this, rho -> {
             final String path = new Dataized(
                 rho.attr("f").get()
             ).take(String.class);

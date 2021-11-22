@@ -24,7 +24,7 @@
 // @checkstyle PackageNameCheck (1 line)
 package EOorg.EOeolang.EOfs;
 
-import org.eolang.AtLambda;
+import org.eolang.AtComposite;
 import org.eolang.Data;
 import org.eolang.PhDefault;
 import org.eolang.PhWith;
@@ -46,7 +46,7 @@ public class EOtmpdir extends PhDefault {
     @SuppressWarnings("PMD.ConstructorOnlyInitializesOrCallOtherConstructors")
     public EOtmpdir(final Phi sigma) {
         super(sigma);
-        this.add("φ", new AtLambda(this, rho -> new PhWith(
+        this.add("φ", new AtComposite(this, rho -> new PhWith(
             new EOdir(rho), "file",
             new PhWith(
                 new EOfile(rho), "path",

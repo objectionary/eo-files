@@ -78,7 +78,7 @@ public final class EOfileEOas_inputTest {
             input = new PhConst(
                 new PhMethod(
                     new PhWith(
-                        input.attr("read").get().copy(input),
+                        input.attr("read").get(),
                         "max", new Data.ToPhi((long) max)
                     ),
                     "φ"

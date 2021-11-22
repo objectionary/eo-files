@@ -25,8 +25,8 @@
 package EOorg.EOeolang.EOfs;
 
 import java.io.OutputStream;
+import org.eolang.AtComposite;
 import org.eolang.AtFree;
-import org.eolang.AtLambda;
 import org.eolang.Dataized;
 import org.eolang.PhDefault;
 import org.eolang.Phi;
@@ -60,7 +60,7 @@ public class EOfile$EOas_output$EOwrite extends PhDefault {
     public EOfile$EOas_output$EOwrite(final Phi sigma, final OutputStream stream) {
         super(sigma);
         this.add("data", new AtFree());
-        this.add("φ", new AtLambda(this, rho -> {
+        this.add("φ", new AtComposite(this, rho -> {
             final byte[] chunk = new Dataized(
                 rho.attr("data").get()
             ).take(byte[].class);

@@ -25,7 +25,7 @@
 package EOorg.EOeolang.EOfs;
 
 import java.io.File;
-import org.eolang.AtLambda;
+import org.eolang.AtComposite;
 import org.eolang.Data;
 import org.eolang.Dataized;
 import org.eolang.PhDefault;
@@ -48,7 +48,7 @@ public class EOfile$EOrm extends PhDefault {
     @SuppressWarnings("PMD.ConstructorOnlyInitializesOrCallOtherConstructors")
     public EOfile$EOrm(final Phi sigma) {
         super(sigma);
-        this.add("φ", new AtLambda(this, rho -> new Data.ToPhi(
+        this.add("φ", new AtComposite(this, rho -> new Data.ToPhi(
             new File(
                 new Dataized(
                     rho.attr("ρ").get()

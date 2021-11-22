@@ -24,8 +24,8 @@
 // @checkstyle PackageNameCheck (1 line)
 package EOorg.EOeolang.EOio;
 
+import org.eolang.AtComposite;
 import org.eolang.AtFree;
-import org.eolang.AtLambda;
 import org.eolang.Data;
 import org.eolang.Dataized;
 import org.eolang.PhConst;
@@ -55,27 +55,24 @@ public class EOcopied extends PhDefault {
         this.add("input", new AtFree());
         this.add("output", new AtFree());
         this.add("size", new AtFree());
-        this.add("φ", new AtLambda(this, rho -> {
+        this.add("φ", new AtComposite(this, rho -> {
             final long size = new Dataized(rho.attr("size").get()).take(Long.class);
             int total = 0;
             Phi input = rho.attr("input").get();
             Phi output = rho.attr("output").get();
             while (true) {
                 input = new PhConst(
-                    new PhMethod(
-                        new PhWith(
-                            input.attr("read").get().copy(input),
-                            0, new Data.ToPhi(size)
-                        ),
-                        "φ"
+                    new PhWith(
+                        input.attr("read").get(),
+                        "max", new Data.ToPhi(size)
                     )
                 );
                 final byte[] chunk = new Dataized(input).take(byte[].class);
                 output = new PhConst(
                     new PhMethod(
                         new PhWith(
-                            output.attr("write").get().copy(output),
-                            0, new Data.ToPhi(chunk)
+                            output.attr("write").get(),
+                            "data", new Data.ToPhi(chunk)
                         ),
                         "φ"
                     )

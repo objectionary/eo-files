@@ -48,27 +48,28 @@ public final class EOcopiedTest {
     @CsvFileSource(resources = "/EOlang/EOio/test-samples.csv")
     public void readsBytes(final String text, final int size) {
         final byte[] bytes = text.getBytes();
-        Phi copy = new PhWith(
-            new EOcopied(Phi.Φ), "input",
+        Phi copied = new PhWith(
+            new EOcopied(Phi.Φ),
+            "input",
             new PhWith(
                 new EObytes_as_input(Phi.Φ),
                 "b", new Data.ToPhi(bytes)
             )
         );
         final Phi mem = new EOmemory(Phi.Φ);
-        copy = new PhWith(
-            copy, "output",
+        copied = new PhWith(
+            copied, "output",
             new PhWith(
                 new EOmemory_as_output(Phi.Φ),
                 "m", mem
             )
         );
-        copy = new PhWith(
-            copy, "size",
+        copied = new PhWith(
+            copied, "size",
             new Data.ToPhi((long) size)
         );
         MatcherAssert.assertThat(
-            new Dataized(copy).take(Long.class),
+            new Dataized(copied).take(Long.class),
             Matchers.equalTo((long) bytes.length)
         );
         MatcherAssert.assertThat(

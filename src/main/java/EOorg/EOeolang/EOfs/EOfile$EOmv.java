@@ -26,8 +26,8 @@ package EOorg.EOeolang.EOfs;
 
 import java.io.File;
 import java.nio.file.Paths;
+import org.eolang.AtComposite;
 import org.eolang.AtFree;
-import org.eolang.AtLambda;
 import org.eolang.Data;
 import org.eolang.Dataized;
 import org.eolang.PhDefault;
@@ -52,7 +52,7 @@ public class EOfile$EOmv extends PhDefault {
     public EOfile$EOmv(final Phi sigma) {
         super(sigma);
         this.add("path", new AtFree());
-        this.add("φ", new AtLambda(this, rho -> {
+        this.add("φ", new AtComposite(this, rho -> {
             final File file = Paths.get(
                 new Dataized(
                     rho.attr("ρ").get()

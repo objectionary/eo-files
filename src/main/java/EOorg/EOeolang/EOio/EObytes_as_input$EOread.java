@@ -25,8 +25,8 @@
 package EOorg.EOeolang.EOio;
 
 import java.util.Arrays;
+import org.eolang.AtComposite;
 import org.eolang.AtFree;
-import org.eolang.AtLambda;
 import org.eolang.Attr;
 import org.eolang.Data;
 import org.eolang.Dataized;
@@ -51,9 +51,9 @@ public class EObytes_as_input$EOread extends PhDefault {
     public EObytes_as_input$EOread(final Phi sigma) {
         super(sigma);
         this.add("max", new AtFree());
-        this.add("φ", new AtLambda(this, rho -> {
+        this.add("φ", new AtComposite(this, rho -> {
             final long max = new Dataized(rho.attr("max").get()).take(Long.class);
-            final Phi input = rho.attr("ρ").get();
+            final Phi input = rho.attr("σ").get();
             long next;
             try {
                 next = new Dataized(input.attr("next").get()).take(Long.class);
@@ -62,6 +62,7 @@ public class EObytes_as_input$EOread extends PhDefault {
             }
             final Phi data = input.attr("b").get();
             final byte[] bytes = new Dataized(data).take(byte[].class);
+            new Dataized(data).take(byte[].class);
             final byte[] buf = Arrays.copyOfRange(
                 bytes,
                 (int) next,
@@ -70,7 +71,7 @@ public class EObytes_as_input$EOread extends PhDefault {
             return new PhWith(
                 new PhWith(
                     new PhWith(
-                        new EObytes_as_input(input),
+                        new EObytes_as_input(Phi.Φ),
                         "b", data
                     ),
                     "next", new Data.ToPhi(next + (long) buf.length)

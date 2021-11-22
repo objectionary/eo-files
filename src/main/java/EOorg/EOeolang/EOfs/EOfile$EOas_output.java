@@ -33,8 +33,8 @@ import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.Collection;
 import java.util.LinkedList;
+import org.eolang.AtComposite;
 import org.eolang.AtFree;
-import org.eolang.AtLambda;
 import org.eolang.Data;
 import org.eolang.Dataized;
 import org.eolang.PhDefault;
@@ -69,8 +69,8 @@ public class EOfile$EOas_output extends PhDefault {
     public EOfile$EOas_output(final Phi sigma, final OutputStream out) {
         super(sigma);
         this.add("mode", new AtFree());
-        this.add("φ", new AtLambda(this, rho -> new Data.ToPhi(true)));
-        this.add("write", new AtLambda(this, self -> {
+        this.add("φ", new AtComposite(this, rho -> new Data.ToPhi(true)));
+        this.add("write", new AtComposite(this, self -> {
             OutputStream stream = out;
             if (stream == null) {
                 final String mode = new Dataized(
@@ -85,7 +85,7 @@ public class EOfile$EOas_output extends PhDefault {
             }
             return new EOfile$EOas_output$EOwrite(self, stream);
         }));
-        this.add("close", new AtLambda(this, self -> {
+        this.add("close", new AtComposite(this, self -> {
             if (out != null) {
                 out.close();
             }

@@ -25,8 +25,8 @@
 package EOorg.EOeolang.EOio;
 
 import java.io.ByteArrayOutputStream;
+import org.eolang.AtComposite;
 import org.eolang.AtFree;
-import org.eolang.AtLambda;
 import org.eolang.Data;
 import org.eolang.Dataized;
 import org.eolang.PhDefault;
@@ -51,8 +51,8 @@ public class EOmemory_as_output$EOwrite extends PhDefault {
     public EOmemory_as_output$EOwrite(final Phi sigma) {
         super(sigma);
         this.add("data", new AtFree());
-        this.add("φ", new AtLambda(this, rho -> {
-            final Phi mem = rho.attr("ρ").get().attr("m").get();
+        this.add("φ", new AtComposite(this, rho -> {
+            final Phi mem = rho.attr("σ").get().attr("m").get();
             final ByteArrayOutputStream baos = new ByteArrayOutputStream();
             if (!new Dataized(mem.attr("is-empty").get()).take(Boolean.class)) {
                 baos.write(new Dataized(mem).take(byte[].class));
@@ -61,7 +61,7 @@ public class EOmemory_as_output$EOwrite extends PhDefault {
             baos.write(chunk);
             new Dataized(
                 new PhWith(
-                    mem.attr("write").get().copy(rho),
+                    mem.attr("write").get(),
                     0, new Data.ToPhi(baos.toByteArray())
                 )
             ).take();

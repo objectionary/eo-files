@@ -26,8 +26,8 @@ package EOorg.EOeolang.EOfs;
 
 import java.io.InputStream;
 import java.util.Arrays;
+import org.eolang.AtComposite;
 import org.eolang.AtFree;
-import org.eolang.AtLambda;
 import org.eolang.Data;
 import org.eolang.Dataized;
 import org.eolang.PhDefault;
@@ -63,7 +63,7 @@ public class EOfile$EOas_input$EOread extends PhDefault {
     public EOfile$EOas_input$EOread(final Phi sigma, final InputStream stream) {
         super(sigma);
         this.add("max", new AtFree());
-        this.add("φ", new AtLambda(this, rho -> {
+        this.add("φ", new AtComposite(this, rho -> {
             final long max = new Dataized(rho.attr("max").get()).take(Long.class);
             final byte[] chunk = new byte[(int) max];
             final int found = stream.read(chunk);

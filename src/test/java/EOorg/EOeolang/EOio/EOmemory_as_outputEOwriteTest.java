@@ -61,7 +61,7 @@ public final class EOmemory_as_outputEOwriteTest {
             output = new PhConst(
                 new PhMethod(
                     new PhWith(
-                        output.attr("write").get().copy(output),
+                        output.attr("write").get(),
                         "data", new Data.ToPhi(chunk)
                     ),
                     "φ"

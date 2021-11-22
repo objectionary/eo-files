@@ -31,8 +31,8 @@ import java.nio.file.PathMatcher;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.stream.Collectors;
+import org.eolang.AtComposite;
 import org.eolang.AtFree;
-import org.eolang.AtLambda;
 import org.eolang.Data;
 import org.eolang.Dataized;
 import org.eolang.PhDefault;
@@ -58,7 +58,7 @@ public class EOdir$EOwalk extends PhDefault {
     public EOdir$EOwalk(final Phi sigma) {
         super(sigma);
         this.add("glob", new AtFree());
-        this.add("φ", new AtLambda(this, rho -> {
+        this.add("φ", new AtComposite(this, rho -> {
             final Path path = Paths.get(
                 new Dataized(
                     rho.attr("ρ").get()

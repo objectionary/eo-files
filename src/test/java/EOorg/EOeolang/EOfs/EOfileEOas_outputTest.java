@@ -80,7 +80,7 @@ public final class EOfileEOas_outputTest {
             output = new PhConst(
                 new PhMethod(
                     new PhWith(
-                        output.attr("write").get().copy(output),
+                        output.attr("write").get(),
                         "data", new Data.ToPhi(chunk)
                     ),
                     "φ"

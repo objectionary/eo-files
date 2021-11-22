@@ -35,6 +35,7 @@ import org.eolang.PhWith;
 import org.eolang.Phi;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 
@@ -57,12 +58,9 @@ public final class EObytes_as_inputEOreadTest {
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         while (true) {
             input = new PhConst(
-                new PhMethod(
-                    new PhWith(
-                        input.attr("read").get().copy(input),
-                        "max", new Data.ToPhi((long) max)
-                    ),
-                    "φ"
+                new PhWith(
+                    input.attr("read").get(),
+                    "max", new Data.ToPhi((long) max)
                 )
             );
             final byte[] chunk = new Dataized(input).take(byte[].class);
@@ -78,4 +76,31 @@ public final class EObytes_as_inputEOreadTest {
         );
     }
 
+    @ParameterizedTest
+    @CsvFileSource(resources = "/EOlang/EOio/test-samples.csv")
+    public void readsBytesFromString(final String text, final int max) {
+        final Phi input = new PhWith(
+            new EObytes_as_input(Phi.Φ),
+            "b",
+            new PhMethod(
+                new Data.ToPhi(text),
+                "as-bytes"
+            )
+        );
+        final Phi first = new PhConst(
+            new PhWith(
+                input.attr("read").get(),
+                "max", new Data.ToPhi((long) max)
+            )
+        );
+        final Phi last = new PhConst(
+            new PhWith(
+                first.attr("read").get(),
+                "max", new Data.ToPhi((long) max)
+            )
+        ).copy();
+        Assertions.assertDoesNotThrow(
+            () -> new Dataized(last).take(byte[].class)
+        );
+    }
 }

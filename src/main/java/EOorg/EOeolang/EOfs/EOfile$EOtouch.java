@@ -27,7 +27,7 @@ package EOorg.EOeolang.EOfs;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.nio.file.Paths;
-import org.eolang.AtLambda;
+import org.eolang.AtComposite;
 import org.eolang.Data;
 import org.eolang.Dataized;
 import org.eolang.PhDefault;
@@ -50,7 +50,7 @@ public class EOfile$EOtouch extends PhDefault {
     @SuppressWarnings("PMD.ConstructorOnlyInitializesOrCallOtherConstructors")
     public EOfile$EOtouch(final Phi sigma) {
         super(sigma);
-        this.add("φ", new AtLambda(this, rho -> {
+        this.add("φ", new AtComposite(this, rho -> {
             final File file = Paths.get(
                 new Dataized(
                     rho.attr("ρ").get()

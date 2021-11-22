@@ -27,7 +27,7 @@ package EOorg.EOeolang.EOfs;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import org.eolang.AtLambda;
+import org.eolang.AtComposite;
 import org.eolang.Data;
 import org.eolang.Dataized;
 import org.eolang.PhDefault;
@@ -51,7 +51,7 @@ public class EOdir$EOtmpfile extends PhDefault {
     @SuppressWarnings("PMD.ConstructorOnlyInitializesOrCallOtherConstructors")
     public EOdir$EOtmpfile(final Phi sigma) {
         super(sigma);
-        this.add("φ", new AtLambda(this, rho -> {
+        this.add("φ", new AtComposite(this, rho -> {
             final Path home = Paths.get(
                 new Dataized(
                     rho.attr("ρ").get()
