@@ -30,6 +30,8 @@ import org.eolang.AtFree;
 import org.eolang.Attr;
 import org.eolang.Data;
 import org.eolang.Dataized;
+import org.eolang.ExAbstract;
+import org.eolang.ExUnset;
 import org.eolang.PhDefault;
 import org.eolang.PhWith;
 import org.eolang.Phi;
@@ -57,7 +59,7 @@ public class EObytes_as_input$EOread extends PhDefault {
             long next;
             try {
                 next = new Dataized(input.attr("next").get()).take(Long.class);
-            } catch (final Attr.StillAbstractException ex) {
+            } catch (final ExAbstract ex) {
                 next = 0L;
             }
             final Phi data = input.attr("b").get();
