@@ -21,6 +21,6 @@
 # SOFTWARE.
 
 +package org.eolang.fs
-+rt jvm org.eolang:eo-files:0.3.1
++rt jvm org.eolang:eo-files:0.3.2
 
 [] > tmpdir /dir

@@ -21,7 +21,7 @@
 # SOFTWARE.
 
 +package org.eolang.io
-+rt jvm org.eolang:eo-files:0.3.1
++rt jvm org.eolang:eo-files:0.3.2
 
 # Makes an input from bytes. In most cases you don't
 # need to specify the last two arguments, only the first
