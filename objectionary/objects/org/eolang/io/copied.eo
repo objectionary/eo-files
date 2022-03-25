@@ -21,7 +21,7 @@
 # SOFTWARE.
 
 +package org.eolang.io
-+rt jvm org.eolang:eo-files:0.3.0
++rt jvm org.eolang:eo-files:0.3.1
 
 # A copy of input into output, which is a total
 # number of bytes copied.
