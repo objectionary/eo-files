@@ -35,11 +35,11 @@ SOFTWARE.
   <packaging>jar</packaging>
   <name>eo-files</name>
   <description>File System Primitives in EOLANG</description>
-  <url>https://github.com/yegor256/eo-files</url>
+  <url>https://github.com/objectionary/eo-files</url>
   <inceptionYear>2021</inceptionYear>
   <organization>
     <name>EO</name>
-    <url>https://github.com/yegor256/eo-files</url>
+    <url>https://github.com/objectionary/eo-files</url>
   </organization>
   <licenses>
     <license>
@@ -64,12 +64,12 @@ SOFTWARE.
   </developers>
   <issueManagement>
     <system>GitHub</system>
-    <url>https://github.com/yegor256/eo-files/issues</url>
+    <url>https://github.com/objectionary/eo-files/issues</url>
   </issueManagement>
   <scm>
-    <connection>scm:git:git@github.com:yegor256/eo-files.git</connection>
-    <developerConnection>scm:git:git@github.com:yegor256/eo-files.git</developerConnection>
-    <url>https://github.com/yegor256/eo-files</url>
+    <connection>scm:git:git@github.com:objectionary/eo-files.git</connection>
+    <developerConnection>scm:git:git@github.com:objectionary/eo-files.git</developerConnection>
+    <url>https://github.com/objectionary/eo-files</url>
   </scm>
   <ciManagement>
     <system>rultor</system>
@@ -78,7 +78,7 @@ SOFTWARE.
   <distributionManagement>
     <site>
       <id>github-pages</id>
-      <url>https://github.com/yegor256/eo-files</url>
+      <url>https://github.com/objectionary/eo-files</url>
     </site>
   </distributionManagement>
   <dependencies>

@@ -1,17 +1,17 @@
 <img src="https://www.yegor256.com/images/books/elegant-objects/cactus.svg" height="100px" />
 
 [![EO principles respected here](https://www.elegantobjects.org/badge.svg)](https://www.elegantobjects.org)
-[![DevOps By Rultor.com](http://www.rultor.com/b/yegor256/eo-files)](http://www.rultor.com/p/yegor256/eo-files)
+[![DevOps By Rultor.com](http://www.rultor.com/b/objectionary/eo-files)](http://www.rultor.com/p/objectionary/eo-files)
 [![We recommend IntelliJ IDEA](https://www.elegantobjects.org/intellij-idea.svg)](https://www.jetbrains.com/idea/)
 
-[![mvn](https://github.com/yegor256/eo-files/actions/workflows/mvn.yml/badge.svg?branch=master)](https://github.com/yegor256/eo-files/actions/workflows/mvn.yml)
-[![PDD status](http://www.0pdd.com/svg?name=yegor256/eo-files)](http://www.0pdd.com/p?name=yegor256/eo-files)
+[![mvn](https://github.com/objectionary/eo-files/actions/workflows/mvn.yml/badge.svg?branch=master)](https://github.com/objectionary/eo-files/actions/workflows/mvn.yml)
+[![PDD status](http://www.0pdd.com/svg?name=objectionary/eo-files)](http://www.0pdd.com/p?name=objectionary/eo-files)
 [![codecov](https://codecov.io/gh/cqfn/eo/branch/master/graph/badge.svg)](https://codecov.io/gh/cqfn/eo)
 [![Maven Central](https://img.shields.io/maven-central/v/org.eolang/eo-files.svg)](https://maven-badges.herokuapp.com/maven-central/org.eolang/eo-files)
 
-[![Hits-of-Code](https://hitsofcode.com/github/yegor256/eo-files)](https://hitsofcode.com/view/github/yegor256/eo-files)
-![Lines of code](https://img.shields.io/tokei/lines/github/yegor256/eo-files)
-[![License](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/yegor256/eo-files/blob/master/LICENSE.txt)
+[![Hits-of-Code](https://hitsofcode.com/github/objectionary/eo-files)](https://hitsofcode.com/view/github/objectionary/eo-files)
+![Lines of code](https://img.shields.io/tokei/lines/github/objectionary/eo-files)
+[![License](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/objectionary/eo-files/blob/master/LICENSE.txt)
 
 [EOLANG](https://www.eolang.org) objects for file system.
 
