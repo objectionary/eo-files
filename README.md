@@ -20,16 +20,17 @@ This is how you list all text files in a directory recursively:
 ```
 +alias org.eolang.io.stdout
 +alias org.eolang.txt.sprintf
-+alias org.eolang.fs.directory
++alias org.eolang.fs.dir
 
 each. > @
   select.
     walk.
-      directory "/tmp"
+      dir "/tmp"
       "**/*"
-    *
-      [f] (f.is-dir.not > @)
-      [f] (/\.txt$/.matches f > @)
+    [f]
+      and. > @
+        f.is-dir.not
+        /\.txt$/.matches f
   [f]
     stdout > @
       sprintf "file: %s" f
