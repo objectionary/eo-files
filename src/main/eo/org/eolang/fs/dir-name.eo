@@ -21,6 +21,7 @@
 # SOFTWARE.
 
 +package org.eolang.fs
++home https://github.com/objectionary/eo-files
 +rt jvm org.eolang:eo-files:0.0.0
 
 # Takes the directory name from the full path name,

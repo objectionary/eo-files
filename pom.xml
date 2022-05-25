@@ -85,7 +85,7 @@ SOFTWARE.
     <dependency>
       <groupId>org.eolang</groupId>
       <artifactId>eo-runtime</artifactId>
-      <version>0.22.2</version>
+      <version>0.23.5</version>
     </dependency>
     <dependency>
       <groupId>org.junit.jupiter</groupId>
@@ -99,7 +99,7 @@ SOFTWARE.
       <plugin>
         <groupId>org.eolang</groupId>
         <artifactId>eo-maven-plugin</artifactId>
-        <version>0.22.2</version>
+        <version>0.23.5</version>
         <executions>
           <execution>
             <id>compile</id>
@@ -133,47 +133,6 @@ SOFTWARE.
     </plugins>
   </build>
   <profiles>
-    <profile>
-      <id>jacoco</id>
-      <build>
-        <plugins>
-          <plugin>
-            <groupId>org.jacoco</groupId>
-            <artifactId>jacoco-maven-plugin</artifactId>
-            <version>0.8.5</version>
-            <configuration>
-              <output>file</output>
-            </configuration>
-            <executions>
-              <execution>
-                <id>jacoco-initialize</id>
-                <goals>
-                  <goal>prepare-agent</goal>
-                </goals>
-              </execution>
-              <execution>
-                <id>jacoco-initialize-integration</id>
-                <goals>
-                  <goal>prepare-agent-integration</goal>
-                </goals>
-              </execution>
-              <execution>
-                <id>jacoco-report</id>
-                <goals>
-                  <goal>report</goal>
-                </goals>
-              </execution>
-              <execution>
-                <id>jacoco-report-integration</id>
-                <goals>
-                  <goal>report-integration</goal>
-                </goals>
-              </execution>
-            </executions>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
     <profile>
       <id>qulice</id>
       <build>

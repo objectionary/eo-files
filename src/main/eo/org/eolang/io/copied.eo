@@ -21,6 +21,7 @@
 # SOFTWARE.
 
 +package org.eolang.io
++home https://github.com/objectionary/eo-files
 +rt jvm org.eolang:eo-files:0.0.0
 
 # A copy of input into output, which is a total

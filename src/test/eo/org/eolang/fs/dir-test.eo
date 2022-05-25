@@ -21,6 +21,7 @@
 # SOFTWARE.
 
 +package org.eolang.fs
++home https://github.com/objectionary/eo-files
 +alias org.eolang.fs.dir
 +alias org.eolang.fs.tmpdir
 +alias org.eolang.io.copied
