@@ -1,6 +1,6 @@
 # The MIT License (MIT)
 #
-# Copyright (c) 2021 Yegor Bugayenko
+# Copyright (c) 2021-2022 Yegor Bugayenko
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -21,7 +21,8 @@
 # SOFTWARE.
 
 +package org.eolang.fs
-+rt jvm org.eolang:eo-files:0.3.2
++home https://github.com/objectionary/eo-files
++rt jvm org.eolang:eo-files:0.3.3
 
 # Takes the extension part from the full path name,
 # for example "/tmp/bar/foo.txt.gz" will lead to "txt.gz"
