@@ -96,7 +96,7 @@ file "/tmp/foo.txt" > f
 copied
   bytes-as-input
     "你好, world!".as-bytes
-  f.as-ouput "w+"
+  f.as-output "w+"
 ```
 
 Smart object to help read content fast:
