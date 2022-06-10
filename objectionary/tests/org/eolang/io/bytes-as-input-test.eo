@@ -21,6 +21,8 @@
 # SOFTWARE.
 
 +package org.eolang.io
++home https://github.com/objectionary/eo-files
++version 0.3.4
 +alias org.eolang.io.bytes-as-input
 +junit
 
