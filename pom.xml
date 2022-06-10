@@ -34,7 +34,7 @@ SOFTWARE.
   <version>1.0-SNAPSHOT</version>
   <packaging>jar</packaging>
   <name>eo-files</name>
-  <description>File System Primitives in EOLANG</description>
+  <description>File System Primitives for EO Programming Language</description>
   <url>https://github.com/objectionary/eo-files</url>
   <inceptionYear>2021</inceptionYear>
   <organization>
@@ -59,7 +59,7 @@ SOFTWARE.
         <role>Architect</role>
         <role>Developer</role>
       </roles>
-      <timezone>-7</timezone>
+      <timezone>+3</timezone>
     </developer>
   </developers>
   <issueManagement>
