@@ -28,7 +28,7 @@
 +junit
 
 [] > copies-bytes-from-object-to-memory
-  memory > m
+  memory -- > m
   eq. > @
     copied
       bytes-as-input

@@ -61,21 +61,17 @@ public class EOcopied extends PhDefault {
             Phi input = rho.attr("input").get();
             Phi output = rho.attr("output").get();
             while (true) {
-                input = new PhConst(
-                    new PhWith(
-                        input.attr("read").get(),
-                        "max", new Data.ToPhi(size)
-                    )
+                input = new PhWith(
+                    input.attr("read").get(),
+                    "max", new Data.ToPhi(size)
                 );
                 final byte[] chunk = new Dataized(input).take(byte[].class);
-                output = new PhConst(
-                    new PhMethod(
-                        new PhWith(
-                            output.attr("write").get(),
-                            "data", new Data.ToPhi(chunk)
-                        ),
-                        "φ"
-                    )
+                output = new PhMethod(
+                    new PhWith(
+                        output.attr("write").get(),
+                        "data", new Data.ToPhi(chunk)
+                    ),
+                    "φ"
                 );
                 new Dataized(output).take();
                 total += chunk.length;

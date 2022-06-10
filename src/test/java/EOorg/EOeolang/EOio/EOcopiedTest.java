@@ -57,6 +57,7 @@ public final class EOcopiedTest {
             )
         );
         final Phi mem = new EOmemory(Phi.Φ);
+        mem.attr(0).put(new Data.ToPhi(new byte[] {}));
         copied = new PhWith(
             copied, "output",
             new PhWith(

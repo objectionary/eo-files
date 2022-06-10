@@ -54,9 +54,7 @@ public class EOmemory_as_output$EOwrite extends PhDefault {
         this.add("φ", new AtComposite(this, rho -> {
             final Phi mem = rho.attr("σ").get().attr("m").get();
             final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            if (!new Dataized(mem.attr("is-empty").get()).take(Boolean.class)) {
-                baos.write(new Dataized(mem).take(byte[].class));
-            }
+            baos.write(new Dataized(mem).take(byte[].class));
             final byte[] chunk = new Dataized(rho.attr("data").get()).take(byte[].class);
             baos.write(chunk);
             new Dataized(
