@@ -22,6 +22,7 @@
 
 +package org.eolang.fs
 +home https://github.com/objectionary/eo-files
++version 0.0.0
 +rt jvm org.eolang:eo-files:0.0.0
 
 # Takes the extension part from the full path name,
