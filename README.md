@@ -18,22 +18,21 @@
 This is how you list all text files in a directory recursively:
 
 ```
-+alias org.eolang.io.stdout
-+alias org.eolang.txt.sprintf
-+alias org.eolang.fs.dir
-
 each. > @
   select.
-    walk.
-      dir "/tmp"
+    QQ.fs.walk.
+      QQ.fs.dir "/tmp"
       "**/*"
     [f]
       and. > @
         f.is-dir.not
-        /\.txt$/.matches f
+        matches.
+          QQ.txt.regex
+            "\.txt$"
+          f
   [f]
-    stdout > @
-      sprintf "file: %s" f
+    QQ.io.stdout > @
+      QQ.txt.sprintf "file: %s" f
 ```
 
 You are welcome to add more primitives to this lib.
@@ -42,13 +41,12 @@ Simple manipulations:
 
 ```
 # Make a new object representing a file on disc
-+alias org.eolang.fs.file
-file > f
+QQ.fs.file > f
   "/tmp/foo.txt"
 
 # Get its name:
-stdout
-  sprintf
+QQ.io.stdout
+  QQ.txt.sprintf
     "File name is: %s"
     f
 
@@ -77,11 +75,11 @@ Reading:
 # Read binary content into the "output," in 1024-bytes chunks;
 # the "memory-as-output" is an abstract object with one free attribute,
 # which is the memory where the bytes will be stored:
-file "/tmp/foo.txt" > f
+QQ.fs.file "/tmp/foo.txt" > f
 memory > m
-copied
+QQ.io.copied
   f.as-input
-  memory-as-output m
+  QQ.io.memory-as-output m
   1024
 ```
 
@@ -92,9 +90,9 @@ Writing:
 # until input turns into a non-empty "bytes"; here the
 # "mode" is the same as the mode in POSIX fopen();
 # if the file is absent, it will be created:
-file "/tmp/foo.txt" > f
-copied
-  bytes-as-input
+QQ.fs.file "/tmp/foo.txt" > f
+QQ.io.copied
+  QQ.io.bytes-as-input
     "你好, world!".as-bytes
   f.as-output "w+"
 ```
@@ -103,16 +101,14 @@ Smart object to help read content fast:
 
 ```
 # This is the entire binary content of the file:
-+alias org.eolang.fs.content
-content f
+QQ.fs.content f
 ```
 
 Directories:
 
 ```
 # Make an object representing a directory on disc:
-+alias org.eolang.fs.directory
-directory > d
+QQ.fs.directory > d
   "/tmp"
 
 # Make it if doesn't exist:
@@ -129,8 +125,7 @@ Temporary files:
 
 ```
 # This is a system directory for temporary files:
-+alias org.eolang.fs.tmpdir
-tmpdir > d
+QQ.fs.tmpdir > d
 
 # Create an empty temporary file in a directory
 d.tmpfile.@ > f
@@ -140,20 +135,17 @@ Name manipulations:
 
 ```
 # Add path segment to existing file:
-file "/tmp" > f
+QQ.fs.file "/tmp" > f
 f.resolve "foo.txt"
 
 # Get directory name:
-+alias org.eolang.fs.dir-name
-dir-name f
+QQ.fs.dir-name f
 
 # Get base name (no directory, not extension):
-+alias org.eolang.fs.base-name
-base-name f
+QQ.fs.base-name f
 
 # Get extension:
-+alias org.eolang.fs.ext-name
-ext-name f
+QQ.fs.ext-name f
 ```
 
 ## How to Contribute
