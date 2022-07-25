@@ -38,36 +38,40 @@ import org.eolang.Phi;
  *
  * @since 0.1
  * @checkstyle TypeNameCheck (100 lines)
- * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
 public class EOmemory_as_output$EOwrite extends PhDefault {
 
     /**
      * Ctor.
      * @param sigma The \sigma
-     * @checkstyle BracketsStructureCheck (200 lines)
      */
     @SuppressWarnings("PMD.ConstructorOnlyInitializesOrCallOtherConstructors")
     public EOmemory_as_output$EOwrite(final Phi sigma) {
         super(sigma);
         this.add("data", new AtFree());
-        this.add("φ", new AtComposite(this, rho -> {
-            final Phi mem = rho.attr("σ").get().attr("m").get();
-            final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            baos.write(new Dataized(mem).take(byte[].class));
-            final byte[] chunk = new Dataized(rho.attr("data").get()).take(byte[].class);
-            baos.write(chunk);
-            new Dataized(
-                new PhWith(
-                    mem.attr("write").get(),
-                    0, new Data.ToPhi(baos.toByteArray())
-                )
-            ).take();
-            return new PhWith(
-                new EOmemory_as_output(rho),
-                "m", mem
-            );
-        }));
+        this.add(
+            "φ",
+            new AtComposite(
+                this,
+                rho -> {
+                    final Phi mem = rho.attr("σ").get().attr("m").get();
+                    final ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                    baos.write(new Dataized(mem).take(byte[].class));
+                    final byte[] chunk = new Dataized(rho.attr("data").get()).take(byte[].class);
+                    baos.write(chunk);
+                    new Dataized(
+                        new PhWith(
+                            mem.attr("write").get(),
+                            0, new Data.ToPhi(baos.toByteArray())
+                        )
+                    ).take();
+                    return new PhWith(
+                        new EOmemory_as_output(rho),
+                        "m", mem
+                    );
+                }
+            )
+        );
     }
 
 }

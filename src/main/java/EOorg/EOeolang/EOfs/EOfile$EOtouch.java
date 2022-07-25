@@ -45,23 +45,29 @@ public class EOfile$EOtouch extends PhDefault {
     /**
      * Ctor.
      * @param sigma The \sigma
-     * @checkstyle BracketsStructureCheck (200 lines)
      */
     @SuppressWarnings("PMD.ConstructorOnlyInitializesOrCallOtherConstructors")
     public EOfile$EOtouch(final Phi sigma) {
         super(sigma);
-        this.add("φ", new AtComposite(this, rho -> {
-            final File file = Paths.get(
-                new Dataized(
-                    rho.attr("ρ").get()
-                ).take(String.class)
-            ).toFile();
-            if (!file.exists()) {
-                new FileOutputStream(file).close();
-            }
-            file.setLastModified(System.currentTimeMillis());
-            return new Data.ToPhi(true);
-        }));
+        this.add(
+            "φ",
+            new AtComposite(
+                this,
+                rho -> {
+                    final File file = Paths.get(
+                        new Dataized(
+                            rho.attr("ρ").get()
+                        ).take(String.class)
+                    ).toFile();
+                    if (!file.exists()) {
+                        new FileOutputStream(file).close();
+                    }
+                    return new Data.ToPhi(
+                        file.setLastModified(System.currentTimeMillis())
+                    );
+                }
+            )
+        );
     }
 
 }

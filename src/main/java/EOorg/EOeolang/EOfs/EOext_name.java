@@ -50,19 +50,25 @@ public class EOext_name extends PhDefault {
     public EOext_name(final Phi sigma) {
         super(sigma);
         this.add("f", new AtFree());
-        this.add("φ", new AtComposite(this, rho -> {
-            final String path = new Dataized(
-                rho.attr("f").get()
-            ).take(String.class);
-            String ext = path.substring(path.lastIndexOf(File.separator) + 1);
-            final int pos = ext.indexOf('.');
-            if (pos > 0) {
-                ext = ext.substring(pos);
-            } else {
-                ext = "";
-            }
-            return new Data.ToPhi(ext);
-        }));
+        this.add(
+            "φ",
+            new AtComposite(
+                this,
+                rho -> {
+                    final String path = new Dataized(
+                        rho.attr("f").get()
+                    ).take(String.class);
+                    String ext = path.substring(path.lastIndexOf(File.separator) + 1);
+                    final int pos = ext.indexOf('.');
+                    if (pos > 0) {
+                        ext = ext.substring(pos);
+                    } else {
+                        ext = "";
+                    }
+                    return new Data.ToPhi(ext);
+                }
+            )
+        );
     }
 
 }

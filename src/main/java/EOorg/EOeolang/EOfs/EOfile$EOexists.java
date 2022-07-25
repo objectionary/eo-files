@@ -44,20 +44,25 @@ public class EOfile$EOexists extends PhDefault {
     /**
      * Ctor.
      * @param sigma The \sigma
-     * @checkstyle BracketsStructureCheck (200 lines)
      */
     @SuppressWarnings("PMD.ConstructorOnlyInitializesOrCallOtherConstructors")
     public EOfile$EOexists(final Phi sigma) {
         super(sigma);
-        this.add("φ", new AtComposite(this, rho -> new Data.ToPhi(
-            Files.exists(
-                Paths.get(
-                    new Dataized(
-                        rho.attr("ρ").get()
-                    ).take(String.class)
+        this.add(
+            "φ",
+            new AtComposite(
+                this,
+                rho -> new Data.ToPhi(
+                    Files.exists(
+                        Paths.get(
+                            new Dataized(
+                                rho.attr("ρ").get()
+                            ).take(String.class)
+                        )
+                    )
                 )
             )
-        )));
+        );
     }
 
 }

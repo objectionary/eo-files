@@ -49,14 +49,20 @@ public class EOdir$EOmkdir extends PhDefault {
     @SuppressWarnings("PMD.ConstructorOnlyInitializesOrCallOtherConstructors")
     public EOdir$EOmkdir(final Phi sigma) {
         super(sigma);
-        this.add("φ", new AtComposite(this, rho -> {
-            final Path path = Paths.get(
-                new Dataized(
-                    rho.attr("ρ").get()
-                ).take(String.class)
-            );
-            return new Data.ToPhi(path.toFile().mkdirs());
-        }));
+        this.add(
+            "φ",
+            new AtComposite(
+                this,
+                rho -> {
+                    final Path path = Paths.get(
+                        new Dataized(
+                            rho.attr("ρ").get()
+                        ).take(String.class)
+                    );
+                    return new Data.ToPhi(path.toFile().mkdirs());
+                }
+            )
+        );
     }
 
 }

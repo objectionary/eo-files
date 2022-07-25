@@ -46,7 +46,6 @@ public class EOfile$EOas_input$EOread extends PhDefault {
     /**
      * Ctor.
      * @param sigma The \sigma
-     * @checkstyle BracketsStructureCheck (200 lines)
      */
     @SuppressWarnings("PMD.ConstructorOnlyInitializesOrCallOtherConstructors")
     public EOfile$EOas_input$EOread(final Phi sigma) {
@@ -57,22 +56,27 @@ public class EOfile$EOas_input$EOread extends PhDefault {
      * Ctor.
      * @param sigma The \sigma
      * @param stream Output stream of NULL
-     * @checkstyle BracketsStructureCheck (200 lines)
      */
     @SuppressWarnings("PMD.ConstructorOnlyInitializesOrCallOtherConstructors")
     public EOfile$EOas_input$EOread(final Phi sigma, final InputStream stream) {
         super(sigma);
         this.add("max", new AtFree());
-        this.add("φ", new AtComposite(this, rho -> {
-            final long max = new Dataized(rho.attr("max").get()).take(Long.class);
-            final byte[] chunk = new byte[(int) max];
-            final int found = stream.read(chunk);
-            final byte[] buf = Arrays.copyOfRange(chunk, 0, Integer.max(0, found));
-            return new PhWith(
-                new EOfile$EOas_input(rho.attr("ρ").get(), stream),
-                "buf", new Data.ToPhi(buf)
-            );
-        }));
+        this.add(
+            "φ",
+            new AtComposite(
+                this,
+                rho -> {
+                    final long max = new Dataized(rho.attr("max").get()).take(Long.class);
+                    final byte[] chunk = new byte[(int) max];
+                    final int found = stream.read(chunk);
+                    final byte[] buf = Arrays.copyOfRange(chunk, 0, Integer.max(0, found));
+                    return new PhWith(
+                        new EOfile$EOas_input(rho.attr("ρ").get(), stream),
+                        "buf", new Data.ToPhi(buf)
+                    );
+                }
+            )
+        );
     }
 
 }

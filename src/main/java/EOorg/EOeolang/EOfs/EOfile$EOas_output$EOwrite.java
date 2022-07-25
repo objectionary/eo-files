@@ -43,7 +43,6 @@ public class EOfile$EOas_output$EOwrite extends PhDefault {
     /**
      * Ctor.
      * @param sigma The \sigma
-     * @checkstyle BracketsStructureCheck (200 lines)
      */
     @SuppressWarnings("PMD.ConstructorOnlyInitializesOrCallOtherConstructors")
     public EOfile$EOas_output$EOwrite(final Phi sigma) {
@@ -54,19 +53,24 @@ public class EOfile$EOas_output$EOwrite extends PhDefault {
      * Ctor.
      * @param sigma The \sigma
      * @param stream Output stream of NULL
-     * @checkstyle BracketsStructureCheck (200 lines)
      */
     @SuppressWarnings("PMD.ConstructorOnlyInitializesOrCallOtherConstructors")
     public EOfile$EOas_output$EOwrite(final Phi sigma, final OutputStream stream) {
         super(sigma);
         this.add("data", new AtFree());
-        this.add("φ", new AtComposite(this, rho -> {
-            final byte[] chunk = new Dataized(
-                rho.attr("data").get()
-            ).take(byte[].class);
-            stream.write(chunk);
-            return new EOfile$EOas_output(rho.attr("ρ").get(), stream);
-        }));
+        this.add(
+            "φ",
+            new AtComposite(
+                this,
+                rho -> {
+                    final byte[] chunk = new Dataized(
+                        rho.attr("data").get()
+                    ).take(byte[].class);
+                    stream.write(chunk);
+                    return new EOfile$EOas_output(rho.attr("ρ").get(), stream);
+                }
+            )
+        );
     }
 
 }

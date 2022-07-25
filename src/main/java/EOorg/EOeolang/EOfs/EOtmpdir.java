@@ -41,18 +41,23 @@ public class EOtmpdir extends PhDefault {
     /**
      * Ctor.
      * @param sigma The \sigma
-     * @checkstyle BracketsStructureCheck (200 lines)
      */
     @SuppressWarnings("PMD.ConstructorOnlyInitializesOrCallOtherConstructors")
     public EOtmpdir(final Phi sigma) {
         super(sigma);
-        this.add("φ", new AtComposite(this, rho -> new PhWith(
-            new EOdir(rho), "file",
-            new PhWith(
-                new EOfile(rho), "path",
-                new Data.ToPhi(System.getProperty("java.io.tmpdir"))
+        this.add(
+            "φ",
+            new AtComposite(
+                this,
+                rho -> new PhWith(
+                    new EOdir(rho), "file",
+                    new PhWith(
+                        new EOfile(rho), "path",
+                        new Data.ToPhi(System.getProperty("java.io.tmpdir"))
+                    )
+                )
             )
-        )));
+        );
     }
 
 }

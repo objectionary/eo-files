@@ -51,18 +51,24 @@ public class EOdir$EOrm_rf extends PhDefault {
     @SuppressWarnings("PMD.ConstructorOnlyInitializesOrCallOtherConstructors")
     public EOdir$EOrm_rf(final Phi sigma) {
         super(sigma);
-        this.add("φ", new AtComposite(this, rho -> {
-            final Path path = Paths.get(
-                new Dataized(
-                    rho.attr("ρ").get()
-                ).take(String.class)
-            );
-            Files.walk(path)
-                .map(Path::toFile)
-                .sorted((o1, o2) -> -o1.compareTo(o2))
-                .forEach(File::delete);
-            return new Data.ToPhi(true);
-        }));
+        this.add(
+            "φ",
+            new AtComposite(
+                this,
+                rho -> {
+                    final Path path = Paths.get(
+                        new Dataized(
+                            rho.attr("ρ").get()
+                        ).take(String.class)
+                    );
+                    Files.walk(path)
+                        .map(Path::toFile)
+                        .sorted((o1, o2) -> -o1.compareTo(o2))
+                        .forEach(File::delete);
+                    return new Data.ToPhi(true);
+                }
+            )
+        );
     }
 
 }

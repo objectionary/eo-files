@@ -46,26 +46,31 @@ public class EOfile$EOresolve extends PhDefault {
     /**
      * Ctor.
      * @param sigma The \sigma
-     * @checkstyle BracketsStructureCheck (200 lines)
      */
     @SuppressWarnings("PMD.ConstructorOnlyInitializesOrCallOtherConstructors")
     public EOfile$EOresolve(final Phi sigma) {
         super(sigma);
         this.add("p", new AtFree());
-        this.add("φ", new AtComposite(this, rho -> {
-            final Path path = Paths.get(
-                new Dataized(
-                    rho.attr("ρ").get()
-                ).take(String.class)
-            );
-            final String suffix = new Dataized(
-                rho.attr("p").get()
-            ).take(String.class);
-            return new PhWith(
-                new EOfile(sigma),
-                0, new Data.ToPhi(path.resolve(suffix).toString())
-            );
-        }));
+        this.add(
+            "φ",
+            new AtComposite(
+                this,
+                rho -> {
+                    final Path path = Paths.get(
+                        new Dataized(
+                            rho.attr("ρ").get()
+                        ).take(String.class)
+                    );
+                    final String suffix = new Dataized(
+                        rho.attr("p").get()
+                    ).take(String.class);
+                    return new PhWith(
+                        new EOfile(sigma),
+                        0, new Data.ToPhi(path.resolve(suffix).toString())
+                    );
+                }
+            )
+        );
     }
 
 }

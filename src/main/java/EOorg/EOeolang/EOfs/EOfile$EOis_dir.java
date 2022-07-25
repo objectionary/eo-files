@@ -43,18 +43,23 @@ public class EOfile$EOis_dir extends PhDefault {
     /**
      * Ctor.
      * @param sigma The \sigma
-     * @checkstyle BracketsStructureCheck (200 lines)
      */
     @SuppressWarnings("PMD.ConstructorOnlyInitializesOrCallOtherConstructors")
     public EOfile$EOis_dir(final Phi sigma) {
         super(sigma);
-        this.add("φ", new AtComposite(this, rho -> new Data.ToPhi(
-            Paths.get(
-                new Dataized(
-                    rho.attr("ρ").get()
-                ).take(String.class)
-            ).toFile().isDirectory())
-        ));
+        this.add(
+            "φ",
+            new AtComposite(
+                this,
+                rho -> new Data.ToPhi(
+                    Paths.get(
+                        new Dataized(
+                            rho.attr("ρ").get()
+                        ).take(String.class)
+                    ).toFile().isDirectory()
+                )
+            )
+        );
     }
 
 }

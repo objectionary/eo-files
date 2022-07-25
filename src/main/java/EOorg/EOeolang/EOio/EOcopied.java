@@ -39,7 +39,6 @@ import org.eolang.Phi;
  *
  * @since 0.1
  * @checkstyle TypeNameCheck (100 lines)
- * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
 @SuppressWarnings("PMD.AvoidDollarSigns")
 public class EOcopied extends PhDefault {
@@ -47,7 +46,6 @@ public class EOcopied extends PhDefault {
     /**
      * Ctor.
      * @param sigma The \sigma
-     * @checkstyle BracketsStructureCheck (200 lines)
      */
     @SuppressWarnings("PMD.ConstructorOnlyInitializesOrCallOtherConstructors")
     public EOcopied(final Phi sigma) {
@@ -55,34 +53,40 @@ public class EOcopied extends PhDefault {
         this.add("input", new AtFree());
         this.add("output", new AtFree());
         this.add("size", new AtFree());
-        this.add("φ", new AtComposite(this, rho -> {
-            final long size = new Dataized(rho.attr("size").get()).take(Long.class);
-            int total = 0;
-            Phi input = rho.attr("input").get();
-            Phi output = rho.attr("output").get();
-            while (true) {
-                input = new PhWith(
-                    input.attr("read").get(),
-                    "max", new Data.ToPhi(size)
-                );
-                final byte[] chunk = new Dataized(input).take(byte[].class);
-                output = new PhMethod(
-                    new PhWith(
-                        output.attr("write").get(),
-                        "data", new Data.ToPhi(chunk)
-                    ),
-                    "φ"
-                );
-                new Dataized(output).take();
-                total += chunk.length;
-                if (chunk.length == 0) {
-                    new Dataized(input.attr("close").get()).take();
-                    break;
+        this.add(
+            "φ",
+            new AtComposite(
+                this,
+                rho -> {
+                    final long size = new Dataized(rho.attr("size").get()).take(Long.class);
+                    int total = 0;
+                    Phi input = rho.attr("input").get();
+                    Phi output = rho.attr("output").get();
+                    while (true) {
+                        input = new PhWith(
+                            input.attr("read").get(),
+                            "max", new Data.ToPhi(size)
+                        );
+                        final byte[] chunk = new Dataized(input).take(byte[].class);
+                        output = new PhMethod(
+                            new PhWith(
+                                output.attr("write").get(),
+                                "data", new Data.ToPhi(chunk)
+                            ),
+                            "φ"
+                        );
+                        new Dataized(output).take();
+                        total += chunk.length;
+                        if (chunk.length == 0) {
+                            new Dataized(input.attr("close").get()).take();
+                            break;
+                        }
+                    }
+                    new Dataized(output.attr("close").get()).take();
+                    return new Data.ToPhi((long) total);
                 }
-            }
-            new Dataized(output.attr("close").get()).take();
-            return new Data.ToPhi((long) total);
-        }));
+            )
+        );
     }
 
 }

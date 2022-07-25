@@ -27,7 +27,7 @@ SOFTWARE.
   <parent>
     <groupId>com.jcabi</groupId>
     <artifactId>parent</artifactId>
-    <version>0.57.2</version>
+    <version>0.59.0</version>
   </parent>
   <groupId>org.eolang</groupId>
   <artifactId>eo-files</artifactId>
@@ -85,7 +85,7 @@ SOFTWARE.
     <dependency>
       <groupId>org.eolang</groupId>
       <artifactId>eo-runtime</artifactId>
-      <version>0.23.10</version>
+      <version>0.25.4</version>
     </dependency>
     <dependency>
       <groupId>org.junit.jupiter</groupId>
@@ -99,7 +99,7 @@ SOFTWARE.
       <plugin>
         <groupId>org.eolang</groupId>
         <artifactId>eo-maven-plugin</artifactId>
-        <version>0.23.8</version>
+        <version>0.25.4</version>
         <executions>
           <execution>
             <id>compile</id>
@@ -111,6 +111,12 @@ SOFTWARE.
               <goal>unspile</goal>
               <goal>copy</goal>
             </goals>
+            <configuration>
+              <keepBinaries>
+                <glob>EOorg/EOeolang/EOio/**</glob>
+                <glob>EOorg/EOeolang/EOfs/**</glob>
+              </keepBinaries>
+            </configuration>
           </execution>
           <execution>
             <id>test-compile</id>
@@ -140,6 +146,7 @@ SOFTWARE.
           <plugin>
             <groupId>com.qulice</groupId>
             <artifactId>qulice-maven-plugin</artifactId>
+            <version>0.20.0</version>
             <configuration>
               <excludes combine.children="append">
                 <exclude>pmd:.*</exclude>

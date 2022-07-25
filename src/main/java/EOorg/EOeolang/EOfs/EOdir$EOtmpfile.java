@@ -51,19 +51,25 @@ public class EOdir$EOtmpfile extends PhDefault {
     @SuppressWarnings("PMD.ConstructorOnlyInitializesOrCallOtherConstructors")
     public EOdir$EOtmpfile(final Phi sigma) {
         super(sigma);
-        this.add("φ", new AtComposite(this, rho -> {
-            final Path home = Paths.get(
-                new Dataized(
-                    rho.attr("ρ").get()
-                ).take(String.class)
-            );
-            final Path path = Files.createTempFile(home, null, null);
-            path.toFile().deleteOnExit();
-            return new PhWith(
-                new EOfile(rho), "path",
-                new Data.ToPhi(path.toAbsolutePath().toString())
-            );
-        }));
+        this.add(
+            "φ",
+            new AtComposite(
+                this,
+                rho -> {
+                    final Path home = Paths.get(
+                        new Dataized(
+                            rho.attr("ρ").get()
+                        ).take(String.class)
+                    );
+                    final Path path = Files.createTempFile(home, null, null);
+                    path.toFile().deleteOnExit();
+                    return new PhWith(
+                        new EOfile(rho), "path",
+                        new Data.ToPhi(path.toAbsolutePath().toString())
+                    );
+                }
+            )
+        );
     }
 
 }

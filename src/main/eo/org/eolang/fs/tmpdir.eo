@@ -25,4 +25,6 @@
 +version 0.0.0
 +rt jvm org.eolang:eo-files:0.0.0
 
+# Temporary directory provided by the operating system. It will
+# be automatically deleted when the program exits.
 [] > tmpdir /dir

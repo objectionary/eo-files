@@ -43,18 +43,23 @@ public class EOfile$EOsize extends PhDefault {
     /**
      * Ctor.
      * @param sigma The \sigma
-     * @checkstyle BracketsStructureCheck (200 lines)
      */
     @SuppressWarnings("PMD.ConstructorOnlyInitializesOrCallOtherConstructors")
     public EOfile$EOsize(final Phi sigma) {
         super(sigma);
-        this.add("φ", new AtComposite(this, rho -> new Data.ToPhi(
-            new File(
-                new Dataized(
-                    rho.attr("ρ").get()
-                ).take(String.class)
-            ).length()
-        )));
+        this.add(
+            "φ",
+            new AtComposite(
+                this,
+                rho -> new Data.ToPhi(
+                    new File(
+                        new Dataized(
+                            rho.attr("ρ").get()
+                        ).take(String.class)
+                    ).length()
+                )
+            )
+        );
     }
 
 }

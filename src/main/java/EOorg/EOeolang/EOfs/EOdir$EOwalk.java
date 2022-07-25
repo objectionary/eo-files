@@ -58,26 +58,32 @@ public class EOdir$EOwalk extends PhDefault {
     public EOdir$EOwalk(final Phi sigma) {
         super(sigma);
         this.add("glob", new AtFree());
-        this.add("φ", new AtComposite(this, rho -> {
-            final Path path = Paths.get(
-                new Dataized(
-                    rho.attr("ρ").get()
-                ).take(String.class)
-            ).toAbsolutePath();
-            final String glob = new Dataized(
-                rho.attr("glob").get()
-            ).take(String.class);
-            final PathMatcher matcher = FileSystems.getDefault().getPathMatcher(
-                String.format("glob:%s", glob)
-            );
-            final List<Phi> files = Files.walk(path)
-                .map(p -> p.toAbsolutePath().toString())
-                .map(p -> p.substring(p.indexOf(path.toString())))
-                .filter(p -> matcher.matches(Paths.get(p)))
-                .map(p -> new PhWith(new EOfile(sigma), 0, new Data.ToPhi(p)))
-                .collect(Collectors.toList());
-            return new Data.ToPhi(files.toArray(new Phi[] {}));
-        }));
+        this.add(
+            "φ",
+            new AtComposite(
+                this,
+                rho -> {
+                    final Path path = Paths.get(
+                        new Dataized(
+                            rho.attr("ρ").get()
+                        ).take(String.class)
+                    ).toAbsolutePath();
+                    final String glob = new Dataized(
+                        rho.attr("glob").get()
+                    ).take(String.class);
+                    final PathMatcher matcher = FileSystems.getDefault().getPathMatcher(
+                        String.format("glob:%s", glob)
+                    );
+                    final List<Phi> files = Files.walk(path)
+                        .map(p -> p.toAbsolutePath().toString())
+                        .map(p -> p.substring(p.indexOf(path.toString())))
+                        .filter(p -> matcher.matches(Paths.get(p)))
+                        .map(p -> new PhWith(new EOfile(sigma), 0, new Data.ToPhi(p)))
+                        .collect(Collectors.toList());
+                    return new Data.ToPhi(files.toArray(new Phi[] {}));
+                }
+            )
+        );
     }
 
 }

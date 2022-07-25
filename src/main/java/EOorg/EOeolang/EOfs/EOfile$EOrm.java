@@ -24,10 +24,13 @@
 // @checkstyle PackageNameCheck (1 line)
 package EOorg.EOeolang.EOfs;
 
-import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import org.eolang.AtComposite;
 import org.eolang.Data;
 import org.eolang.Dataized;
+import org.eolang.ExFailure;
 import org.eolang.PhDefault;
 import org.eolang.Phi;
 
@@ -43,18 +46,30 @@ public class EOfile$EOrm extends PhDefault {
     /**
      * Ctor.
      * @param sigma The \sigma
-     * @checkstyle BracketsStructureCheck (200 lines)
      */
     @SuppressWarnings("PMD.ConstructorOnlyInitializesOrCallOtherConstructors")
     public EOfile$EOrm(final Phi sigma) {
         super(sigma);
-        this.add("φ", new AtComposite(this, rho -> new Data.ToPhi(
-            new File(
-                new Dataized(
-                    rho.attr("ρ").get()
-                ).take(String.class)
-            ).delete()
-        )));
+        this.add(
+            "φ",
+            new AtComposite(
+                this,
+                rho -> {
+                    try {
+                        Files.delete(
+                            Paths.get(
+                                new Dataized(
+                                    rho.attr("ρ").get()
+                                ).take(String.class)
+                            )
+                        );
+                    } catch (final IOException ex) {
+                        throw new ExFailure(ex.getMessage());
+                    }
+                    return new Data.ToPhi(true);
+                }
+            )
+        );
     }
 
 }

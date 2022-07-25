@@ -24,12 +24,15 @@
 // @checkstyle PackageNameCheck (1 line)
 package EOorg.EOeolang.EOfs;
 
-import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import org.eolang.AtComposite;
 import org.eolang.AtFree;
 import org.eolang.Data;
 import org.eolang.Dataized;
+import org.eolang.ExFailure;
 import org.eolang.PhDefault;
 import org.eolang.PhWith;
 import org.eolang.Phi;
@@ -46,29 +49,38 @@ public class EOfile$EOmv extends PhDefault {
     /**
      * Ctor.
      * @param sigma The \sigma
-     * @checkstyle BracketsStructureCheck (200 lines)
      */
     @SuppressWarnings("PMD.ConstructorOnlyInitializesOrCallOtherConstructors")
     public EOfile$EOmv(final Phi sigma) {
         super(sigma);
         this.add("path", new AtFree());
-        this.add("φ", new AtComposite(this, rho -> {
-            final File file = Paths.get(
-                new Dataized(
-                    rho.attr("ρ").get()
-                ).take(String.class)
-            ).toFile();
-            final File target = Paths.get(
-                new Dataized(
-                    rho.attr("path").get()
-                ).take(String.class)
-            ).toFile();
-            file.renameTo(target);
-            return new PhWith(
-                new EOfile(sigma),
-                0, new Data.ToPhi(target.toString())
-            );
-        }));
+        this.add(
+            "φ",
+            new AtComposite(
+                this,
+                rho -> {
+                    final Path file = Paths.get(
+                        new Dataized(
+                            rho.attr("ρ").get()
+                        ).take(String.class)
+                    );
+                    final Path target = Paths.get(
+                        new Dataized(
+                            rho.attr("path").get()
+                        ).take(String.class)
+                    );
+                    try {
+                        Files.move(file, target);
+                    } catch (final IOException ex) {
+                        throw new ExFailure(ex.getMessage());
+                    }
+                    return new PhWith(
+                        new EOfile(sigma),
+                        0, new Data.ToPhi(target.toString())
+                    );
+                }
+            )
+        );
     }
 
 }

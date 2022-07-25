@@ -52,7 +52,6 @@ public class EOfile$EOas_output extends PhDefault {
     /**
      * Ctor.
      * @param sigma The \sigma
-     * @checkstyle BracketsStructureCheck (200 lines)
      */
     @SuppressWarnings("PMD.ConstructorOnlyInitializesOrCallOtherConstructors")
     public EOfile$EOas_output(final Phi sigma) {
@@ -63,34 +62,45 @@ public class EOfile$EOas_output extends PhDefault {
      * Ctor.
      * @param sigma The \sigma
      * @param out Output stream of NULL
-     * @checkstyle BracketsStructureCheck (200 lines)
      */
     @SuppressWarnings("PMD.ConstructorOnlyInitializesOrCallOtherConstructors")
     public EOfile$EOas_output(final Phi sigma, final OutputStream out) {
         super(sigma);
         this.add("mode", new AtFree());
         this.add("φ", new AtComposite(this, rho -> new Data.ToPhi(true)));
-        this.add("write", new AtComposite(this, self -> {
-            OutputStream stream = out;
-            if (stream == null) {
-                final String mode = new Dataized(
-                    self.attr("mode").get()
-                ).take(String.class);
-                final Path path = Paths.get(
-                    new Dataized(
-                        self.attr("ρ").get()
-                    ).take(String.class)
-                );
-                stream = EOfile$EOas_output.stream(path, mode);
-            }
-            return new EOfile$EOas_output$EOwrite(self, stream);
-        }));
-        this.add("close", new AtComposite(this, self -> {
-            if (out != null) {
-                out.close();
-            }
-            return new Data.ToPhi(true);
-        }));
+        this.add(
+            "write",
+            new AtComposite(
+                this,
+                self -> {
+                    OutputStream stream = out;
+                    if (stream == null) {
+                        final String mode = new Dataized(
+                            self.attr("mode").get()
+                        ).take(String.class);
+                        final Path path = Paths.get(
+                            new Dataized(
+                                self.attr("ρ").get()
+                            ).take(String.class)
+                        );
+                        stream = EOfile$EOas_output.stream(path, mode);
+                    }
+                    return new EOfile$EOas_output$EOwrite(self, stream);
+                }
+            )
+        );
+        this.add(
+            "close",
+            new AtComposite(
+                this,
+                self -> {
+                    if (out != null) {
+                        out.close();
+                    }
+                    return new Data.ToPhi(true);
+                }
+            )
+        );
     }
 
     /**
