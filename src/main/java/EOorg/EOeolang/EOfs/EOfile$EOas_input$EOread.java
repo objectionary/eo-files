@@ -24,12 +24,14 @@
 // @checkstyle PackageNameCheck (1 line)
 package EOorg.EOeolang.EOfs;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.Arrays;
 import org.eolang.AtComposite;
 import org.eolang.AtFree;
 import org.eolang.Data;
 import org.eolang.Dataized;
+import org.eolang.ExFailure;
 import org.eolang.PhDefault;
 import org.eolang.PhWith;
 import org.eolang.Phi;
@@ -68,7 +70,12 @@ public class EOfile$EOas_input$EOread extends PhDefault {
                 rho -> {
                     final long max = new Dataized(rho.attr("max").get()).take(Long.class);
                     final byte[] chunk = new byte[(int) max];
-                    final int found = stream.read(chunk);
+                    final int found;
+                    try {
+                        found = stream.read(chunk);
+                    } catch (final IOException ex) {
+                        throw new ExFailure(ex.getMessage());
+                    }
                     final byte[] buf = Arrays.copyOfRange(chunk, 0, Integer.max(0, found));
                     return new PhWith(
                         new EOfile$EOas_input(rho.attr("ρ").get(), stream),

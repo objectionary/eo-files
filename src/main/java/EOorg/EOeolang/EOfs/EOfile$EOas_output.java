@@ -37,6 +37,7 @@ import org.eolang.AtComposite;
 import org.eolang.AtFree;
 import org.eolang.Data;
 import org.eolang.Dataized;
+import org.eolang.ExFailure;
 import org.eolang.PhDefault;
 import org.eolang.Phi;
 
@@ -108,10 +109,8 @@ public class EOfile$EOas_output extends PhDefault {
      * @param path The path
      * @param opts Opts
      * @return Stream
-     * @throws IOException If fails
      */
-    private static OutputStream stream(final Path path, final String opts)
-        throws IOException {
+    private static OutputStream stream(final Path path, final String opts) {
         final Collection<OpenOption> options = new LinkedList<>();
         for (final char chr : opts.toCharArray()) {
             if (chr == 'w') {
@@ -124,7 +123,11 @@ public class EOfile$EOas_output extends PhDefault {
         if (opts.indexOf('+') < 0) {
             options.add(StandardOpenOption.CREATE);
         }
-        return Files.newOutputStream(path, options.toArray(new OpenOption[0]));
+        try {
+            return Files.newOutputStream(path, options.toArray(new OpenOption[0]));
+        } catch (final IOException ex) {
+            throw new ExFailure(ex.getMessage());
+        }
     }
 
 }

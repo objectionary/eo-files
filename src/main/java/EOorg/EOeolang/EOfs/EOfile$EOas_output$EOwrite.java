@@ -24,10 +24,12 @@
 // @checkstyle PackageNameCheck (1 line)
 package EOorg.EOeolang.EOfs;
 
+import java.io.IOException;
 import java.io.OutputStream;
 import org.eolang.AtComposite;
 import org.eolang.AtFree;
 import org.eolang.Dataized;
+import org.eolang.ExFailure;
 import org.eolang.PhDefault;
 import org.eolang.Phi;
 
@@ -66,7 +68,11 @@ public class EOfile$EOas_output$EOwrite extends PhDefault {
                     final byte[] chunk = new Dataized(
                         rho.attr("data").get()
                     ).take(byte[].class);
-                    stream.write(chunk);
+                    try {
+                        stream.write(chunk);
+                    } catch (final IOException ex) {
+                        throw new ExFailure(ex.getMessage());
+                    }
                     return new EOfile$EOas_output(rho.attr("ρ").get(), stream);
                 }
             )

@@ -37,6 +37,7 @@ import org.eolang.AtComposite;
 import org.eolang.AtFree;
 import org.eolang.Data;
 import org.eolang.Dataized;
+import org.eolang.ExFailure;
 import org.eolang.PhDefault;
 import org.eolang.Phi;
 
@@ -109,17 +110,19 @@ public class EOfile$EOas_input extends PhDefault {
      * @param path The path
      * @param opts Opts
      * @return Stream
-     * @throws IOException If fails
      */
-    private static InputStream stream(final Path path, final String opts)
-        throws IOException {
+    private static InputStream stream(final Path path, final String opts) {
         final Collection<OpenOption> options = new LinkedList<>();
         for (final char chr : opts.toCharArray()) {
             if (chr == 'r') {
                 options.add(StandardOpenOption.READ);
             }
         }
-        return Files.newInputStream(path, options.toArray(new OpenOption[0]));
+        try {
+            return Files.newInputStream(path, options.toArray(new OpenOption[0]));
+        } catch (final IOException ex) {
+            throw new ExFailure(ex.getMessage());
+        }
     }
 
 }
