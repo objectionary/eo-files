@@ -12,7 +12,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-20.04]
+        os: [ubuntu-20.04, windows-2022, macos-12]
         java: [11, 13]
     steps:
       - uses: actions/checkout@v2
@@ -25,15 +25,16 @@ jobs:
           key: ${{ runner.os }}-jdk-${{ matrix.java }}-maven-${{ hashFiles('**/pom.xml') }}
           restore-keys: |
             ${{ runner.os }}-jdk-${{ matrix.java }}-maven-
-      - run: java -version; mvn -version;
-      - run: mvn -B verify -Pqulice
+      - run: java -version
+      - run: mvn -version
+      - run: mvn --batch-mode clean install -Pqulice
   xcop-lint:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
       - uses: g4s8/xcop-action@master
   pdd-lint:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
       - uses: g4s8/pdd-action@master
