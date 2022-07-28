@@ -12,12 +12,11 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-latest]
+        os: [ubuntu-20.04]
         java: [11, 13]
     steps:
       - uses: actions/checkout@v2
-      - name: Set up JDK
-        uses: actions/setup-java@v1
+      - uses: actions/setup-java@v1
         with:
           java-version: ${{ matrix.java }}
       - uses: actions/cache@v1
@@ -26,10 +25,8 @@ jobs:
           key: ${{ runner.os }}-jdk-${{ matrix.java }}-maven-${{ hashFiles('**/pom.xml') }}
           restore-keys: |
             ${{ runner.os }}-jdk-${{ matrix.java }}-maven-
-      - name: Show versions
-        run: java -version; mvn -version;
-      - name: Build it with Maven
-        run: mvn -B verify -Pqulice
+      - run: java -version; mvn -version;
+      - run: mvn -B verify -Pqulice
   xcop-lint:
     runs-on: ubuntu-latest
     steps:

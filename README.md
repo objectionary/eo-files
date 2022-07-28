@@ -1,4 +1,4 @@
-<img src="https://www.yegor256.com/images/books/elegant-objects/cactus.svg" height="100px" />
+<img alt="logo" src="https://www.objectionary.com/cactus.svg" height="100px" />
 
 [![EO principles respected here](https://www.elegantobjects.org/badge.svg)](https://www.elegantobjects.org)
 [![DevOps By Rultor.com](http://www.rultor.com/b/objectionary/eo-files)](http://www.rultor.com/p/objectionary/eo-files)
@@ -13,7 +13,7 @@
 ![Lines of code](https://img.shields.io/tokei/lines/github/objectionary/eo-files)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/objectionary/eo-files/blob/master/LICENSE.txt)
 
-[EOLANG](https://www.eolang.org) objects for file system.
+[EO](https://www.eolang.org) objects for file system.
 
 This is how you list all text files in a directory recursively:
 
