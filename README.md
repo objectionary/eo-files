@@ -8,7 +8,6 @@
 [![PDD status](http://www.0pdd.com/svg?name=objectionary/eo-files)](http://www.0pdd.com/p?name=objectionary/eo-files)
 [![codecov](https://codecov.io/gh/objectionary/eo-files/branch/master/graph/badge.svg)](https://codecov.io/gh/objectionary/eo-files)
 [![Maven Central](https://img.shields.io/maven-central/v/org.eolang/eo-files.svg)](https://maven-badges.herokuapp.com/maven-central/org.eolang/eo-files)
-
 [![Hits-of-Code](https://hitsofcode.com/github/objectionary/eo-files)](https://hitsofcode.com/view/github/objectionary/eo-files)
 ![Lines of code](https://img.shields.io/tokei/lines/github/objectionary/eo-files)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/objectionary/eo-files/blob/master/LICENSE.txt)
