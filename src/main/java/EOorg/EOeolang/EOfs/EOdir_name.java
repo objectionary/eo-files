@@ -55,7 +55,9 @@ public class EOdir_name extends PhDefault {
             new AtComposite(
                 this,
                 rho -> {
-                    String path = new Dataized(rho.attr("f").get()).take(String.class);
+                    String path = new Dataized(rho.attr("f").get())
+                        .take(String.class)
+                        .replaceAll("[\\/\\\\]+", File.separator);
                     final int pos = path.lastIndexOf(File.separator);
                     if (pos > 0) {
                         path = path.substring(0, pos);
