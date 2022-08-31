@@ -24,7 +24,7 @@
 // @checkstyle PackageNameCheck (1 line)
 package EOorg.EOeolang.EOfs;
 
-import java.io.File;
+import java.nio.file.FileSystems;
 import org.eolang.AtComposite;
 import org.eolang.AtFree;
 import org.eolang.Data;
@@ -58,8 +58,9 @@ public class EObase_name extends PhDefault {
                     final String path = new Dataized(
                         rho.attr("f").get()
                     ).take(String.class);
+                    final String separator = FileSystems.getDefault().getSeparator();
                     return new Data.ToPhi(
-                        path.substring(path.lastIndexOf(File.separator) + 1)
+                        path.substring(path.lastIndexOf(separator) + 1)
                     );
                 }
             )
