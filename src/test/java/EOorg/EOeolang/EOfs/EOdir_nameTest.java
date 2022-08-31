@@ -24,6 +24,8 @@
 // @checkstyle PackageNameCheck (1 line)
 package EOorg.EOeolang.EOfs;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import org.eolang.Data;
 import org.eolang.Dataized;
 import org.eolang.PhWith;
@@ -42,14 +44,15 @@ public final class EOdir_nameTest {
 
     @Test
     public void extractsPart() {
+        final Path path = Paths.get("tmp", "foo", "base.txt");
         MatcherAssert.assertThat(
             new Dataized(
                 new PhWith(
                     new EOdir_name(Phi.Φ),
-                    0, new Data.ToPhi("/tmp/foo/base.txt")
+                    0, new Data.ToPhi(path.toString())
                 )
             ).take(String.class),
-            Matchers.equalTo("/tmp/foo")
+            Matchers.equalTo("tmp/foo")
         );
     }
 
