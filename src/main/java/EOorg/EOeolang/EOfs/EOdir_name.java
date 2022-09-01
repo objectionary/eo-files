@@ -57,7 +57,10 @@ public class EOdir_name extends PhDefault {
                 rho -> {
                     String path = new Dataized(rho.attr("f").get())
                         .take(String.class)
-                        .replaceAll("[\\/\\\\:\\\\]+", File.separator);
+                        .replaceAll(
+                            "[\\/\\\\:\\\\]+",
+                            String.format("\\%s", File.separator)
+                        );
                     final int pos = path.lastIndexOf(File.separator);
                     if (pos > 0) {
                         path = path.substring(0, pos);
