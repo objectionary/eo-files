@@ -50,7 +50,7 @@ public final class EObytes_as_inputEOreadTest {
     @ParameterizedTest
     @CsvFileSource(resources = "/EOlang/EOio/test-samples.csv")
     public void readsBytes(final String text, final int max) throws IOException {
-        final Phi bytes = new Data.ToPhi(text.getBytes());
+        final Phi bytes = new Data.ToPhi(text.getBytes(StandardCharsets.UTF_8));
         Phi input = new PhWith(
             new EObytes_as_input(bytes),
             "b", bytes
