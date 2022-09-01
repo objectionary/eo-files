@@ -47,7 +47,7 @@ public final class EOcopiedTest {
     @ParameterizedTest
     @CsvFileSource(resources = "/EOlang/EOio/test-samples.csv")
     public void readsBytes(final String text, final int size) {
-        final byte[] bytes = text.getBytes();
+        final byte[] bytes = text.getBytes(StandardCharsets.UTF_8);
         Phi copied = new PhWith(
             new EOcopied(Phi.Φ),
             "input",
