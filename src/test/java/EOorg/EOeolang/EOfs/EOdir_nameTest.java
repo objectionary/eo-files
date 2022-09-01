@@ -52,7 +52,7 @@ public final class EOdir_nameTest {
                     0, new Data.ToPhi(path.toString())
                 )
             ).take(String.class),
-            Matchers.equalTo("tmp/foo")
+            Matchers.equalTo(path.getParent().toString())
         );
     }
 

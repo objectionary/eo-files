@@ -23,6 +23,7 @@
 +package org.eolang.fs
 +home https://github.com/objectionary/eo-files
 +version 0.0.0
++alias org.eolang.fs.dir
 +alias org.eolang.fs.dir-name
 +junit
 
@@ -30,4 +31,4 @@
   eq. > @
     dir-name
       "/tmp/foo/hello.gz"
-    "/tmp/foo"
+    dir "/tmp/foo"
