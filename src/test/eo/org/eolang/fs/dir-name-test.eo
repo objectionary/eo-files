@@ -20,15 +20,15 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-+package org.eolang.fs
-+home https://github.com/objectionary/eo-files
-+version 0.0.0
-+alias org.eolang.fs.dir
 +alias org.eolang.fs.dir-name
++alias org.eolang.hamcrest.assert-that
++home https://github.com/objectionary/eo-files
 +junit
++package org.eolang.fs
++version 0.0.0
 
 [] > takes-name-of-directory
-  eq. > @
+  assert-that > @
     dir-name
       "/tmp/foo/hello.gz"
-    dir "/tmp/foo"
+    $.equal-to "/tmp/foo"
