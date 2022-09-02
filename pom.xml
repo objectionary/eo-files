@@ -121,6 +121,7 @@ SOFTWARE.
                 <glob>EOorg/EOeolang/EOio/**</glob>
                 <glob>EOorg/EOeolang/EOfs/**</glob>
               </keepBinaries>
+              <failOnWarning>true</failOnWarning>
             </configuration>
           </execution>
           <execution>
