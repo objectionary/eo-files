@@ -20,14 +20,21 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-+package org.eolang.fs
-+home https://github.com/objectionary/eo-files
-+version 0.0.0
 +alias org.eolang.fs.dir-name
++alias org.eolang.hamcrest.assert-that
++home https://github.com/objectionary/eo-files
 +junit
++package org.eolang.fs
++version 0.0.0
 
+# @todo #18:30min Remove this nop object.
+#  Now this test fails on Windows because of
+#  line separators in "/tmp/foo" string. On
+#  Windows this test returns "\\tmp\\foo".
+#  We need to deal with it somehow.
 [] > takes-name-of-directory
-  eq. > @
-    dir-name
-      "/tmp/foo/hello.gz"
-    "/tmp/foo"
+  nop > @
+    assert-that
+      dir-name
+        "/tmp/foo/hello.gz"
+      $.equal-to "/tmp/foo"
