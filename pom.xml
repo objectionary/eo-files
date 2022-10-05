@@ -85,7 +85,7 @@ SOFTWARE.
     <dependency>
       <groupId>org.eolang</groupId>
       <artifactId>eo-runtime</artifactId>
-      <version>0.28.8</version>
+      <version>0.28.9</version>
     </dependency>
     <dependency>
       <groupId>org.junit.jupiter</groupId>
