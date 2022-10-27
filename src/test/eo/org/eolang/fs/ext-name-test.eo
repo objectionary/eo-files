@@ -24,10 +24,12 @@
 +home https://github.com/objectionary/eo-files
 +version 0.0.0
 +alias org.eolang.fs.ext-name
++alias org.eolang.hamcrest.assert-that
 +junit
 
 [] > takes-extension-name
-  eq. > @
+  assert-that > @
     ext-name
       "/tmp/foo/hello.gz"
-    ".gz"
+    $.equal-to
+      ".gz"
