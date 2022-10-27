@@ -24,8 +24,12 @@
 +home https://github.com/objectionary/eo-files
 +version 0.0.0
 +alias org.eolang.fs.tmpdir
++alias org.eolang.hamcrest.assert-that
 +junit
 
 [] > global-temp-dir-exists
-  exists. > @
-    tmpdir
+  assert-that > @
+    exists.
+      tmpdir
+    $.equal-to
+      TRUE
