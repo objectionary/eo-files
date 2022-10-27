@@ -52,12 +52,6 @@
     $.equal-to
       TRUE
 
-[] > check-if-true
-  assert-that > @
-    TRUE
-    $.equal-to
-      TRUE
-
 [] > check-if-file-exists
   assert-that > @
     not.

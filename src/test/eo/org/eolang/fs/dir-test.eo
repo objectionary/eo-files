@@ -41,13 +41,12 @@
   tmpdir.tmpfile > f!
   dir > d
     f.resolve "new-dir"
-  and. > existance
-    f.rm
-    d.mkdir
-    d.exists
-    d.is-dir
   assert-that > @
-    existance
+    and.
+      f.rm
+      d.mkdir
+      d.exists
+      d.is-dir
     $.equal-to
       TRUE
 
