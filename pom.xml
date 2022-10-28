@@ -144,6 +144,7 @@ SOFTWARE.
               <targetDir>${project.build.directory}/eo-test</targetDir>
               <addSourcesRoot>false</addSourcesRoot>
               <addTestSourcesRoot>true</addTestSourcesRoot>
+              <failOnWarning>true</failOnWarning>
               <generatedDir>${project.build.directory}/generated-test-sources</generatedDir>
             </configuration>
           </execution>

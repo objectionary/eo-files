@@ -20,12 +20,12 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-+package org.eolang.io
-+home https://github.com/objectionary/eo-files
-+version 0.0.0
 +alias org.eolang.hamcrest.assert-that
 +alias org.eolang.io.bytes-as-input
++home https://github.com/objectionary/eo-files
 +junit
++package org.eolang.io
++version 0.0.0
 
 [] > can-read-bytes-with-assert
   bytes-as-input > i
