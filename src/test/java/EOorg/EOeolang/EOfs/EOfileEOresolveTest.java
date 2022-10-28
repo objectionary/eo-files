@@ -24,6 +24,8 @@
 // @checkstyle PackageNameCheck (1 line)
 package EOorg.EOeolang.EOfs;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import org.eolang.Data;
 import org.eolang.Dataized;
 import org.eolang.PhWith;
@@ -42,6 +44,8 @@ public final class EOfileEOresolveTest {
 
     @Test
     public void existsFile() {
+        final Path path = Paths.get("tmp", "foo");
+        final String file = "bar.txt";
         MatcherAssert.assertThat(
             new Dataized(
                 new PhWith(
@@ -49,14 +53,14 @@ public final class EOfileEOresolveTest {
                         new PhWith(
                             new EOfile(Phi.Φ),
                             "path",
-                            new Data.ToPhi("/tmp/foo")
+                            new Data.ToPhi(path.toString())
                         )
                     ),
                     0,
-                    new Data.ToPhi("bar.txt")
+                    new Data.ToPhi(file)
                 )
             ).take(String.class),
-            Matchers.equalTo("/tmp/foo/bar.txt")
+            Matchers.equalTo(path.resolve(file).toString())
         );
     }
 

@@ -23,6 +23,7 @@
 +package org.eolang.io
 +home https://github.com/objectionary/eo-files
 +version 0.0.0
++alias org.eolang.hamcrest.assert-that
 +alias org.eolang.io.bytes-as-input
 +alias org.eolang.io.memory-as-output
 +alias org.eolang.io.copied
@@ -30,7 +31,7 @@
 
 [] > copies-bytes-from-object-to-memory
   memory -- > m
-  eq. > @
+  assert-that > @
     copied
       bytes-as-input
         as-bytes.
@@ -38,4 +39,6 @@
       memory-as-output
         m
       4
-    17
+    $.equal-to
+      17
+

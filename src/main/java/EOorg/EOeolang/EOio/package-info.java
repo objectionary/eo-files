@@ -23,7 +23,7 @@
  */
 
 /**
- * Files.
+ * Files. IO.
  *
  * @since 0.1
  * @checkstyle PackageNameCheck (5 lines)

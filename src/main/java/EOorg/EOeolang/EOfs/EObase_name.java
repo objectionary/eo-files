@@ -57,7 +57,10 @@ public class EObase_name extends PhDefault {
                 rho -> {
                     final String path = new Dataized(
                         rho.attr("f").get()
-                    ).take(String.class);
+                    ).take(String.class).replaceAll(
+                        "[\\/\\\\:\\\\]+",
+                        String.format("\\%s", File.separator)
+                    );
                     return new Data.ToPhi(
                         path.substring(path.lastIndexOf(File.separator) + 1)
                     );
