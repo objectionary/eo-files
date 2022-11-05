@@ -22,19 +22,21 @@
 
 +alias org.eolang.fs.dir-name
 +alias org.eolang.hamcrest.assert-that
++alias org.eolang.sys.uname
 +home https://github.com/objectionary/eo-files
 +junit
 +package org.eolang.fs
 +version 0.0.0
 
-# @todo #18:30min Remove this nop object.
-#  Now this test fails on Windows because of
-#  line separators in "/tmp/foo" string. On
-#  Windows this test returns "\\tmp\\foo".
-#  We need to deal with it somehow.
 [] > takes-name-of-directory
-  nop > @
-    assert-that
-      dir-name
-        "/tmp/foo/hello.gz"
-      $.equal-to "/tmp/foo"
+  if. > path!
+    or.
+      uname.is-unix
+      uname.is-macos
+    "/tmp/foo"
+    "\\tmp\\foo"
+  assert-that > @
+    dir-name
+      "/tmp/foo/hello.gz"
+    $.equal-to
+      path
