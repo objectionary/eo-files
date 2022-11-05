@@ -29,14 +29,13 @@
 +version 0.0.0
 
 [] > takes-name-of-directory
-  if. > path!
-    or.
-      uname.is-unix
-      uname.is-macos
-    "/tmp/foo"
-    "\\tmp\\foo"
   assert-that > @
     dir-name
       "/tmp/foo/hello.gz"
     $.equal-to
-      path
+      if.
+        or.
+          uname.is-unix
+          uname.is-macos
+        "/tmp/foo"
+        "\\tmp\\foo"
