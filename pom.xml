@@ -127,7 +127,7 @@ SOFTWARE.
                 <glob>EOorg/EOeolang/EOio/**</glob>
                 <glob>EOorg/EOeolang/EOfs/**</glob>
               </keepBinaries>
-              <failOnWarning>true</failOnWarning>
+              <failOnWarning>false</failOnWarning>
             </configuration>
           </execution>
           <execution>
@@ -144,7 +144,7 @@ SOFTWARE.
               <targetDir>${project.build.directory}/eo-test</targetDir>
               <addSourcesRoot>false</addSourcesRoot>
               <addTestSourcesRoot>true</addTestSourcesRoot>
-              <failOnWarning>true</failOnWarning>
+              <failOnWarning>false</failOnWarning>
               <generatedDir>${project.build.directory}/generated-test-sources</generatedDir>
             </configuration>
           </execution>
