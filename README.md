@@ -18,20 +18,22 @@ This is how you list all text files in a directory recursively:
 
 ```
 each. > @
-  select.
-    QQ.fs.walk.
-      QQ.fs.dir "/tmp"
-      "**/*"
-    [f]
+  filteredi.
+    QQ.collections.list
+      walk.
+        QQ.fs.dir "/tmp"
+        "**/*"
+    [f i]
       and. > @
         f.is-dir.not
         matches.
-          QQ.txt.regex
-            "\.txt$"
+          compile.
+            QQ.txt.regex
+              "/.*\\.txt$/"
           f
   [f]
     QQ.io.stdout > @
-      QQ.txt.sprintf "file: %s" f
+      QQ.txt.sprintf "file: %s\n" f
 ```
 
 You are welcome to add more primitives to this lib.
