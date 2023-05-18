@@ -29,7 +29,6 @@
 # need to specify the last two arguments, only the first
 # one: the bytes to read.
 [b next buf] > bytes-as-input
-
   buf > @
 
   # Read the next chunk of bytes and
