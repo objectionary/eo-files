@@ -28,7 +28,6 @@ import org.eolang.AtComposite;
 import org.eolang.AtFree;
 import org.eolang.Data;
 import org.eolang.Dataized;
-import org.eolang.PhConst;
 import org.eolang.PhDefault;
 import org.eolang.PhMethod;
 import org.eolang.PhWith;
