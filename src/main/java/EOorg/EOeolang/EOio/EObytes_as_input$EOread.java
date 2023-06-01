@@ -35,6 +35,7 @@ import org.eolang.ExUnset;
 import org.eolang.PhDefault;
 import org.eolang.PhWith;
 import org.eolang.Phi;
+import org.eolang.XmirObject;
 
 /**
  * Bytes-as-input.read.
@@ -42,6 +43,7 @@ import org.eolang.Phi;
  * @since 0.1
  * @checkstyle TypeNameCheck (100 lines)
  */
+@XmirObject(oname = "bytes-as-input.read")
 public class EObytes_as_input$EOread extends PhDefault {
 
     /**

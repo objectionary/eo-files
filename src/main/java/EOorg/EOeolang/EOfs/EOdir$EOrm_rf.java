@@ -33,6 +33,7 @@ import org.eolang.Data;
 import org.eolang.Dataized;
 import org.eolang.PhDefault;
 import org.eolang.Phi;
+import org.eolang.XmirObject;
 
 /**
  * Dir.rm-rf.
@@ -41,6 +42,7 @@ import org.eolang.Phi;
  * @checkstyle TypeNameCheck (100 lines)
  */
 @SuppressWarnings("PMD.AvoidDollarSigns")
+@XmirObject(oname = "dir.rm-rf")
 public class EOdir$EOrm_rf extends PhDefault {
 
     /**

@@ -31,6 +31,7 @@ import org.eolang.Data;
 import org.eolang.Dataized;
 import org.eolang.PhDefault;
 import org.eolang.Phi;
+import org.eolang.XmirObject;
 
 /**
  * Dir-name.
@@ -38,6 +39,7 @@ import org.eolang.Phi;
  * @since 0.1
  * @checkstyle TypeNameCheck (100 lines)
  */
+@XmirObject(oname = "dir-name")
 @SuppressWarnings("PMD.AvoidDollarSigns")
 public class EOdir_name extends PhDefault {
 

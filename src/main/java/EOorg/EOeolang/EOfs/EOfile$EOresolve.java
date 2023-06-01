@@ -33,6 +33,7 @@ import org.eolang.Dataized;
 import org.eolang.PhDefault;
 import org.eolang.PhWith;
 import org.eolang.Phi;
+import org.eolang.XmirObject;
 
 /**
  * File.resolve.
@@ -40,6 +41,7 @@ import org.eolang.Phi;
  * @since 0.1
  * @checkstyle TypeNameCheck (100 lines)
  */
+@XmirObject(oname = "file.resolve")
 @SuppressWarnings("PMD.AvoidDollarSigns")
 public class EOfile$EOresolve extends PhDefault {
 

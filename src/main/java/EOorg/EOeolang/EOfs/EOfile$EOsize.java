@@ -30,6 +30,7 @@ import org.eolang.Data;
 import org.eolang.Dataized;
 import org.eolang.PhDefault;
 import org.eolang.Phi;
+import org.eolang.XmirObject;
 
 /**
  * File.size.
@@ -37,6 +38,7 @@ import org.eolang.Phi;
  * @since 0.1
  * @checkstyle TypeNameCheck (100 lines)
  */
+@XmirObject(oname = "file.size")
 @SuppressWarnings("PMD.AvoidDollarSigns")
 public class EOfile$EOsize extends PhDefault {
 

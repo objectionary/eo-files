@@ -38,6 +38,7 @@ import org.eolang.Dataized;
 import org.eolang.PhDefault;
 import org.eolang.PhWith;
 import org.eolang.Phi;
+import org.eolang.XmirObject;
 
 /**
  * Dir.walk.
@@ -47,6 +48,7 @@ import org.eolang.Phi;
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
 @SuppressWarnings("PMD.AvoidDollarSigns")
+@XmirObject(oname = "dir.walk")
 public class EOdir$EOwalk extends PhDefault {
 
     /**

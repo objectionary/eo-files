@@ -32,6 +32,7 @@ import org.eolang.Dataized;
 import org.eolang.PhDefault;
 import org.eolang.PhWith;
 import org.eolang.Phi;
+import org.eolang.XmirObject;
 
 /**
  * Memory-as-output.write.
@@ -39,6 +40,7 @@ import org.eolang.Phi;
  * @since 0.1
  * @checkstyle TypeNameCheck (100 lines)
  */
+@XmirObject(oname = "memory-as-output.write")
 public class EOmemory_as_output$EOwrite extends PhDefault {
 
     /**

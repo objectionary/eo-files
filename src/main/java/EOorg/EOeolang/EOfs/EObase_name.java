@@ -31,6 +31,7 @@ import org.eolang.Data;
 import org.eolang.Dataized;
 import org.eolang.PhDefault;
 import org.eolang.Phi;
+import org.eolang.XmirObject;
 
 /**
  * Base-name.
@@ -39,6 +40,7 @@ import org.eolang.Phi;
  * @checkstyle TypeNameCheck (100 lines)
  */
 @SuppressWarnings("PMD.AvoidDollarSigns")
+@XmirObject(oname = "base-name")
 public class EObase_name extends PhDefault {
 
     /**

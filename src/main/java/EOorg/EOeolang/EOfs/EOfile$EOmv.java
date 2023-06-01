@@ -36,6 +36,7 @@ import org.eolang.ExFailure;
 import org.eolang.PhDefault;
 import org.eolang.PhWith;
 import org.eolang.Phi;
+import org.eolang.XmirObject;
 
 /**
  * File.mv.
@@ -43,6 +44,7 @@ import org.eolang.Phi;
  * @since 0.1
  * @checkstyle TypeNameCheck (100 lines)
  */
+@XmirObject(oname = "file.mv")
 @SuppressWarnings("PMD.AvoidDollarSigns")
 public class EOfile$EOmv extends PhDefault {
 

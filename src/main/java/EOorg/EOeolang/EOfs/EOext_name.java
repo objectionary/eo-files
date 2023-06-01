@@ -31,6 +31,7 @@ import org.eolang.Data;
 import org.eolang.Dataized;
 import org.eolang.PhDefault;
 import org.eolang.Phi;
+import org.eolang.XmirObject;
 
 /**
  * Ext-name.
@@ -38,6 +39,7 @@ import org.eolang.Phi;
  * @since 0.1
  * @checkstyle TypeNameCheck (100 lines)
  */
+@XmirObject(oname = "ext-name")
 @SuppressWarnings("PMD.AvoidDollarSigns")
 public class EOext_name extends PhDefault {
 

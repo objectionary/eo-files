@@ -29,6 +29,7 @@ import org.eolang.Data;
 import org.eolang.PhDefault;
 import org.eolang.PhWith;
 import org.eolang.Phi;
+import org.eolang.XmirObject;
 
 /**
  * Tmpdir.@.
@@ -36,6 +37,7 @@ import org.eolang.Phi;
  * @since 0.1
  * @checkstyle TypeNameCheck (100 lines)
  */
+@XmirObject(oname = "tmpdir")
 public class EOtmpdir extends PhDefault {
 
     /**

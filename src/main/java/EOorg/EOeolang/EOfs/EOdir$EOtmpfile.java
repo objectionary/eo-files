@@ -33,6 +33,7 @@ import org.eolang.Dataized;
 import org.eolang.PhDefault;
 import org.eolang.PhWith;
 import org.eolang.Phi;
+import org.eolang.XmirObject;
 
 /**
  * Dir.tmpfile.
@@ -41,6 +42,7 @@ import org.eolang.Phi;
  * @checkstyle TypeNameCheck (100 lines)
  */
 @SuppressWarnings("PMD.AvoidDollarSigns")
+@XmirObject(oname = "dir.tmpfile")
 public class EOdir$EOtmpfile extends PhDefault {
 
     /**
