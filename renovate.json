@@ -2,5 +2,11 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
     "config:base"
+  ],
+  "packageRules": [
+    {
+      "matchPackageNames": ["maven-compiler-plugin"],
+      "allowedVersions": "3.8.1"
+    }
   ]
 }
