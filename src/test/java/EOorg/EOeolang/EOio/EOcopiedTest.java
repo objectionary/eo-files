@@ -42,7 +42,7 @@ import org.junit.jupiter.params.provider.CsvFileSource;
  * @since 0.1
  * @todo #89:90min Enable the test when memory-as-output will
  *  be reimplemented. Now it writes bytes to memory, but it
- *  requires that the memory keeps enough count of bytes.
+ *  requires that the memory keeps enough num of bytes.
  * @checkstyle TypeNameCheck (100 lines)
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
