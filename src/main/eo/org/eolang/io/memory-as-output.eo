@@ -33,6 +33,4 @@
   # return a new "output" object
   [data] > write /memory-as-output
 
-  # Close it
-  [] > close
-    TRUE > @
+  TRUE > close

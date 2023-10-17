@@ -35,6 +35,4 @@
   # return a new "input" object, with the maximum length of "max"
   [max] > read /bytes-as-input
 
-  # Close it
-  [] > close
-    TRUE > @
+  TRUE > close
