@@ -25,7 +25,7 @@
 +home https://github.com/objectionary/eo-files
 +junit
 +package org.eolang.io
-+version 0.4.0
++version 0.4.1
 
 [] > can-read-bytes-with-assert
   bytes-as-input > i

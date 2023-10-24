@@ -26,7 +26,7 @@
 +home https://github.com/objectionary/eo-files
 +junit
 +package org.eolang.fs
-+version 0.4.0
++version 0.4.1
 
 [] > takes-name-of-directory
   assert-that > @
