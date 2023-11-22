@@ -58,7 +58,7 @@ public final class EOfileEOas_outputTest {
 
     @ParameterizedTest
     @CsvFileSource(resources = "/EOlang/EOio/test-samples.csv")
-    public void writesBytesToFile(final String text, final int max) throws IOException {
+    public void writesBytesToFile(final String text, final String max) throws IOException {
         final Path file = this.temp.resolve("test.txt");
         Phi output = new PhWith(
             new PhMethod(
@@ -75,7 +75,7 @@ public final class EOfileEOas_outputTest {
         int pos = 0;
         while (true) {
             final byte[] chunk = Arrays.copyOfRange(
-                bytes, pos, Integer.min(pos + max, bytes.length)
+                bytes, pos, Integer.min(pos + Integer.parseInt(max), bytes.length)
             );
             output = new PhConst(
                 new PhMethod(

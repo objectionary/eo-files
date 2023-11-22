@@ -49,7 +49,7 @@ public final class EObytes_as_inputEOreadTest {
 
     @ParameterizedTest
     @CsvFileSource(resources = "/EOlang/EOio/test-samples.csv")
-    public void readsBytes(final String text, final int max) throws IOException {
+    public void readsBytes(final String text, final String max) throws IOException {
         final Phi bytes = new Data.ToPhi(text.getBytes(StandardCharsets.UTF_8));
         Phi input = new PhWith(
             new EObytes_as_input(bytes),
@@ -60,7 +60,7 @@ public final class EObytes_as_inputEOreadTest {
             input = new PhConst(
                 new PhWith(
                     input.attr("read").get(),
-                    "max", new Data.ToPhi((long) max)
+                    "max", new Data.ToPhi(Long.parseLong(max))
                 )
             );
             final byte[] chunk = new Dataized(input).take(byte[].class);
@@ -78,7 +78,7 @@ public final class EObytes_as_inputEOreadTest {
 
     @ParameterizedTest
     @CsvFileSource(resources = "/EOlang/EOio/test-samples.csv")
-    public void readsBytesFromString(final String text, final int max) {
+    public void readsBytesFromString(final String text, final String max) {
         final Phi input = new PhWith(
             new EObytes_as_input(Phi.Φ),
             "b",
@@ -90,13 +90,13 @@ public final class EObytes_as_inputEOreadTest {
         final Phi first = new PhConst(
             new PhWith(
                 input.attr("read").get(),
-                "max", new Data.ToPhi((long) max)
+                "max", new Data.ToPhi(Long.parseLong(max))
             )
         );
         final Phi last = new PhConst(
             new PhWith(
                 first.attr("read").get(),
-                "max", new Data.ToPhi((long) max)
+                "max", new Data.ToPhi(Long.parseLong(max))
             )
         ).copy();
         Assertions.assertDoesNotThrow(

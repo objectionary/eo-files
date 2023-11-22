@@ -59,7 +59,7 @@ public final class EOfileEOas_inputTest {
 
     @ParameterizedTest
     @CsvFileSource(resources = "/EOlang/EOio/test-samples.csv")
-    public void readsBytes(final String text, final int max) throws IOException {
+    public void readsBytes(final String text, final String max) throws IOException {
         final Path file = this.temp.resolve("test.txt");
         Files.write(file, text.getBytes(StandardCharsets.UTF_8));
         Phi input = new PhWith(
@@ -79,7 +79,7 @@ public final class EOfileEOas_inputTest {
                 new PhMethod(
                     new PhWith(
                         input.attr("read").get(),
-                        "max", new Data.ToPhi((long) max)
+                        "max", new Data.ToPhi(Long.parseLong(max))
                     ),
                     "φ"
                 )
