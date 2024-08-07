@@ -12,6 +12,9 @@
 ![Lines of code](https://img.shields.io/tokei/lines/github/objectionary/eo-files)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/objectionary/eo-files/blob/master/LICENSE.txt)
 
+**This repository is deprecated! We've moved all EO objects from this repository
+to [objectionary/eo](https://github.com/objectionary/eo).**
+
 [EO](https://www.eolang.org) objects for file system.
 
 This is how you list all text files in a directory recursively:
